@@ -1,4 +1,4 @@
-Running on local machine:
+Running on a local machine:
 
 Set enviroment variables for:
 
@@ -13,12 +13,3 @@ You can get the first two env variables in your spotify dashboard after creating
 https://developer.spotify.com/dashboard/applications
 
 Important: Set the redirect URI in the settings.
-
-Build based on:
-Handling Spotify API:
-Spotify API Documentation
-Spotipy
-Working with Flask: 
-HarvardX - CS50x Course
-Setting up Games in JS: 
-Tutorials by Chris DeLeon
