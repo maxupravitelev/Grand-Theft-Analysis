@@ -1,6 +1,15 @@
-Drive around in your browser while listening to tracks from Spotify with basic music visualisation.
 
-Running on a local machine:
+- Drive around in your browser while listening to tracks from Spotify with basic music visualisation.
+
+- Put in a Spotify URI in the Track-field on the /submit Page. (example: spotify:track:650Y88XvGHwLgDleFDSYmF )
+
+- Drive the car with arrow keys.
+
+# Run current release 
+https://grandtheftanalysis2.herokuapp.com/
+
+
+# Running on a local machine
 
 Set enviroment variables for:
 
