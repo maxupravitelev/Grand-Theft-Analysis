@@ -1,0 +1,172 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Result
+{% endblock %}
+
+{% block main %}
+
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script src="{{ url_for('static', filename='js/spotify.js') }}"></script>
+<script src="{{ url_for('static', filename='js/GraphicsCommon.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Car.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Track.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Input.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Cam.js') }}"></script>
+
+<script>
+  let uri_from_submit = '{{ track }}';
+  let token = '{{ token }}';
+
+  let data_json = {{ analysis| tojson }};
+
+  let api_loaded = false;
+  let spotifyPlayerStarted = false;
+  let spotifyPlayerReady = false;
+
+  // Source for Initializing the Spotify SDK: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
+  let device_id_global = '';
+  let spotify_uri = 'spotify:track:0uRtI9z2jvfE9fdf67n8jq'
+
+  function startSpotifyPlayer() {
+    if (api_loaded == true) {
+      spotify_uri = uri_from_submit;
+      fetch('https://api.spotify.com/v1/me/player/play?device_id=' + device_id_global, {
+        method: 'PUT',
+        body: JSON.stringify({ uris: [spotify_uri] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+    }
+    spotifyPlayerStarted = true;
+  }
+
+  window.onSpotifyWebPlaybackSDKReady = () => {
+
+    const player = new Spotify.Player({
+      name: 'Web Playback SDK Quick Start Player',
+      getOAuthToken: cb => { cb(token); }
+    });
+
+    // Error handling
+    player.addListener('initialization_error', ({ message }) => { console.error(message); });
+    player.addListener('authentication_error', ({ message }) => { console.error(message); });
+    player.addListener('account_error', ({ message }) => { console.error(message); });
+    player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+    // Playback status updates
+    player.addListener('player_state_changed', state => {
+      if (state.position >= 0) {
+        spotifyPlayerReady = true;
+      };
+
+    });
+
+    // Ready
+    player.addListener('ready', ({ device_id }) => {
+      console.log('Ready with Device ID', device_id);
+      device_id_global = device_id;
+
+    });
+
+    // Not Ready
+    player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+    });
+
+    // Connect to the player!
+    player.connect();
+
+    player.togglePlay().then(() => {
+      console.log('Toggled playback!');
+    });
+
+  }
+
+
+
+
+
+  var carPic = document.createElement("img");
+  var car2Pic = document.createElement("img");
+  var roof = document.createElement("img");
+  var roof_up = document.createElement("img");
+
+  var trackPics = [];
+
+  var picsToLoad = 0;
+
+  function countLoadedImageAndLaunchIfReady() {
+    picsToLoad--;
+    if (picsToLoad == 0) { // last image loaded?
+      loadingDoneSoStartGame();
+    }
+  }
+
+  function beginLoadingImage(imgVar, fileName) {
+    imgVar.onload = countLoadedImageAndLaunchIfReady;
+    imgVar.src = fileName;
+  }
+
+  function loadImageForTrackCode(trackCode, fileName) {
+    trackPics[trackCode] = document.createElement("img");
+    beginLoadingImage(trackPics[trackCode], fileName);
+  }
+
+
+  function loadImages() {
+
+    var imageList = [
+      { varName: carPic, theFile: "{{ url_for('static', filename='images/player1.png') }}" },
+      { varName: roof, theFile: "{{ url_for('static', filename='images/roof.png') }}" },
+      { varName: roof_up, theFile: "{{ url_for('static', filename='images/roof_up.png') }}" },
+
+      { trackType: TRACK_ROAD, theFile: "{{ url_for('static', filename='images/track_road.png') }}" },
+      { trackType: TRACK_WALL, theFile: "{{ url_for('static', filename='images/track_wall.png') }}" },
+      { trackType: TRACK_GOAL, theFile: "{{ url_for('static', filename='images/track_goal.png') }}" },
+      { trackType: TRACK_TREE, theFile: "{{ url_for('static', filename='images/track_tree.png') }}" },
+      { trackType: TRACK_FLAG, theFile: "{{ url_for('static', filename='images/track_flag.png') }}" },
+    ];
+
+    picsToLoad = imageList.length;
+
+    for (var i = 0; i < imageList.length; i++) {
+      if (imageList[i].trackType != undefined) {
+        loadImageForTrackCode(imageList[i].trackType, imageList[i].theFile);
+      } else {
+        beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+      } // end of else
+    } // end of for imageList
+
+  } // end of function loadImages
+
+
+
+
+
+
+</script>
+
+
+<p>
+
+<h4>{{ artist_name }}</h4>
+<h1>{{ song_name }}</h1>
+<h4>{{ album_name }}</h4>
+
+</p>
+
+<br>
+<br>
+<br>
+<br>
+<a href="/sign_out">Sign Out</a>
+
+
+{% endblock %}

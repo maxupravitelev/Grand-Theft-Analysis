@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Track
+{% endblock %}
+
+{% block main %}
+
+<script>
+let token_test = '{{ token_test }}'
+console.log(token_test);
+</script>
+
+    <form action="/submit" method="post">
+
+        <div class="form-group">
+            <input class="form-control" name="track" placeholder="TRACK" type="text">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Track</button>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/sign_out">Sign Out</a>
+
+    </form>
+{% endblock %}
