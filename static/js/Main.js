@@ -1,7 +1,7 @@
 // save the canvas for dimensions, and its 2d context for drawing to it
-var canvas, canvasContext;
+let canvas, canvasContext;
 
-var p1 = new carClass();
+let p1 = new carClass();
 
 window.onload = function() {
   canvas = document.getElementById('gameCanvas');
@@ -25,7 +25,7 @@ function loadingDoneSoStartGame() {
       
       if (device_id_global != '') { api_loaded = true };
       if ((api_loaded == true) && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
-      if (spotifyPlayerReady == true) { computeRGBvalueFromFlaskData(); }
+      if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); }
 
     }, 1000/framesPerSecond);
   

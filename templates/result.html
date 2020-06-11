@@ -19,137 +19,152 @@ Result
 <script src="{{ url_for('static', filename='js/Cam.js') }}"></script>
 
 <script>
-  let uri_from_submit = '{{ track }}';
-  let token = '{{ token }}';
 
-  let data_json = {{ analysis| tojson }};
+    // Data provided by Flask @ application.py
+    //
 
-  let api_loaded = false;
-  let spotifyPlayerStarted = false;
-  let spotifyPlayerReady = false;
+    // Spotify URI submitted @ submit.html
+    let uri_from_submit = '{{ track }}';
+    
+    // access token via Spotify API
+    let token = '{{ token }}';
 
-  // Source for Initializing the Spotify SDK: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
-  let device_id_global = '';
-  let spotify_uri = 'spotify:track:0uRtI9z2jvfE9fdf67n8jq'
+    // track analysis via Spotify API
+    let data_json = {{ analysis| tojson }};
 
-  function startSpotifyPlayer() {
-    if (api_loaded == true) {
-      spotify_uri = uri_from_submit;
-      fetch('https://api.spotify.com/v1/me/player/play?device_id=' + device_id_global, {
-        method: 'PUT',
-        body: JSON.stringify({ uris: [spotify_uri] }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      });
+
+
+    // Spotify initialization
+    // 
+    // Source for Initializing the Spotify SDK: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
+    //
+    
+    // set to true via check in Main.js
+    let api_loaded = false;
+
+    // check if spotify player initialization has started
+    let spotifyPlayerStarted = false;
+    
+    // check if spotify player started playing
+    let spotifyPlayerStartedPlaying = false;
+    
+    //initialize device ID variable
+    let device_id_global = '';
+    
+    // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
+    let spotify_uri = 'spotify:track:0uRtI9z2jvfE9fdf67n8jq'
+
+    function startSpotifyPlayer() {
+        if (api_loaded == true) {
+            spotify_uri = uri_from_submit;
+            fetch('https://api.spotify.com/v1/me/player/play?device_id=' + device_id_global, {
+                method: 'PUT',
+                body: JSON.stringify({ uris: [spotify_uri] }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+        }
+        spotifyPlayerStarted = true;
     }
-    spotifyPlayerStarted = true;
-  }
 
-  window.onSpotifyWebPlaybackSDKReady = () => {
+    window.onSpotifyWebPlaybackSDKReady = () => {
 
-    const player = new Spotify.Player({
-      name: 'Web Playback SDK Quick Start Player',
-      getOAuthToken: cb => { cb(token); }
-    });
+        const player = new Spotify.Player({
+            name: 'Web Playback SDK Quick Start Player',
+            getOAuthToken: cb => { cb(token); }
+        });
 
-    // Error handling
-    player.addListener('initialization_error', ({ message }) => { console.error(message); });
-    player.addListener('authentication_error', ({ message }) => { console.error(message); });
-    player.addListener('account_error', ({ message }) => { console.error(message); });
-    player.addListener('playback_error', ({ message }) => { console.error(message); });
+        // Error handling
+        player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        player.addListener('account_error', ({ message }) => { console.error(message); });
+        player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-    // Playback status updates
-    player.addListener('player_state_changed', state => {
-      if (state.position >= 0) {
-        spotifyPlayerReady = true;
-      };
+        // Playback status updates
+        player.addListener('player_state_changed', state => {
+            if (state.position >= 0) {
+                spotifyPlayerStartedPlaying = true;
+            };
 
-    });
+        });
 
-    // Ready
-    player.addListener('ready', ({ device_id }) => {
-      console.log('Ready with Device ID', device_id);
-      device_id_global = device_id;
+        // Ready
+        player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+            device_id_global = device_id;
 
-    });
+        });
 
-    // Not Ready
-    player.addListener('not_ready', ({ device_id }) => {
-      console.log('Device ID has gone offline', device_id);
-    });
+        // Not Ready
+        player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+        });
 
-    // Connect to the player!
-    player.connect();
+        // Connect to the player!
+        player.connect();
 
-    player.togglePlay().then(() => {
-      console.log('Toggled playback!');
-    });
+        player.togglePlay().then(() => {
+            console.log('Toggled playback!');
+        });
 
-  }
-
-
-
-
-
-  var carPic = document.createElement("img");
-  var car2Pic = document.createElement("img");
-  var roof = document.createElement("img");
-  var roof_up = document.createElement("img");
-
-  var trackPics = [];
-
-  var picsToLoad = 0;
-
-  function countLoadedImageAndLaunchIfReady() {
-    picsToLoad--;
-    if (picsToLoad == 0) { // last image loaded?
-      loadingDoneSoStartGame();
     }
-  }
 
-  function beginLoadingImage(imgVar, fileName) {
-    imgVar.onload = countLoadedImageAndLaunchIfReady;
-    imgVar.src = fileName;
-  }
+    // Handles image loading before starting to draw in Main.js
+    //
 
-  function loadImageForTrackCode(trackCode, fileName) {
-    trackPics[trackCode] = document.createElement("img");
-    beginLoadingImage(trackPics[trackCode], fileName);
-  }
+    let carPic = document.createElement("img");
+    let car2Pic = document.createElement("img");
+    let roof = document.createElement("img");
+    let roof_up = document.createElement("img");
 
+    let trackPics = [];
 
-  function loadImages() {
+    let picsToLoad = 0;
 
-    var imageList = [
-      { varName: carPic, theFile: "{{ url_for('static', filename='images/player1.png') }}" },
-      { varName: roof, theFile: "{{ url_for('static', filename='images/roof.png') }}" },
-      { varName: roof_up, theFile: "{{ url_for('static', filename='images/roof_up.png') }}" },
+    function countLoadedImageAndLaunchIfReady() {
+        picsToLoad--;
+        if (picsToLoad == 0) {                          // last image loaded
+            loadingDoneSoStartGame();
+        }
+    }
 
-      { trackType: TRACK_ROAD, theFile: "{{ url_for('static', filename='images/track_road.png') }}" },
-      { trackType: TRACK_WALL, theFile: "{{ url_for('static', filename='images/track_wall.png') }}" },
-      { trackType: TRACK_GOAL, theFile: "{{ url_for('static', filename='images/track_goal.png') }}" },
-      { trackType: TRACK_TREE, theFile: "{{ url_for('static', filename='images/track_tree.png') }}" },
-      { trackType: TRACK_FLAG, theFile: "{{ url_for('static', filename='images/track_flag.png') }}" },
-    ];
+    function beginLoadingImage(imgVar, fileName) {
+        imgVar.onload = countLoadedImageAndLaunchIfReady;
+        imgVar.src = fileName;
+    }
 
-    picsToLoad = imageList.length;
-
-    for (var i = 0; i < imageList.length; i++) {
-      if (imageList[i].trackType != undefined) {
-        loadImageForTrackCode(imageList[i].trackType, imageList[i].theFile);
-      } else {
-        beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-      } // end of else
-    } // end of for imageList
-
-  } // end of function loadImages
+    function loadImageForTrackCode(trackCode, fileName) {
+        trackPics[trackCode] = document.createElement("img");
+        beginLoadingImage(trackPics[trackCode], fileName);
+    }
 
 
+    function loadImages() {
 
+        let imageList = [
+            { varName: carPic, theFile: "{{ url_for('static', filename='images/player1.png') }}" },
+            { varName: roof, theFile: "{{ url_for('static', filename='images/roof.png') }}" },
+            { varName: roof_up, theFile: "{{ url_for('static', filename='images/roof_up.png') }}" },
 
+            { trackType: TRACK_ROAD, theFile: "{{ url_for('static', filename='images/track_road.png') }}" },
+            { trackType: TRACK_WALL, theFile: "{{ url_for('static', filename='images/track_wall.png') }}" },
+            { trackType: TRACK_GOAL, theFile: "{{ url_for('static', filename='images/track_goal.png') }}" },
+            { trackType: TRACK_TREE, theFile: "{{ url_for('static', filename='images/track_tree.png') }}" },
+            { trackType: TRACK_FLAG, theFile: "{{ url_for('static', filename='images/track_flag.png') }}" },
+        ];
 
+        picsToLoad = imageList.length;
+
+        for (let i = 0; i < imageList.length; i++) {
+            if (imageList[i].trackType != undefined) {
+                loadImageForTrackCode(imageList[i].trackType, imageList[i].theFile);
+            } else {
+                beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+            } // end of else
+        } // end of for imageList
+    } // end of function loadImages
 
 </script>
 
