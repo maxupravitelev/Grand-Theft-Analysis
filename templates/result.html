@@ -16,6 +16,8 @@ Result
 <script src="{{ url_for('static', filename='js/Input.js') }}"></script>
 <script src="{{ url_for('static', filename='js/Main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/Cam.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Vis.js') }}"></script>
+
 
 <script>
 
@@ -39,7 +41,6 @@ Result
     //
     
     // set to true via check in Main.js
-    let api_loaded = false;
 
     // check if spotify player initialization has started
     let spotifyPlayerStarted = false;
@@ -54,7 +55,6 @@ Result
     let spotify_uri = 'spotify:track:0uRtI9z2jvfE9fdf67n8jq'
 
     function startSpotifyPlayer() {
-        if (api_loaded == true) {
             spotify_uri = uri_from_submit;
             fetch('https://api.spotify.com/v1/me/player/play?device_id=' + device_id_global, {
                 method: 'PUT',
@@ -64,7 +64,7 @@ Result
                     'Authorization': `Bearer ${token}`
                 },
             });
-        }
+        
         spotifyPlayerStarted = true;
     }
 
@@ -85,7 +85,7 @@ Result
         player.addListener('player_state_changed', state => {
             if (state.position >= 0) {
                 spotifyPlayerStartedPlaying = true;
-                spotofyPlayerCurrentPosition 
+                // spotifyPlayerCurrentPosition 
             };
 
         });

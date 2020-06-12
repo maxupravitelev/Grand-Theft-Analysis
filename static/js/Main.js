@@ -23,8 +23,7 @@ function loadingDoneSoStartGame() {
       moveEverything();
       drawEverything();
       
-      if (device_id_global != '') { api_loaded = true };
-      if ((api_loaded == true) && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
+      if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
       if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
 
     }, 1000/framesPerSecond);
