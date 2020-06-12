@@ -33,6 +33,14 @@ Result
     // track analysis via Spotify API
     let data_json = {{ analysis| tojson }};
 
+    let segmentsDurationsArray = [];
+
+    let segmentsDurationPitchesArray = [];
+
+    for (let i = 0; i < data_json.segments.length; i++) {
+        segmentsDurationsArray.push(data_json.segments[i].duration);
+        segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
+    }
 
 
     // Spotify initialization
