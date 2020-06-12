@@ -10,7 +10,6 @@ Result
 <canvas id="gameCanvas" width="800" height="600"></canvas>
 
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script src="{{ url_for('static', filename='js/spotify.js') }}"></script>
 <script src="{{ url_for('static', filename='js/GraphicsCommon.js') }}"></script>
 <script src="{{ url_for('static', filename='js/Car.js') }}"></script>
 <script src="{{ url_for('static', filename='js/Track.js') }}"></script>
@@ -86,6 +85,7 @@ Result
         player.addListener('player_state_changed', state => {
             if (state.position >= 0) {
                 spotifyPlayerStartedPlaying = true;
+                spotofyPlayerCurrentPosition 
             };
 
         });

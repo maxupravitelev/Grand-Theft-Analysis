@@ -98,6 +98,39 @@ function computeRGBvalueFromFlaskData() {
     }
 }
 
+// Timer for radius value
+let beat_startTime = Date.now();
+let beat_elapsedTime = 0.0000;
+
+setInterval(function () { beat_elapsedTime = (Date.now() - beat_startTime) / 1000; }, 1);
+
+let radius_size = 200;
+
+let beat_duration_index = 0;
+
+function computeCircleRadius() {
+
+
+    if (Object.keys(data_json).length != 0) {
+        api_loaded = true;
+    }
+
+    if (api_loaded == true) {
+
+        if ((beat_elapsedTime > data_json.beats[beat_duration_index].duration) && (beat_duration_index < data_json.beats.length - 1)) {
+            if (beat_duration_index % 2 == 1) {
+                radius_size += 20;
+                beat_startTime = Date.now();
+            }
+
+            else {                              // (beat_duration_index % 2 == 0)
+                radius_size = 120;
+                beat_startTime = Date.now();
+            }
+            beat_duration_index++;
+        }
+    }
+}
 
 function drawTracks() {
 
@@ -109,9 +142,11 @@ function drawTracks() {
             {
                 var trackLeftEdgeX = eachCol * TRACK_W;
                 var trackTopEdgeY = eachRow * TRACK_H;
+                colorCircle(8170, 1600, radius_size, rgb_value)
                 colorRect(trackLeftEdgeX, trackTopEdgeY,
                 TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, rgb_value);
                 canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
+
             } // end of isTrackAtTileCoord()
         } // end of for eachRow
     } // end of for eachCol

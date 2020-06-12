@@ -25,7 +25,7 @@ function loadingDoneSoStartGame() {
       
       if (device_id_global != '') { api_loaded = true };
       if ((api_loaded == true) && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
-      if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); }
+      if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
 
     }, 1000/framesPerSecond);
   
@@ -57,7 +57,7 @@ function drawEverything() {
   
 
 
-
+//   colorCircle(75, 75, radius_size, 'blue')
   p1.carDraw();
 
 
