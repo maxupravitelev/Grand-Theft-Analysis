@@ -5,8 +5,8 @@
 
 - Drive the car with arrow keys.
 
-# Run current release 
-https://grandtheftanalysis2.herokuapp.com/
+# Run current version  
+https://grandtheftanalysis.herokuapp.com/
 
 
 # Running on a local machine
