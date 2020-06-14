@@ -1,6 +1,6 @@
-rgb_value = "#555555";          // initialize rgb value on start
+greenValue = "#555555";          // initialize rgb value on start
 
-function rgb() {
+function computeGreenValue() {
 
     ///////////// compute RGB  
     // let R = Math.round(Math.random() * 255);
@@ -15,9 +15,35 @@ function rgb() {
     G = ('00' + G.toString(16)).slice(-2);
     B = ('00' + B.toString(16)).slice(-2);
 
-    rgb_value = "#" + R + G + B;
+    greenValue = "#" + R + G + B;
+}
 
-    return "#" + R + G + B;
+let blueValue = '#0000AA';
+
+function computeBlueValue() {
+    let R = '00';
+    let G = '00';
+    let B = current_segment_pitch_avg * 255;
+
+    R = ('00' + R.toString(16)).slice(-2);
+    G = ('00' + G.toString(16)).slice(-2);
+    B = ('00' + B.toString(16)).slice(-2);
+
+    blueValue = "#" + R + G + B;
+}
+
+let redValue = '#0000AA';
+
+function computeRedValue() {
+    let R = current_segment_pitch_avg * 255;
+    let G = '00';
+    let B = '00';
+
+    R = ('00' + R.toString(16)).slice(-2);
+    G = ('00' + G.toString(16)).slice(-2);
+    B = ('00' + B.toString(16)).slice(-2);
+
+    redValue = "#" + R + G + B;
 }
 
 let current_segment_pitch_avg = 0;
@@ -41,7 +67,9 @@ function computeRGBvalueFromFlaskData() {
         // }
 
         current_segment_pitch_avg = (segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0)) / segmentsDurationPitchesArray[segment_duration_index].length;
-        rgb();
+        computeGreenValue();
+        computeBlueValue();
+        computeRedValue();
         startTime = Date.now();             // set back timer to 0
         segment_duration_index++;
     }
@@ -62,12 +90,12 @@ function computeCircleRadius() {
 
     if ((beat_elapsedTime > data_json.beats[beat_duration_index].duration) && (beat_duration_index < data_json.beats.length - 1)) {
         if (beat_duration_index % 2 == 1) {
-            radius_size += 20;
+            radius_size += 10;
             beat_startTime = Date.now();
         }
 
         else {                              // (beat_duration_index % 2 == 0)
-            radius_size = 120;
+            radius_size = 40;
             beat_startTime = Date.now();
         }
         beat_duration_index++;
