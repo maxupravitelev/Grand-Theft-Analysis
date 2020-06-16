@@ -7,26 +7,40 @@ window.onload = function() {
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
 
-  // canvasContext.canvas.width  = window.innerWidth;
-  // canvasContext.canvas.height = window.innerHeight;
+//   canvasContext.canvas.width  = window.innerWidth;
+//   canvasContext.canvas.height = window.innerHeight;
   
-  canvasContext.canvas.width = 800;
-  canvasContext.canvas.height = 600;
+  canvasContext.canvas.width = 1280;
+  canvasContext.canvas.height = 720;
 
   loadImages();
 }
 
-function loadingDoneSoStartGame() {
 
-  var framesPerSecond = 60;
-  setInterval(function() {
-      moveEverything();
-      drawEverything();
-      
+var currentTime = 0;
+var deltaTime = 0;
+var pastTime = (new Date()).getTime();
+var framesPerSecond = 1 / 60;
+
+function gameloop() {
+    currentTime = (new Date()).getTime();
+    deltaTime = deltaTime + Math.min(1, (currentTime - pastTime) / 1000);
+    while (deltaTime > framesPerSecond) {
+        deltaTime = deltaTime - framesPerSecond;
+        moveEverything();
+    }
+    drawEverything();
+    if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
+    if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
+    pastTime = currentTime;
+    requestAnimationFrame(gameloop);
+}
+
+function loadingDoneSoStartGame() {
+    requestAnimationFrame(gameloop);
+  
       if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
       if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
-
-    }, 1000/framesPerSecond);
   
   sliderReset();
   p1.carInit(carPic, "Blue Car");
