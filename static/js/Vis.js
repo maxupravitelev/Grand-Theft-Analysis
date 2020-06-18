@@ -80,7 +80,7 @@ function computeRGBvalueFromFlaskData() {
 let beat_startTime = Date.now();
 let beat_elapsedTime = 0.0000;
 
-setInterval(function () { beat_elapsedTime = (Date.now() - beat_startTime) / 1000; }, 1);
+setInterval(() => { beat_elapsedTime = (Date.now() - beat_startTime) / 1000; }, 1);
 
 let radius_size = 200;
 

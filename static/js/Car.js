@@ -21,20 +21,20 @@ function carClass() {
   this.keyHeld_TurnRight = false;
 
   // key controls used for this car 
-  this.setupControls = function(forwardKey,backKey,leftKey,rightKey) {
+  this.setupControls = (forwardKey,backKey,leftKey,rightKey) => {
     this.controlKeyForGas = forwardKey;
     this.controlKeyForReverse = backKey;
     this.controlKeyForTurnLeft = leftKey;
     this.controlKeyForTurnRight = rightKey;
   }
 
-  this.carInit = function(whichGraphic,whichName) {
+  this.carInit = (whichGraphic,whichName) => {
     this.myBitmap = whichGraphic;
     this.myName = whichName;
     this.carReset();
   }
   
-  this.carReset = function() {
+  this.carReset = () => {
     this.carSpeed = 0;
     this.carAng = -0.5 * Math.PI;
   
@@ -56,7 +56,7 @@ function carClass() {
 
   } // end of carReset
   
-  this.carMove = function() {
+  this.carMove = () => {
     // only allow the car to turn while it's rolling
     
     
@@ -119,7 +119,7 @@ function carClass() {
 
   }
   
-  this.carDraw = function() {
+  this.carDraw = () => {
     drawBitmapCenteredAtLocationWithRotation( this.myBitmap, this.carX, this.carY, this.carAng );
     //console.log(reverse)
   }
