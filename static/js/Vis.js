@@ -1,4 +1,4 @@
-greenValue = "#555555";          // initialize rgb value on start
+let greenValue = "#00AA00";          // initialize green value on start
 
 function computeGreenValue() {
 
@@ -32,7 +32,7 @@ function computeBlueValue() {
     blueValue = "#" + R + G + B;
 }
 
-let redValue = '#0000AA';
+let redValue = '#AA0000';
 
 function computeRedValue() {
     let R = current_segment_pitch_avg * 255;

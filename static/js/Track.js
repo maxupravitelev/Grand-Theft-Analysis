@@ -41,7 +41,7 @@ function getTrackAtPixelCoord(pixelX, pixelY) {
 }
 
 
-var currentRGBvalue = greenValue;
+var currentRGBvalue = 0;
 var blueColorActive = false;
 var greenColorActive = false;
 var redColorActive = false;
