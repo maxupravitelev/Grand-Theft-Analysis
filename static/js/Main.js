@@ -22,7 +22,7 @@ var deltaTime = 0;
 var pastTime = (new Date()).getTime();
 var framesPerSecond = 1 / 60;
 
-function gameloop() {
+const gameloop = () => {
     currentTime = (new Date()).getTime();
     deltaTime = deltaTime + Math.min(1, (currentTime - pastTime) / 1000);
     while (deltaTime > framesPerSecond) {
@@ -36,7 +36,7 @@ function gameloop() {
     requestAnimationFrame(gameloop);
 }
 
-function loadingDoneSoStartGame() {
+const loadingDoneSoStartGame = () => {
     requestAnimationFrame(gameloop);
   
       if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
@@ -47,7 +47,7 @@ function loadingDoneSoStartGame() {
   initInput();  
 }
 
-function moveEverything() {
+const moveEverything = () => {
   p1.carMove();
   sliderMove();
   instantCamFollow();
@@ -57,34 +57,22 @@ function moveEverything() {
 
 
 
-function drawEverything() {
+const drawEverything = () => {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
-
 
   canvasContext.save(); // needed to undo this .translate() used for scroll
   
   canvasContext.translate(-camPanX,-camPanY);
 
-
   drawTracks();
-  
-
 
 //   colorCircle(75, 75, radius_size, 'blue')
   p1.carDraw();
 
-
-
   canvasContext.restore()
 
-  
   canvasContext.fillStyle = "white";
   canvasContext.font = "20px Arial";
   canvasContext.fillText("Counter: " + elapsedTime, 10, 50);
-
-
-
-
-
 
 }

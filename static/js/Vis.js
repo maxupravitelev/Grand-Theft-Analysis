@@ -1,6 +1,6 @@
 let greenValue = "#00AA00";          // initialize green value on start
 
-function computeGreenValue() {
+const computeGreenValue = () => {
 
     ///////////// compute RGB  
     // let R = Math.round(Math.random() * 255);
@@ -20,7 +20,7 @@ function computeGreenValue() {
 
 let blueValue = '#0000AA';
 
-function computeBlueValue() {
+const computeBlueValue = () => {
     let R = '00';
     let G = '00';
     let B = current_segment_pitch_avg * 255;
@@ -34,7 +34,7 @@ function computeBlueValue() {
 
 let redValue = '#AA0000';
 
-function computeRedValue() {
+const computeRedValue = () => {
     let R = current_segment_pitch_avg * 255;
     let G = '00';
     let B = '00';
@@ -57,7 +57,7 @@ let elapsedTime = 0.0000;
 setInterval(function () { elapsedTime = (Date.now() - startTime) / 1000; }, 1);
 
 
-function computeRGBvalueFromFlaskData() {
+const computeRGBvalueFromFlaskData = () => {
     if ((elapsedTime > segmentsDurationsArray[segment_duration_index]) && (segment_duration_index < segmentsDurationsArray.length - 1)) {
 
         // for (j = 0; j < segmentsDurationPitchesArray[segment_duration_index].length - 1; j++)
@@ -86,7 +86,7 @@ let radius_size = 200;
 
 let beat_duration_index = 0;
 
-function computeCircleRadius() {
+const computeCircleRadius = () => {
 
     if ((beat_elapsedTime > data_json.beats[beat_duration_index].duration) && (beat_duration_index < data_json.beats.length - 1)) {
         if (beat_duration_index % 2 == 1) {

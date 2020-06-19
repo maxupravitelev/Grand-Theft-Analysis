@@ -5,14 +5,14 @@ const KEY_RIGHT_ARROW = 39;
 const KEY_DOWN_ARROW = 40;
 
 
-function initInput() {
+const initInput = () => {
   document.addEventListener("keydown", keyPressed);
   document.addEventListener("keyup", keyReleased);
   
   p1.setupControls(KEY_UP_ARROW,KEY_DOWN_ARROW,KEY_LEFT_ARROW,KEY_RIGHT_ARROW);
 }
 
-function setKeyHoldState(thisKey, thisCar, setTo) {
+const setKeyHoldState = (thisKey, thisCar, setTo) => {
   if(thisKey == thisCar.controlKeyForTurnLeft) {
     thisCar.keyHeld_TurnLeft = setTo;
   }
@@ -27,11 +27,11 @@ function setKeyHoldState(thisKey, thisCar, setTo) {
   }
 }
 
-function keyPressed(evt) {
+const keyPressed = (evt) => {
   setKeyHoldState(evt.keyCode, p1, true);
   evt.preventDefault(); // without this, arrow keys scroll the browser!
 }
 
-function keyReleased(evt) {
+const keyReleased = (evt) => {
   setKeyHoldState(evt.keyCode, p1, false);
 }

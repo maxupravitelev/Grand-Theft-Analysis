@@ -13,16 +13,16 @@ const TRACK_GOAL = 3;
 const TRACK_TREE = 4;
 const TRACK_FLAG = 5;
 
-function trackTileToIndex(tileCol, tileRow) {
+const trackTileToIndex = (tileCol, tileRow) => {
     return (tileCol + TRACK_COLS * tileRow);
 }
 
-function isTrackAtTileCoord(trackTileCol, trackTileRow) {
+const isTrackAtTileCoord = (trackTileCol, trackTileRow) => {
     var trackIndex = trackTileToIndex(trackTileCol, trackTileRow);
     return (trackGrid[trackIndex] == 1);
 }
 
-function getTrackAtPixelCoord(pixelX, pixelY) {
+const getTrackAtPixelCoord = (pixelX, pixelY) => {
     var tileCol = pixelX / TRACK_W;
     var tileRow = pixelY / TRACK_H;
 
@@ -46,7 +46,7 @@ var blueColorActive = false;
 var greenColorActive = false;
 var redColorActive = false;
 
-function drawTracks() {
+const drawTracks = () => {
 
     for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) { // in each column...
         for (var eachRow = 0; eachRow < TRACK_ROWS; eachRow++) { // in each row within that col
