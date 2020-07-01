@@ -54,48 +54,7 @@ const drawTracks = () => {
                 var trackLeftEdgeX = eachCol * TRACK_W;
                 var trackTopEdgeY = eachRow * TRACK_H;
 
-                let blueCircleX = 9500;
-                let blueCircleY = 890;
-
-                let greenCircleX = 9900;
-                let greenCircleY = 890;
-
-                let redCircleX = 10300;
-                let redCircleY = 890;
-
-
-                if (((p1.carX > blueCircleX) && (p1.carX < blueCircleX + radius_size / 2)) && ((p1.carY > blueCircleY) && (p1.carY < blueCircleY + radius_size / 2))) {
-                    blueColorActive = true;
-                    greenColorActive = false;
-                    redColorActive = false;
-                }
-                if (blueColorActive == true) {
-                    currentRGBvalue = blueValue;
-                }
-
-                if (((p1.carX > greenCircleX) && (p1.carX < greenCircleX + radius_size / 2)) && ((p1.carY > greenCircleY) && (p1.carY < greenCircleY + radius_size / 2))) {
-                    blueColorActive = false;                    
-                    greenColorActive = true;
-                    redColorActive = false;
-
-                }
-                if (greenColorActive == true) {
-                    currentRGBvalue = greenValue;
-                }
-
-                if (((p1.carX > redCircleX) && (p1.carX < redCircleX + radius_size / 2)) && ((p1.carY > redCircleY) && (p1.carY < redCircleY + radius_size / 2))) {
-                    blueColorActive = false;
-                    greenColorActive = false;                
-                    redColorActive = true;
-                }
-                if (redColorActive == true) {
-                    currentRGBvalue = redValue;
-                }
-
-
-                colorCircle(blueCircleX, blueCircleY, radius_size, blueValue)
-                colorCircle(greenCircleX, greenCircleY, radius_size, greenValue)
-                colorCircle(redCircleX, redCircleY, radius_size, redValue)
+                
 
                 colorRect(trackLeftEdgeX, trackTopEdgeY,
                     TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
@@ -104,5 +63,50 @@ const drawTracks = () => {
             } // end of isTrackAtTileCoord()
         } // end of for eachRow
     } // end of for eachCol
+
+
+    let blueCircleX = 9500;
+    let blueCircleY = 890;
+
+    let greenCircleX = 9900;
+    let greenCircleY = 890;
+
+    let redCircleX = 10300;
+    let redCircleY = 890;
+
+
+    if (((p1.carX > blueCircleX) && (p1.carX < blueCircleX + radius_size / 2)) && ((p1.carY > blueCircleY) && (p1.carY < blueCircleY + radius_size / 2))) {
+        blueColorActive = true;
+        greenColorActive = false;
+        redColorActive = false;
+    }
+    if (blueColorActive == true) {
+        currentRGBvalue = blueValue;
+    }
+
+    if (((p1.carX > greenCircleX) && (p1.carX < greenCircleX + radius_size / 2)) && ((p1.carY > greenCircleY) && (p1.carY < greenCircleY + radius_size / 2))) {
+        blueColorActive = false;                    
+        greenColorActive = true;
+        redColorActive = false;
+
+    }
+    if (greenColorActive == true) {
+        currentRGBvalue = greenValue;
+    }
+
+    if (((p1.carX > redCircleX) && (p1.carX < redCircleX + radius_size / 2)) && ((p1.carY > redCircleY) && (p1.carY < redCircleY + radius_size / 2))) {
+        blueColorActive = false;
+        greenColorActive = false;                
+        redColorActive = true;
+    }
+    if (redColorActive == true) {
+        currentRGBvalue = redValue;
+    }
+
+
+    colorCircle(blueCircleX, blueCircleY, radius_size, blueValue)
+    colorCircle(greenCircleX, greenCircleY, radius_size, greenValue)
+    colorCircle(redCircleX, redCircleY, radius_size, redValue)
+
 } // end of drawTracks()
 
