@@ -56,9 +56,7 @@ const drawTracks = () => {
 
                 
 
-                colorRect(trackLeftEdgeX, trackTopEdgeY,
-                    TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
-                canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
+
 
             } // end of isTrackAtTileCoord()
         } // end of for eachRow
@@ -107,6 +105,10 @@ const drawTracks = () => {
     colorCircle(blueCircleX, blueCircleY, radius_size, blueValue)
     colorCircle(greenCircleX, greenCircleY, radius_size, greenValue)
     colorCircle(redCircleX, redCircleY, radius_size, redValue)
+
+    colorRect(trackLeftEdgeX, trackTopEdgeY,
+        TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
+    canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
 
 } // end of drawTracks()
 
