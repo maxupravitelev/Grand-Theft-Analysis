@@ -1,0 +1,19 @@
+{
+  "name": "grand-theft-analysis-nodejs",
+  "version": "0.0.1",
+  "description": "- Drive around in your browser while listening to tracks from Spotify with basic music visualisation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxupravitelev/Grand-Theft-Analysis.git"
+  },
+  "author": "Max Upravitelev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxupravitelev/Grand-Theft-Analysis/issues"
+  },
+  "homepage": "https://github.com/maxupravitelev/Grand-Theft-Analysis#readme"
+}
