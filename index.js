@@ -3,6 +3,7 @@ require('dotenv').config()
 const querystring = require('querystring')
 const express = require('express')
 const app = express()
+const request = require('request');
 
 // spotify init
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
@@ -18,8 +19,6 @@ const spotifyAPI = new SpotifyWebAPI({
     clientSecret: SPOTIFY_CLIENT_SECRET,
     // redirectUri: SPOTIFY_REDIRECT_URI
 })
-
-
 
 // spotifyApi.setAccessToken('<your_access_token>');
 
@@ -38,21 +37,21 @@ const redirectURI = `https://accounts.spotify.com/authorize?${querystring.string
 console.log(redirectURI)
 
 // Retrieve an access token.
-const authenticate = () => {
-    spotifyAPI.clientCredentialsGrant()
-        .then(data => {
-            console.log('The access token expires in ' + data.body['expires_in']);
-            console.log('The access token is ' + data.body['access_token']);
+// const authenticate = () => {
+//     spotifyAPI.clientCredentialsGrant()
+//         .then((data) => {
+//             console.log('The access token expires in ' + data.body['expires_in']);
+//             console.log('The access token is ' + data.body['access_token']);
         
-            // Save the access token so that it's used in future calls
-            spotifyApi.setAccessToken(data.body['access_token']);
-        }
-        , (err) => {
-            console.log('Something went wrong when retrieving an access token', err);
-        })
-}
+//             // Save the access token so that it's used in future calls
+//             spotifyApi.setAccessToken(data.body['access_token']);
+//         }
+//         , (err) => {
+//             console.log('Something went wrong when retrieving an access token', err);
+//         })
+// }
 
-authenticate();
+// authenticate();
 
 
 app.get("/spotifyRedirectIrl", (req, res) => {
@@ -69,3 +68,35 @@ app.listen(PORT, () => {
 
 //backup .env
 // SPOTIFY_REDIRECT_URI=https://grandtheftanalysis.herokuapp.com/
+
+
+// https://github.com/spotify/web-api-auth-examples/blob/master/client_credentials/app.js
+var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64'))
+    },
+    form: {
+      grant_type: 'client_credentials'
+    },
+    json: true
+  };
+  
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+  
+      // use the access token to access the Spotify Web API
+      var token = body.access_token;
+      console.log(token)
+      var options = {
+        url: 'https://api.spotify.com/v1/users/' + SPOTIFY_CLIENT_USERNAME,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        json: true
+      };
+      request.get(options, function(error, response, body) {
+        console.log(body);
+      });
+    }
+  });
