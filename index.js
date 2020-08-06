@@ -1,9 +1,12 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const querystring = require('querystring')
-const express = require('express')
-const app = express()
-const request = require('request');
+const express = require("express");
+const app = express();
+const request = require("request")
+// const cors = require("cors");
+
+// app.use(cors());
+app.use(express.json());
 
 // spotify init
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
@@ -11,92 +14,43 @@ const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 const SPOTIFY_CLIENT_USERNAME = process.env.SPOTIFY_CLIENT_USERNAME
 const SPOTIFY_REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI
 
-// https://www.npmjs.com/package/spotify-web-api-node
-const SpotifyWebAPI = require('spotify-web-api-node')
+var authOptions = {
+  url: 'https://accounts.spotify.com/api/token',
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64'))
+  },
+  form: {
+    grant_type: 'client_credentials'
+  },
+  json: true
+};
 
-const spotifyAPI = new SpotifyWebAPI({
-    clientID: SPOTIFY_CLIENT_ID,
-    clientSecret: SPOTIFY_CLIENT_SECRET,
-    // redirectUri: SPOTIFY_REDIRECT_URI
-})
+var token = '';
 
-// spotifyApi.setAccessToken('<your_access_token>');
+request.post(authOptions, function(error, response, body) {
+  if (!error && response.statusCode === 200) {
 
-const scopes = ["streaming", "user-read-birthdate", "user-read-email", "user-read-private"];
-
-const redirectUriParameters = {
-    client_id: process.env.CLIENT_ID,
-    response_type: 'token',
-    scope: scopes.join(' '),
-    redirect_uri: encodeURI(SPOTIFY_REDIRECT_URI),
-    show_dialog: true,
+    // use the access token to access the Spotify Web API
+    token = body.access_token;
+    console.log(token)
+    var options = {
+      url: 'https://api.spotify.com/v1/users/' + SPOTIFY_CLIENT_USERNAME,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      json: true
+    };
+    request.get(options, function(error, response, body) {
+      console.log(body);
+    });
   }
+});
 
-const redirectURI = `https://accounts.spotify.com/authorize?${querystring.stringify(redirectUriParameters)}`;
-
-console.log(redirectURI)
-
-// Retrieve an access token.
-// const authenticate = () => {
-//     spotifyAPI.clientCredentialsGrant()
-//         .then((data) => {
-//             console.log('The access token expires in ' + data.body['expires_in']);
-//             console.log('The access token is ' + data.body['access_token']);
-        
-//             // Save the access token so that it's used in future calls
-//             spotifyApi.setAccessToken(data.body['access_token']);
-//         }
-//         , (err) => {
-//             console.log('Something went wrong when retrieving an access token', err);
-//         })
-// }
-
-// authenticate();
-
-
-app.get("/spotifyRedirectIrl", (req, res) => {
-    resonse.send(JSON.stringify({
-        redirectURI
-    }, null, 2))
-})
+app.get("/api/token", (req, res, next) => {
+  res.json(token)
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
-//backup .env
-// SPOTIFY_REDIRECT_URI=https://grandtheftanalysis.herokuapp.com/
-
-
-// https://github.com/spotify/web-api-auth-examples/blob/master/client_credentials/app.js
-var authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: {
-      'Authorization': 'Basic ' + (new Buffer(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64'))
-    },
-    form: {
-      grant_type: 'client_credentials'
-    },
-    json: true
-  };
-  
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-  
-      // use the access token to access the Spotify Web API
-      var token = body.access_token;
-      console.log(token)
-      var options = {
-        url: 'https://api.spotify.com/v1/users/' + SPOTIFY_CLIENT_USERNAME,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-        json: true
-      };
-      request.get(options, function(error, response, body) {
-        console.log(body);
-      });
-    }
-  });

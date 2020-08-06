@@ -1,7 +1,7 @@
 {
-  "name": "grand-theft-analysis-nodejs",
+  "name": "shopping-assistent-server",
   "version": "0.0.1",
-  "description": "- Drive around in your browser while listening to tracks from Spotify with basic music visualisation.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,21 +10,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxupravitelev/Grand-Theft-Analysis.git"
+    "url": "git+https://github.com/maxupravitelev/shopping-assistent-server.git"
   },
   "author": "Max Upravitelev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maxupravitelev/Grand-Theft-Analysis/issues"
+    "url": "https://github.com/maxupravitelev/shopping-assistent-server/issues"
   },
-  "homepage": "https://github.com/maxupravitelev/Grand-Theft-Analysis#readme",
+  "homepage": "https://github.com/maxupravitelev/shopping-assistent-server#readme",
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "querystring": "^0.2.0",
-    "spotify-web-api-node": "^4.0.0"
+    "mongoose": "^5.9.25"
   }
 }
