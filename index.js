@@ -19,6 +19,37 @@ const spotifyAPI = new SpotifyWebAPI({
     // redirectUri: SPOTIFY_REDIRECT_URI
 })
 
+
+
 // spotifyApi.setAccessToken('<your_access_token>');
 
 const scopes = ["streaming", "user-read-birthdate", "user-read-email", "user-read-private"];
+
+const redirectUriParameters = {
+    client_id: process.env.CLIENT_ID,
+    response_type: 'token',
+    scope: scopes.join(' '),
+    redirect_uri: encodeURI(SPOTIFY_REDIRECT_URI),
+    show_dialog: true,
+  }
+
+const redirectURI = `https://accounts.spotify.com/authorize?${querystring.stringify(redirectUriParameters)}`;
+
+console.log(redirectURI)
+
+// Retrieve an access token.
+const authenticate = () => {
+    spotifyAPI.clientCredentialsGrant()
+        .then(data => {
+            console.log('The access token expires in ' + data.body['expires_in']);
+            console.log('The access token is ' + data.body['access_token']);
+        
+            // Save the access token so that it's used in future calls
+            spotifyApi.setAccessToken(data.body['access_token']);
+        }
+        , (err) => {
+            console.log('Something went wrong when retrieving an access token', err);
+        })
+}
+
+authenticate();
