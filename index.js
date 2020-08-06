@@ -8,6 +8,9 @@ const request = require("request")
 // app.use(cors());
 app.use(express.json());
 
+app.use(express.static('public'));
+
+
 // spotify init
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
@@ -46,7 +49,7 @@ request.post(authOptions, function(error, response, body) {
   }
 });
 
-app.get("/api/token", (req, res, next) => {
+app.get("/api/token", (req, res) => {
   res.json(token)
 });
 
