@@ -17,7 +17,7 @@ const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 const SPOTIFY_CLIENT_USERNAME = process.env.SPOTIFY_CLIENT_USERNAME
 const SPOTIFY_REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI
 
-var authOptions = {
+let authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
     'Authorization': 'Basic ' + (new Buffer(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64'))
@@ -30,7 +30,9 @@ var authOptions = {
 
 var token = '';
 
-request.post(authOptions, function(error, response, body) {
+
+//to do: update request to https://github.com/mikeal/bent
+request.post(authOptions, (error, response, body) => {
   if (!error && response.statusCode === 200) {
 
     // use the access token to access the Spotify Web API
@@ -43,7 +45,7 @@ request.post(authOptions, function(error, response, body) {
       },
       json: true
     };
-    request.get(options, function(error, response, body) {
+    request.get(options, (error, response, body) => {
       console.log(body);
     });
   }
