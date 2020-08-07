@@ -1,11 +1,7 @@
 //
 
-const handleSubmit = (query) => {
-    console.log(query)
-}
+let urlParams = new URLSearchParams(window.location.search);
 
-let uri = document.getElementsByName('query');
+let spotifyURI = urlParams.get('query')
 
-console.log(uri)
-
-console.log(window.location.search)
+console.log(spotifyURI);
