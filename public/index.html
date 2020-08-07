@@ -6,7 +6,7 @@
     <link id="favicon" rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
   </head>
   <body>
     <header>
@@ -21,7 +21,7 @@
         Enter Spotify Track URI
         <input type="text" name="query"/>
         <button
-          
+          onClick="postToServer()"
           >submit</button>
       </form>
     
@@ -31,6 +31,6 @@
     <footer>
 
     </footer>
-    <script src="/index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
