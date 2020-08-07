@@ -30,7 +30,7 @@ let authOptions = {
 
 var token = '';
 
-
+let spotifyURI = 'spotify:track:4zTqkKfNC3rDQ0uuAGOvie'
 //to do: update request to https://github.com/mikeal/bent
 request.post(authOptions, (error, response, body) => {
   if (!error && response.statusCode === 200) {
@@ -47,6 +47,7 @@ request.post(authOptions, (error, response, body) => {
     };
     request.get(options, (error, response, body) => {
       console.log(body);
+      sentURIforAnalysis();
     });
   }
 });
@@ -58,6 +59,20 @@ app.get("/api/token", (req, res) => {
 app.get("api/:spotify_uri", (req, res) => {
   
 })
+
+const sentURIforAnalysis = () => {
+  let options = {
+    url: 'https://api.spotify.com/v1/audio-analysis/' + spotifyURI,
+    headers: {
+      'Authorization' : `Bearer ${token}`
+    },
+    json: true
+  };
+  console.log(options)
+  request.get(options, (error, response, body) => {
+    console.log(body)
+  })
+}
 
 
 const PORT = process.env.PORT;
