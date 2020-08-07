@@ -55,6 +55,11 @@ app.get("/api/token", (req, res) => {
   res.json(token)
 });
 
+app.get("api/:spotify_uri", (req, res) => {
+  
+})
+
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
