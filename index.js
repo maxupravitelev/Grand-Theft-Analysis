@@ -60,9 +60,13 @@ app.get("/api/token", (req, res) => {
   res.json(token)
 });
 
-app.get("api/:id", (req, res) => {
+app.get("/api/:id", (req, res) => {
   console.log(req.params.id)
   sentIDforAnalysis(req.params.id)
+})
+
+app.get("/api/test", (req, res) => {
+  res.send("test")
 })
 
 const sentIDforAnalysis = (id) => {
