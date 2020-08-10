@@ -1,7 +1,7 @@
 let urlParams = new URLSearchParams(window.location.search);
 
-let spotifyID = urlParams.get('query')
-let analysis = ''
+let spotifyID = urlParams.get('query') || '4zTqkKfNC3rDQ0uuAGOvie';
+let analysis = '';
 
 console.log(spotifyID);
 
@@ -28,14 +28,15 @@ if (spotifyID === null) {
 
 /////////////////////////////
     
-let access_token = ''
+let access_token = urlParams.get('access_token')
+console.log(access_token)
 
 fetch('http://localhost:8888/api/token')
     .then(response => response.json())
     .then(data => {
         access_token = data;
         console.log(access_token)
-        initSpotifyWebPlayer();
+        // initSpotifyWebPlayer();
     })
 
 
@@ -56,9 +57,11 @@ fetch('http://localhost:8888/api/token')
 // let spotify_uri = '0uRtI9z2jvfE9fdf67n8jq'
 
 
-const initSpotifyWebPlayer = () => {
+// const initSpotifyWebPlayer = () => {
     window.onSpotifyWebPlaybackSDKReady = () => {
         const token = access_token;
+        // const token = 'BQAA-SjmBg-kqNigZgauIKUMHUx6EBou7WbveXclZj8uho-MgraDeK6HpuEyHWr-V9R9oL6KVOHyeXKoP3SbImFG-Fi1ofK8H_q5y_V950vMN2LpKr_wtSwZ-TVoPWXNLo84WcfIxAiWPWmAPMmC3DiYc3TpUqvLbsWBwyQf'
+        console.log(token)
         const player = new Spotify.Player({
           name: 'Web Playback SDK Quick Start Player',
           getOAuthToken: cb => { cb(token); }
@@ -86,7 +89,7 @@ const initSpotifyWebPlayer = () => {
         // Connect to the player!
         player.connect();
       };
-}
+// }
 
 
 // const startSpotifyPlayer = () => {
