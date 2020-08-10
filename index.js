@@ -46,6 +46,7 @@ request.post(authOptions, (error, response, body) => {
       url: "https://api.spotify.com/v1/users/" + SPOTIFY_CLIENT_USERNAME,
       headers: {
         Authorization: "Bearer " + token,
+        scope: "streaming user-read-email user-read-private"
       },
       json: true,
     };
