@@ -30,7 +30,11 @@ let authOptions = {
 
 var token = '';
 
-let spotifyURI = 'spotify:track:4zTqkKfNC3rDQ0uuAGOvie'
+// let spotifyURI = 'spotify:track:4zTqkKfNC3rDQ0uuAGOvie'
+let spotifyID = '4zTqkKfNC3rDQ0uuAGOvie'
+
+
+
 //to do: update request to https://github.com/mikeal/bent
 request.post(authOptions, (error, response, body) => {
   if (!error && response.statusCode === 200) {
@@ -47,7 +51,7 @@ request.post(authOptions, (error, response, body) => {
     };
     request.get(options, (error, response, body) => {
       console.log(body);
-      sentURIforAnalysis();
+      // sentIDforAnalysis();
     });
   }
 });
@@ -56,13 +60,14 @@ app.get("/api/token", (req, res) => {
   res.json(token)
 });
 
-app.get("api/:spotify_uri", (req, res) => {
-  
+app.get("api/:id", (req, res) => {
+  console.log(req.params.id)
+  sentIDforAnalysis(req.params.id)
 })
 
-const sentURIforAnalysis = () => {
+const sentIDforAnalysis = (id) => {
   let options = {
-    url: 'https://api.spotify.com/v1/audio-analysis/' + spotifyURI,
+    url: 'https://api.spotify.com/v1/audio-analysis/' + id,
     headers: {
       'Authorization' : `Bearer ${token}`
     },
