@@ -1,19 +1,3 @@
-//
-
-// var inputElement = document.createElement('input');
-// inputElement.type = "button"
-// inputElement.addEventListener('click', function(){
-//     gotoNode(result.name);
-// });
-
-// // ​document.body.appendChild(inputElement);​
-
-// var mi = document.createElement("input");
-// mi.setAttribute('type', 'text');
-// mi.setAttribute('value', 'default');
-
-// document.body.appendChild(mi)
-
 let urlParams = new URLSearchParams(window.location.search);
 
 let spotifyID = urlParams.get('query')
@@ -36,8 +20,22 @@ if (spotifyID === null) {
 
 }
 
-document.write(analysis);
+// document.write(analysis);
 
-const postToServer = () => {
-    console.log("sf")
-}
+// const postToServer = () => {
+//     console.log("sf")
+// }
+
+/////////////////////////////
+    
+let access_token = ''
+
+fetch('http://localhost:8888/api/token')
+    .then(response => response.json())
+    .then(data => {
+        access_token = data;
+        console.log(access_token)
+    })
+
+
+
