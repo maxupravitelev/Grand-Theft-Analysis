@@ -16,15 +16,27 @@
 
 let urlParams = new URLSearchParams(window.location.search);
 
-let spotifyURI = urlParams.get('query')
+let spotifyID = urlParams.get('query')
+let analysis = ''
 
-console.log(spotifyURI);
+console.log(spotifyID);
 
-if (spotifyURI === null) {
-    spotifyURI = 'No URI entered'
+if (spotifyID === null) {
+    analysis = 'No URI entered'
+} else {
+
+    let url = 'http://localhost:8888/api/' + spotifyID
+    console.log(url)
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            analysis = data;
+            console.log(data);
+        });
+
 }
 
-document.write(spotifyURI);
+document.write(analysis);
 
 const postToServer = () => {
     console.log("sf")
