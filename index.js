@@ -10,18 +10,7 @@ const cookieParser = require("cookie-parser");
 app.use(cors());
 app.use(express.json());
 
-var generateRandomString = function (length) {
-  var text = "";
-  var possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
-
-var stateKey = "spotify_auth_state";
+let stateKey = "spotify_auth_state";
 
 // spotify init // based on: https://github.com/spotify/web-api-auth-examples/tree/master/authorization_code
 
@@ -146,21 +135,24 @@ app.get("/api/:id", (req, res) => {
   });
 });
 
-const sentIDforAnalysis = (id) => {
-  let options = {
-    url: "https://api.spotify.com/v1/audio-analysis/" + id,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    json: true,
-  };
-  console.log(options);
-  request.get(options, (error, response, body) => {
-    // console.log(body.meta)
-  });
-};
-
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+//////
+
+
+// generating random state string @ app.get /login
+
+let generateRandomString = (length) => {
+    let text = "";
+    let possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  };
