@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const request = require("request");
+const request = require("request"); // todo: update to https://github.com/mikeal/bent
 const cors = require("cors");
 const qs = require("querystring");
 const cookieParser = require("cookie-parser");
@@ -22,11 +22,11 @@ const SPOTIFY_REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
 app.use(express.static("public"));
 app.use(cookieParser());
 
-app.get("/login", function (req, res) {
-  var state = generateRandomString(16);
+app.get("/login", (req, res) => {
+  let state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  var scope = "streaming user-read-email user-read-private";
+  let scope = "streaming user-read-email user-read-private";
 
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
@@ -40,12 +40,12 @@ app.get("/login", function (req, res) {
   );
 });
 
-var token = "";
+let token = "";
 
 app.get("/callback", function (req, res) {
-  var code = req.query.code || null;
-  var state = req.query.state || null;
-  var storedState = req.cookies ? req.cookies[stateKey] : null;
+  let code = req.query.code || null;
+  let state = req.query.state || null;
+  let storedState = req.cookies ? req.cookies[stateKey] : null;
 
   console.log(code);
 
@@ -58,7 +58,8 @@ app.get("/callback", function (req, res) {
     );
   } else {
     res.clearCookie(stateKey);
-    var authOptions = {
+
+    let authOptions = {
       url: "https://accounts.spotify.com/api/token",
       form: {
         code: code,
@@ -68,17 +69,17 @@ app.get("/callback", function (req, res) {
       headers: {
         Authorization:
           "Basic " +
-          new Buffer.from(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET).toString(
-            "base64"
-          ),
+          new Buffer.from(
+            SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET
+          ).toString("base64"),
       },
       json: true,
     };
 
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        var access_token = body.access_token,
-            refresh_token = body.refresh_token;
+        let access_token = body.access_token;
+        let refresh_token = body.refresh_token;
 
         // let options = {
         //   url: "https://api.spotify.com/v1/me",
@@ -93,7 +94,7 @@ app.get("/callback", function (req, res) {
 
         token = access_token;
 
-        // pass the token to the browser
+        // pass token to browser
         // todo: disable token visibility in url in production
         res.redirect(
           "/?" +
@@ -141,19 +142,17 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
 //////
-
 
 // generating random state string @ app.get /login
 
 let generateRandomString = (length) => {
-    let text = "";
-    let possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
-    for (var i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-  };
+  let text = "";
+  let possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
