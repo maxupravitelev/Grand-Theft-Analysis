@@ -75,25 +75,26 @@ app.get("/callback", function (req, res) {
       json: true,
     };
 
-    request.post(authOptions, function (error, response, body) {
+    request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         var access_token = body.access_token,
-          refresh_token = body.refresh_token;
+            refresh_token = body.refresh_token;
 
-        var options = {
-          url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + access_token },
-          json: true,
-        };
+        // let options = {
+        //   url: "https://api.spotify.com/v1/me",
+        //   headers: { Authorization: "Bearer " + access_token },
+        //   json: true,
+        // };
 
-        // use the access token to access the Spotify Web API
-        request.get(options, function (error, response, body) {
-          console.log(body);
-        });
+        // // use the access token to access the Spotify Web API
+        // request.get(options, (error, response, body) => {
+        //   console.log(body);
+        // });
 
         token = access_token;
 
-        // we can also pass the token to the browser to make requests from there
+        // pass the token to the browser
+        // todo: disable token visibility in url in production
         res.redirect(
           "/?" +
             qs.stringify({
