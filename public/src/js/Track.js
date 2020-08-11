@@ -42,7 +42,7 @@ const getTrackAtPixelCoord = (pixelX, pixelY) => {
 
 
 var currentRGBvalue = 0;
-var blueColorActive = false;
+var blueColorActive = true;
 var greenColorActive = false;
 var redColorActive = false;
 
@@ -54,9 +54,9 @@ const drawTracks = () => {
                 var trackLeftEdgeX = eachCol * TRACK_W;
                 var trackTopEdgeY = eachRow * TRACK_H;
 
-                
-
-
+                colorRect(trackLeftEdgeX, trackTopEdgeY,
+                    TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
+                canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
 
             } // end of isTrackAtTileCoord()
         } // end of for eachRow
@@ -106,9 +106,7 @@ const drawTracks = () => {
     colorCircle(greenCircleX, greenCircleY, radius_size, greenValue)
     colorCircle(redCircleX, redCircleY, radius_size, redValue)
 
-    colorRect(trackLeftEdgeX, trackTopEdgeY,
-        TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
-    canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
+
 
 } // end of drawTracks()
 

@@ -40,7 +40,7 @@ if (spotifyID === null) {
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 
-let token = ''
+let token = "";
 
 fetch("http://localhost:8888/api/token")
   .then((response) => response.json())
@@ -108,30 +108,28 @@ let spotifyPlayerStarted = false;
 // check if spotify player started playing
 let spotifyPlayerStartedPlaying = false;
 
-
+// Spotify URI submitted @ submit.html
+let uri_from_submit = "spotify:track:4zTqkKfNC3rDQ0uuAGOvie";
 
 // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
 let spotify_uri = "spotify:track:0uRtI9z2jvfE9fdf67n8jq";
 
-const initAnalysis = () =>{
-    // Spotify URI submitted @ submit.html
-let uri_from_submit = "spotify:track:4zTqkKfNC3rDQ0uuAGOvie";
-
 // track analysis via Spotify API
-let data_json = analysis;
+let data_json = {};
 
 let segmentsDurationsArray = [];
 
 let segmentsDurationPitchesArray = [];
 
-for (let i = 0; i < data_json.segments.length; i++) {
-  segmentsDurationsArray.push(data_json.segments[i].duration);
-  segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
-}
+const initAnalysis = () => {
+  
+    data_json = analysis;
 
-
-}
-
+    for (let i = 0; i < data_json.segments.length; i++) {
+    segmentsDurationsArray.push(data_json.segments[i].duration);
+    segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
+  }
+};
 
 const startSpotifyPlayer = () => {
   spotify_uri = uri_from_submit;
