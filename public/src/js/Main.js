@@ -32,17 +32,16 @@ const gameloop = () => {
         moveEverything();
     }
     drawEverything();
-    if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
-    if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
+    // startSpotifyPlayer()
+    computeRGBvalueFromFlaskData(); 
+    computeCircleRadius();
     pastTime = currentTime;
     requestAnimationFrame(gameloop);
 }
 
 document.getElementById("startButton").addEventListener("click", () => {
   
-  
-  if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
-  
+  startSpotifyPlayer()
 
 });
 

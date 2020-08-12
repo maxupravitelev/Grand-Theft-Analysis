@@ -80,7 +80,6 @@ const initSpotifyPlayer = () => {
     // Playback status updates
     player.addListener("player_state_changed", (state) => {
       if (state.position >= 0) {
-        spotifyPlayerStartedPlaying = true;
         spotifyPlayerCurrentPosition = 0;
       }
     });
@@ -100,12 +99,6 @@ const initSpotifyPlayer = () => {
     player.connect();
   };
 };
-
-// check if spotify player initialization has started
-let spotifyPlayerStarted = false;
-
-// check if spotify player started playing
-let spotifyPlayerStartedPlaying = false;
 
 // Spotify URI submitted @ submit.html
 // let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
@@ -144,16 +137,22 @@ const startSpotifyPlayer = () => {
         Authorization: `Bearer ${token}`,
       },
     }
-  ).then(response => {
+  ).then(() => {
+    
+    // start gameloop for first time
     requestAnimationFrame(gameloop);
     
-    if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
+    computeRGBvalueFromFlaskData(); 
+
+    computeCircleRadius();
 
     sliderReset();
+
     p1.carInit(carPic, "Blue Car");
+
     initInput();  
 
-  })    // fix starting
+  })   
 
   spotifyPlayerStarted = true;
 };
