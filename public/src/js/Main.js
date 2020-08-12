@@ -39,14 +39,11 @@ const gameloop = () => {
 }
 
 document.getElementById("startButton").addEventListener("click", () => {
-  requestAnimationFrame(gameloop);
+  
   
   if ((device_id_global != '') && (spotifyPlayerStarted == false)) { startSpotifyPlayer() };
-  if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
+  
 
-sliderReset();
-p1.carInit(carPic, "Blue Car");
-initInput();  
 });
 
 // const loadingDoneSoStartGame = () => {

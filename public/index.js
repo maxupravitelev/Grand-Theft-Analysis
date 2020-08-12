@@ -144,7 +144,16 @@ const startSpotifyPlayer = () => {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
+  ).then(response => {
+    requestAnimationFrame(gameloop);
+    
+    if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
+
+    sliderReset();
+    p1.carInit(carPic, "Blue Car");
+    initInput();  
+
+  })    // fix starting
 
   spotifyPlayerStarted = true;
 };
