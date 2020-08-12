@@ -108,10 +108,10 @@ let spotifyPlayerStarted = false;
 let spotifyPlayerStartedPlaying = false;
 
 // Spotify URI submitted @ submit.html
-let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
+// let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
 
 // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
-let spotify_uri = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
+let spotify_uri = "spotify:track:" + spotifyID;
 
 // track analysis via Spotify API
 let data_json = {};
@@ -131,7 +131,9 @@ const initAnalysis = () => {
 };
 
 const startSpotifyPlayer = () => {
-  spotify_uri = uri_from_submit;
+  // spotify_uri = uri_from_submit;
+  console.log(spotify_uri)
+
   fetch(
     "https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global,
     {
