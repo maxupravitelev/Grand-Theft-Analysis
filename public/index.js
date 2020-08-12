@@ -16,7 +16,7 @@
 
 let urlParams = new URLSearchParams(window.location.search);
 
-let spotifyID = urlParams.get("query") || "4zTqkKfNC3rDQ0uuAGOvie";
+let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 
 //initialize device ID variable
@@ -108,10 +108,10 @@ let spotifyPlayerStarted = false;
 let spotifyPlayerStartedPlaying = false;
 
 // Spotify URI submitted @ submit.html
-let uri_from_submit = "spotify:track:4zTqkKfNC3rDQ0uuAGOvie";
+let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
 
 // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
-let spotify_uri = "spotify:track:0uRtI9z2jvfE9fdf67n8jq";
+let spotify_uri = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
 
 // track analysis via Spotify API
 let data_json = {};
