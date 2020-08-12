@@ -16,6 +16,8 @@ window.onload = () => {
   loadImages();
 }
 
+// todo: add eventHandlers for starting gameloop()
+
 
 var currentTime = 0;
 var deltaTime = 0;

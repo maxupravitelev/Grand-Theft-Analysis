@@ -13,6 +13,7 @@
 //     document.write('<strong>user is logged id</strong>')
 // }
 
+
 let urlParams = new URLSearchParams(window.location.search);
 
 let spotifyID = urlParams.get("query") || "4zTqkKfNC3rDQ0uuAGOvie";
@@ -55,8 +56,6 @@ fetch("http://localhost:8888/api/token")
 
 const initSpotifyPlayer = () => {
   window.onSpotifyWebPlaybackSDKReady = () => {
-    //   const token = access_token;
-    //   console.log(token);
     const player = new Spotify.Player({
       name: "Web Playback SDK Quick Start Player",
       getOAuthToken: (cb) => {
