@@ -60,8 +60,6 @@ setInterval(function () { elapsedTime = (Date.now() - startTime) / 1000; }, 1);
 const computeRGBvalueFromSpotifyAnalysis = () => {
     if ((elapsedTime > segmentsDurationsArray[segment_duration_index]) && (segment_duration_index < segmentsDurationsArray.length - 1)) {
 
-
-
         current_segment_pitch_avg = (segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0)) / segmentsDurationPitchesArray[segment_duration_index].length;
         computeGreenValue();
         computeBlueValue();
