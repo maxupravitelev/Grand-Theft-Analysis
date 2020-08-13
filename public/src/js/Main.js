@@ -32,9 +32,6 @@ const gameloop = () => {
         moveEverything();
     }
     drawEverything();
-    // startSpotifyPlayer()
-    computeRGBvalueFromSpotifyAnalysis(); 
-    computeCircleRadius();
     pastTime = currentTime;
     requestAnimationFrame(gameloop);
 }
@@ -67,13 +64,17 @@ const moveEverything = () => {
 
 
 const drawEverything = () => {
-  colorRect(0, 0, canvas.width, canvas.height, 'black');
+    computeRGBvalueFromSpotifyAnalysis(); 
+    computeCircleRadius();
+  
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
 
   canvasContext.save(); // needed to undo this .translate() used for scroll
   
   canvasContext.translate(-camPanX,-camPanY);
 
   drawTracks();
+  colorizeTracks();
 
 //   colorCircle(75, 75, radius_size, 'blue')
   p1.carDraw();

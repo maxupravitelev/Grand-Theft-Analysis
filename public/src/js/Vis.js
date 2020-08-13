@@ -60,11 +60,7 @@ setInterval(function () { elapsedTime = (Date.now() - startTime) / 1000; }, 1);
 const computeRGBvalueFromSpotifyAnalysis = () => {
     if ((elapsedTime > segmentsDurationsArray[segment_duration_index]) && (segment_duration_index < segmentsDurationsArray.length - 1)) {
 
-        // for (j = 0; j < segmentsDurationPitchesArray[segment_duration_index].length - 1; j++)
-        // {
-        //     setInterval(function(){ current_segment_pitch_avg = segmentsDurationPitchesArray[segment_duration_index][j];}, (segmentsDurationsArray[segment_duration_index] / 12) * 100);
-        //     rgb();
-        // }
+
 
         current_segment_pitch_avg = (segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0)) / segmentsDurationPitchesArray[segment_duration_index].length;
         computeGreenValue();
