@@ -46,6 +46,7 @@ var blueColorActive = true;
 var greenColorActive = false;
 var redColorActive = false;
 
+
 const drawTracks = () => {
 
     for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) { // in each column...

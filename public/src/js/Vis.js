@@ -57,7 +57,7 @@ let elapsedTime = 0.0000;
 setInterval(function () { elapsedTime = (Date.now() - startTime) / 1000; }, 1);
 
 
-const computeRGBvalueFromFlaskData = () => {
+const computeRGBvalueFromSpotifyAnalysis = () => {
     if ((elapsedTime > segmentsDurationsArray[segment_duration_index]) && (segment_duration_index < segmentsDurationsArray.length - 1)) {
 
         // for (j = 0; j < segmentsDurationPitchesArray[segment_duration_index].length - 1; j++)

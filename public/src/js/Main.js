@@ -33,7 +33,7 @@ const gameloop = () => {
     }
     drawEverything();
     // startSpotifyPlayer()
-    computeRGBvalueFromFlaskData(); 
+    computeRGBvalueFromSpotifyAnalysis(); 
     computeCircleRadius();
     pastTime = currentTime;
     requestAnimationFrame(gameloop);
