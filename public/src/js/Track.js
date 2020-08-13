@@ -42,10 +42,7 @@ const getTrackAtPixelCoord = (pixelX, pixelY) => {
 
 
 var currentRGBvalue = 0;
-var blueColorActive = true;
-var greenColorActive = false;
-var redColorActive = false;
-
+let activeColor = 'blue'
 
 const drawTracks = () => {
 
@@ -75,30 +72,30 @@ const drawTracks = () => {
 
 
     if (((p1.carX > blueCircleX) && (p1.carX < blueCircleX + radius_size / 2)) && ((p1.carY > blueCircleY) && (p1.carY < blueCircleY + radius_size / 2))) {
-        blueColorActive = true;
-        greenColorActive = false;
-        redColorActive = false;
+        
+        activeColor = 'blue';
+        
     }
-    if (blueColorActive == true) {
+    if (activeColor == 'blue') {
         currentRGBvalue = blueValue;
     }
 
     if (((p1.carX > greenCircleX) && (p1.carX < greenCircleX + radius_size / 2)) && ((p1.carY > greenCircleY) && (p1.carY < greenCircleY + radius_size / 2))) {
-        blueColorActive = false;                    
-        greenColorActive = true;
-        redColorActive = false;
+
+        activeColor = 'green';
+
 
     }
-    if (greenColorActive == true) {
+    if (activeColor == 'green') {
         currentRGBvalue = greenValue;
     }
 
     if (((p1.carX > redCircleX) && (p1.carX < redCircleX + radius_size / 2)) && ((p1.carY > redCircleY) && (p1.carY < redCircleY + radius_size / 2))) {
-        blueColorActive = false;
-        greenColorActive = false;                
-        redColorActive = true;
+
+        activeColor = 'red';
+
     }
-    if (redColorActive == true) {
+    if (activeColor == 'red') {
         currentRGBvalue = redValue;
     }
 
