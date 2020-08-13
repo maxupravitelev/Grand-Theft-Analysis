@@ -142,7 +142,7 @@ const startSpotifyPlayer = () => {
     // start gameloop for first time
     requestAnimationFrame(gameloop);
     
-    computeRGBvalueFromFlaskData(); 
+    computeRGBvalueFromSpotifyAnalysis(); 
 
     computeCircleRadius();
 
