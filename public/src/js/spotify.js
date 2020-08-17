@@ -15,7 +15,7 @@ let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 //initialize device ID variable
 let device_id_global = "";
-console.log(spotifyID);
+// console.log(spotifyID);
 if (spotifyID === null) {
     analysis = "No URI entered";
 }
@@ -34,6 +34,7 @@ let access_token = '';
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 let token = "";
+// todo: check for redundancy in token vars
 fetch("http://localhost:8888/api/token")
     .then((response) => response.json())
     .then((data) => {
@@ -89,7 +90,7 @@ const initSpotifyPlayer = () => {
 let spotify_uri = "spotify:track:" + spotifyID;
 // track analysis via Spotify API
 let data_json = {
-    segments: [],
+// segments: [],
 };
 let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
@@ -102,7 +103,7 @@ const initAnalysis = () => {
 };
 const startSpotifyPlayer = () => {
     // spotify_uri = uri_from_submit;
-    console.log(spotify_uri);
+    //   console.log(spotify_uri)
     fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global, {
         method: "PUT",
         body: JSON.stringify({ uris: [spotify_uri] }),

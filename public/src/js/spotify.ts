@@ -14,15 +14,15 @@
 // }
 
 
-let urlParams = new URLSearchParams(window.location.search);
+let urlParams: any = new URLSearchParams(window.location.search);
 
-let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
+let spotifyID: any = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 
 //initialize device ID variable
-let device_id_global = "";
+let device_id_global: string = "";
 
-console.log(spotifyID);
+// console.log(spotifyID);
 
 if (spotifyID === null) {
   analysis = "No URI entered";
@@ -43,7 +43,9 @@ let access_token: string = '';
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 
-let token = "";
+let token: string = "";
+// todo: check for redundancy in token vars
+
 
 fetch("http://localhost:8888/api/token")
   .then((response) => response.json())
@@ -58,7 +60,7 @@ fetch("http://localhost:8888/api/token")
 
 const initSpotifyPlayer = () => {
   window.onSpotifyWebPlaybackSDKReady = () => {
-    const player = new Spotify.Player({
+    const player: any = new Spotify.Player({
       name: "Web Playback SDK Quick Start Player",
       getOAuthToken: (cb) => {
         cb(token);
@@ -106,16 +108,16 @@ const initSpotifyPlayer = () => {
 // let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
 
 // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
-let spotify_uri = "spotify:track:" + spotifyID;
+let spotify_uri: string = "spotify:track:" + spotifyID;
 
 // track analysis via Spotify API
 let data_json: any = {
-    segments: [],
+    // segments: [],
 };
 
-let segmentsDurationsArray = [];
+let segmentsDurationsArray: any[] = [];
 
-let segmentsDurationPitchesArray = [];
+let segmentsDurationPitchesArray: any[] = [];
 
 const initAnalysis = () => {
   
@@ -129,7 +131,7 @@ const initAnalysis = () => {
 
 const startSpotifyPlayer = () => {
   // spotify_uri = uri_from_submit;
-  console.log(spotify_uri)
+//   console.log(spotify_uri)
 
   fetch(
     "https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global,
