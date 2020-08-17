@@ -88,7 +88,9 @@ const initSpotifyPlayer = () => {
 // initialize spotify uri variable with example uri; gets overwritten with uri_from_submit
 let spotify_uri = "spotify:track:" + spotifyID;
 // track analysis via Spotify API
-let data_json = {};
+let data_json = {
+    segments: [],
+};
 let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
 const initAnalysis = () => {

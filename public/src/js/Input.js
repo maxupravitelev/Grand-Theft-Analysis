@@ -1,4 +1,4 @@
-// keyboard keycode constants, determined by printing out evt.keyCode from a key handler  
+// keyboard keycode constants, determined by printing out evt.keyCode from a key handler
 const KEY_LEFT_ARROW = 37;
 const KEY_UP_ARROW = 38;
 const KEY_RIGHT_ARROW = 39;

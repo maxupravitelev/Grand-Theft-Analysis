@@ -109,7 +109,9 @@ const initSpotifyPlayer = () => {
 let spotify_uri = "spotify:track:" + spotifyID;
 
 // track analysis via Spotify API
-let data_json = {};
+let data_json: any = {
+    segments: [],
+};
 
 let segmentsDurationsArray = [];
 

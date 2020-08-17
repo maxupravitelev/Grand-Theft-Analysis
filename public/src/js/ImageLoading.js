@@ -6,8 +6,9 @@ let trackPics = [];
 let picsToLoad = 0;
 const countLoadedImageAndLaunchIfReady = () => {
     picsToLoad--;
-    if (picsToLoad == 0) { // last image loaded
-        loadingDoneSoStartGame();
+    if (picsToLoad == 0) {
+        // last image loaded
+        // loadingDoneSoStartGame();
     }
 };
 const beginLoadingImage = (imgVar, fileName) => {

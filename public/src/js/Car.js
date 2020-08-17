@@ -16,7 +16,7 @@ function carClass() {
     this.keyHeld_Reverse = false;
     this.keyHeld_TurnLeft = false;
     this.keyHeld_TurnRight = false;
-    // key controls used for this car 
+    // key controls used for this car
     this.setupControls = (forwardKey, backKey, leftKey, rightKey) => {
         this.controlKeyForGas = forwardKey;
         this.controlKeyForReverse = backKey;
@@ -39,7 +39,7 @@ function carClass() {
                     this.homeX = tileCol * TRACK_W + 0.5 * TRACK_W;
                     this.homeY = tileRow * TRACK_H + 0.5 * TRACK_H;
                     trackGrid[i] = TRACK_ROAD;
-                    break; // found it, so no need to keep searching 
+                    break; // found it, so no need to keep searching
                 } // end of if
             } // end of for
         } // end of if car position not saved yet
@@ -49,16 +49,16 @@ function carClass() {
     this.carMove = () => {
         // only allow the car to turn while it's rolling
         if (Math.abs(this.carSpeed) > MIN_TURN_SPEED) {
-            if ((this.keyHeld_TurnLeft) && (reverse == false)) {
+            if (this.keyHeld_TurnLeft && reverse == false) {
                 this.carAng -= TURN_RATE * Math.PI;
             }
-            if ((this.keyHeld_TurnLeft) && (reverse == true)) {
+            if (this.keyHeld_TurnLeft && reverse == true) {
                 this.carAng += TURN_RATE * Math.PI;
             }
-            if ((this.keyHeld_TurnRight) && (reverse == false)) {
+            if (this.keyHeld_TurnRight && reverse == false) {
                 this.carAng += TURN_RATE * Math.PI;
             }
-            if ((this.keyHeld_TurnRight) && (reverse == true)) {
+            if (this.keyHeld_TurnRight && reverse == true) {
                 this.carAng -= TURN_RATE * Math.PI;
             }
         }

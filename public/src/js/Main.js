@@ -2,8 +2,8 @@
 let canvas, canvasContext;
 let p1 = new carClass();
 window.onload = () => {
-    canvas = document.getElementById('gameCanvas');
-    canvasContext = canvas.getContext('2d');
+    canvas = document.getElementById("gameCanvas");
+    canvasContext = canvas.getContext("2d");
     //   canvasContext.canvas.width  = window.innerWidth;
     //   canvasContext.canvas.height = window.innerHeight;
     canvasContext.canvas.width = 1280;
@@ -13,10 +13,10 @@ window.onload = () => {
 // todo: add eventHandlers for starting gameloop()
 var currentTime = 0;
 var deltaTime = 0;
-var pastTime = (new Date()).getTime();
+var pastTime = new Date().getTime();
 var framesPerSecond = 1 / 60;
 const gameloop = () => {
-    currentTime = (new Date()).getTime();
+    currentTime = new Date().getTime();
     deltaTime = deltaTime + Math.min(1, (currentTime - pastTime) / 1000);
     while (deltaTime > framesPerSecond) {
         deltaTime = deltaTime - framesPerSecond;
@@ -35,7 +35,7 @@ document.getElementById("startButton").addEventListener("click", () => {
 //       if (spotifyPlayerStartedPlaying == true) { computeRGBvalueFromFlaskData(); computeCircleRadius(); }
 //   sliderReset();
 //   p1.carInit(carPic, "Blue Car");
-//   initInput();  
+//   initInput();
 // }
 const moveEverything = () => {
     p1.carMove();
@@ -45,7 +45,7 @@ const moveEverything = () => {
 const drawEverything = () => {
     computeRGBvalueFromSpotifyAnalysis();
     computeCircleRadius();
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    colorRect(0, 0, canvas.width, canvas.height, "black");
     canvasContext.save(); // needed to undo this .translate() used for scroll
     canvasContext.translate(-camPanX, -camPanY);
     drawTracks();
