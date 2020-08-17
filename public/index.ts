@@ -156,5 +156,5 @@ const startSpotifyPlayer = () => {
 
   })   
 
-  spotifyPlayerStarted = true;
+//   spotifyPlayerStarted = true;
 };

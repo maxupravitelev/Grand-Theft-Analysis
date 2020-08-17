@@ -117,5 +117,5 @@ const startSpotifyPlayer = () => {
         p1.carInit(carPic, "Blue Car");
         initInput();
     });
-    spotifyPlayerStarted = true;
+    //   spotifyPlayerStarted = true;
 };
