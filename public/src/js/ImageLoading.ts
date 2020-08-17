@@ -1,11 +1,11 @@
-let carPic = document.createElement("img");
-let car2Pic = document.createElement("img");
-let roof = document.createElement("img");
-let roof_up = document.createElement("img");
+let carPic: object = document.createElement("img");
+let car2Pic: object = document.createElement("img");
+let roof: object = document.createElement("img");
+let roof_up: object = document.createElement("img");
 
-let trackPics = [];
+let trackPics: any[] = [];
 
-let picsToLoad = 0;
+let picsToLoad: number = 0;
 
 const countLoadedImageAndLaunchIfReady = () => {
   picsToLoad--;
@@ -26,7 +26,7 @@ const loadImageForTrackCode = (trackCode, fileName) => {
 };
 
 const loadImages = () => {
-  let imageList = [
+  let imageList: any[] = [
     { varName: carPic, theFile: "src/images/player1.png" },
     { varName: roof, theFile: "src/images/roof.png" },
     { varName: roof_up, theFile: "src/images/roof_up.png" },
