@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "watch": true,
+        // "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "lib": ["DOM", "ES2019"],
+        // "outDir": "js",
+    },
+    "include": ["public"],
+}
