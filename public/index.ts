@@ -38,6 +38,8 @@ if (spotifyID === null) {
     });
 }
 
+let access_token: string = '';
+
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 
@@ -80,7 +82,7 @@ const initSpotifyPlayer = () => {
     // Playback status updates
     player.addListener("player_state_changed", (state) => {
       if (state.position >= 0) {
-        spotifyPlayerCurrentPosition = 0;
+        // spotifyPlayerCurrentPosition = 0;
       }
     });
 

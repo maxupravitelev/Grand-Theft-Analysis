@@ -30,6 +30,7 @@ else {
         initAnalysis();
     });
 }
+let access_token = '';
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 let token = "";
@@ -66,7 +67,7 @@ const initSpotifyPlayer = () => {
         // Playback status updates
         player.addListener("player_state_changed", (state) => {
             if (state.position >= 0) {
-                spotifyPlayerCurrentPosition = 0;
+                // spotifyPlayerCurrentPosition = 0;
             }
         });
         // Ready

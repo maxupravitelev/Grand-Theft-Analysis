@@ -5,6 +5,10 @@ var camPanY = 0.0;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = p1.carX;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = p1.carY;
 
+let sliderX: number = 0;
+let sliderY: number = 0;
+
+
 const sliderMove = () => {
     var nextX = sliderX;
     var nextY = sliderY;
