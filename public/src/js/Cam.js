@@ -1,3 +1,4 @@
+// build upon "How To Program Games"-Course by Chris DeLeon: https://www.udemy.com/course/how-to-program-games/learn/lecture/3440374
 const RUN_SPEED = 5.5;
 var camPanX = 0.0;
 var camPanY = 0.0;

@@ -1,7 +1,9 @@
-const RUN_SPEED = 5.5;
+// build upon "How To Program Games"-Course by Chris DeLeon: https://www.udemy.com/course/how-to-program-games/learn/lecture/3440374
 
-var camPanX = 0.0;
-var camPanY = 0.0;
+const RUN_SPEED: number = 5.5;
+
+var camPanX: number = 0.0;
+var camPanY: number = 0.0;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = p1.carX;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = p1.carY;
 
@@ -9,8 +11,8 @@ let sliderX: number = 0;
 let sliderY: number = 0;
 
 const sliderMove = () => {
-  var nextX = sliderX;
-  var nextY = sliderY;
+  var nextX: number = sliderX;
+  var nextY: number = sliderY;
 
   if (p1.keyHeld_TurnLeft) {
     nextX += -TURN_RATE * Math.PI;
@@ -45,11 +47,11 @@ const instantCamFollow = () => {
 };
 
 const cameraFollow = () => {
-  var cameraFocusCenterX = camPanX + canvas.width / 2;
-  var cameraFocusCenterY = camPanY + canvas.height / 2;
+  var cameraFocusCenterX: number = camPanX + canvas.width / 2;
+  var cameraFocusCenterY: number = camPanY + canvas.height / 2;
 
-  var playerDistFromCameraFocusX = Math.abs(sliderX - cameraFocusCenterX);
-  var playerDistFromCameraFocusY = Math.abs(sliderY - cameraFocusCenterY);
+  var playerDistFromCameraFocusX: number = Math.abs(sliderX - cameraFocusCenterX);
+  var playerDistFromCameraFocusY: number = Math.abs(sliderY - cameraFocusCenterY);
 
   if (
     playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X
@@ -69,6 +71,8 @@ const cameraFollow = () => {
       camPanY -= RUN_SPEED;
     }
   }
+
+
 
   //instantCamFollow();
 
