@@ -1,5 +1,5 @@
 // save the canvas for dimensions, and its 2d context for drawing to it
-let canvas, canvasContext;
+let canvas: any, canvasContext: any;
 
 let p1 = new carClass();
 
@@ -18,10 +18,10 @@ window.onload = () => {
 
 // todo: add eventHandlers for starting gameloop()
 
-var currentTime = 0;
-var deltaTime = 0;
-var pastTime = new Date().getTime();
-var framesPerSecond = 1 / 60;
+let currentTime: number = 0;
+let deltaTime: number = 0;
+let pastTime = new Date().getTime();
+let framesPerSecond: number = 1 / 60;
 
 const gameloop = () => {
   currentTime = new Date().getTime();

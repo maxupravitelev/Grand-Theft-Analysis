@@ -11,10 +11,10 @@ window.onload = () => {
     loadImages();
 };
 // todo: add eventHandlers for starting gameloop()
-var currentTime = 0;
-var deltaTime = 0;
-var pastTime = new Date().getTime();
-var framesPerSecond = 1 / 60;
+let currentTime = 0;
+let deltaTime = 0;
+let pastTime = new Date().getTime();
+let framesPerSecond = 1 / 60;
 const gameloop = () => {
     currentTime = new Date().getTime();
     deltaTime = deltaTime + Math.min(1, (currentTime - pastTime) / 1000);

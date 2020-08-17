@@ -1,4 +1,4 @@
-let greenValue = "#00AA00"; // initialize green value on start
+let greenValue: string = "#00AA00"; // initialize green value on start
 
 const computeGreenValue = () => {
   ///////////// compute RGB
@@ -6,9 +6,9 @@ const computeGreenValue = () => {
   // let G = Math.round(Math.random() * 255);
   // let B = Math.round(Math.random() * 255);
 
-  let R = "00";
+  let R: string = "00";
   let G: string = (current_segment_pitch_avg * 255).toString();
-  let B = "00";
+  let B: string = "00";
 
   R = ("00" + R.toString()).slice(-2);
   G = ("00" + G.toString()).slice(-2);
@@ -17,11 +17,11 @@ const computeGreenValue = () => {
   greenValue = "#" + R + G + B;
 };
 
-let blueValue = "#0000AA";
+let blueValue: string = "#0000AA";
 
 const computeBlueValue = () => {
-  let R = "00";
-  let G = "00";
+  let R: string = "00";
+  let G: string = "00";
   let B: string = (current_segment_pitch_avg * 255).toString();
 
   R = ("00" + R.toString()).slice(-2);
@@ -31,12 +31,12 @@ const computeBlueValue = () => {
   blueValue = "#" + R + G + B;
 };
 
-let redValue = "#AA0000";
+let redValue: string = "#AA0000";
 
 const computeRedValue = () => {
   let R: string = (current_segment_pitch_avg * 255).toString();
-  let G = "00";
-  let B = "00";
+  let G: string = "00";
+  let B: string = "00";
 
   R = ("00" + R.toString()).slice(-2);
   G = ("00" + G.toString()).slice(-2);
@@ -45,13 +45,13 @@ const computeRedValue = () => {
   redValue = "#" + R + G + B;
 };
 
-let current_segment_pitch_avg = 0;
+let current_segment_pitch_avg: number = 0;
 
-let segment_duration_index = 0;
+let segment_duration_index: number = 0;
 
 // Timer for RGB value
 let startTime = Date.now();
-let elapsedTime = 0.0;
+let elapsedTime: number = 0.0;
 
 setInterval(function () {
   elapsedTime = (Date.now() - startTime) / 1000;
@@ -77,15 +77,15 @@ const computeRGBvalueFromSpotifyAnalysis = () => {
 
 // Timer for radius value
 let beat_startTime = Date.now();
-let beat_elapsedTime = 0.0;
+let beat_elapsedTime: number = 0.0;
 
 setInterval(() => {
   beat_elapsedTime = (Date.now() - beat_startTime) / 1000;
 }, 1);
 
-let radius_size = 200;
+let radius_size: number = 200;
 
-let beat_duration_index = 0;
+let beat_duration_index: number = 0;
 
 const computeCircleRadius = () => {
   if (
