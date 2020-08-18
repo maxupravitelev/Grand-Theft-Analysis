@@ -29,8 +29,9 @@ app.get("/login", (req, res) => {
         }));
 });
 let token = "";
-app.get("/callback", function (req, res) {
+app.get("/callback", (req, res) => {
     let code = req.query.code || null;
+    //   console.log(typeof code) // object
     let state = req.query.state || null;
     let storedState = req.cookies ? req.cookies[stateKey] : null;
     console.log(code);
