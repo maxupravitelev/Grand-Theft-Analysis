@@ -4,8 +4,14 @@
         "watch": true,
         // "emitDecoratorMetadata": true,
         "module": "commonjs",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
         "lib": ["DOM", "ES2019"],
         // "outDir": "js",
     },
     "include": ["public"],
+    "files": [
+        "index.ts"
+    ],
+    "exclude": ["node_modules", "**/*.spec.ts"]
 }
