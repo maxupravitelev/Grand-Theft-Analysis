@@ -47,11 +47,11 @@ const instantCamFollow = () => {
 };
 
 const cameraFollow = () => {
-  var cameraFocusCenterX: number = camPanX + canvas.width / 2;
-  var cameraFocusCenterY: number = camPanY + canvas.height / 2;
+  let cameraFocusCenterX: number = camPanX + canvas.width / 2;
+  let cameraFocusCenterY: number = camPanY + canvas.height / 2;
 
-  var playerDistFromCameraFocusX: number = Math.abs(sliderX - cameraFocusCenterX);
-  var playerDistFromCameraFocusY: number = Math.abs(sliderY - cameraFocusCenterY);
+  let playerDistFromCameraFocusX: number = Math.abs(sliderX - cameraFocusCenterX);
+  let playerDistFromCameraFocusY: number = Math.abs(sliderY - cameraFocusCenterY);
 
   if (
     playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X

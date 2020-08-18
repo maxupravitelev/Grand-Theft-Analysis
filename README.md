@@ -29,3 +29,5 @@ You can get the first two env variables in your spotify dashboard after creating
 https://developer.spotify.com/dashboard/applications
 
 Important: Set the redirect URI in the settings.
+
+Driving-handling is build upon the "How To Program Games"-Course by Chris DeLeon: https://www.udemy.com/course/how-to-program-games/learn/lecture/3440374

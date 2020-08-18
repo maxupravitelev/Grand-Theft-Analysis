@@ -38,10 +38,10 @@ const instantCamFollow = () => {
     // camPanY = sliderY - canvas.height/2;
 };
 const cameraFollow = () => {
-    var cameraFocusCenterX = camPanX + canvas.width / 2;
-    var cameraFocusCenterY = camPanY + canvas.height / 2;
-    var playerDistFromCameraFocusX = Math.abs(sliderX - cameraFocusCenterX);
-    var playerDistFromCameraFocusY = Math.abs(sliderY - cameraFocusCenterY);
+    let cameraFocusCenterX = camPanX + canvas.width / 2;
+    let cameraFocusCenterY = camPanY + canvas.height / 2;
+    let playerDistFromCameraFocusX = Math.abs(sliderX - cameraFocusCenterX);
+    let playerDistFromCameraFocusY = Math.abs(sliderY - cameraFocusCenterY);
     if (playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
         if (cameraFocusCenterX < sliderX) {
             camPanX += RUN_SPEED;
