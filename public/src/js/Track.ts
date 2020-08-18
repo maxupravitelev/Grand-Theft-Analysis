@@ -1,31 +1,31 @@
 // track constants and variables
-const TRACK_W = 600;
-const TRACK_H = 600;
-const TRACK_GAP = 1;
-const TRACK_COLS = 20;
-const TRACK_ROWS = 15;
-var trackGrid = 
+const TRACK_W: number = 600;
+const TRACK_H: number = 600;
+const TRACK_GAP: number = 1;
+const TRACK_COLS: number = 20;
+const TRACK_ROWS: number = 15;
+const trackGrid: any[] = 
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-const TRACK_ROAD = 0;
-const TRACK_WALL = 1;
-const TRACK_PLAYER = 2;
-const TRACK_GOAL = 3;
-const TRACK_TREE = 4;
-const TRACK_FLAG = 5;
+const TRACK_ROAD: number = 0;
+const TRACK_WALL: number = 1;
+const TRACK_PLAYER: number = 2;
+const TRACK_GOAL: number = 3;
+const TRACK_TREE: number = 4;
+const TRACK_FLAG: number = 5;
 
 const trackTileToIndex = (tileCol, tileRow) => {
   return tileCol + TRACK_COLS * tileRow;
 };
 
 const isTrackAtTileCoord = (trackTileCol, trackTileRow) => {
-  var trackIndex = trackTileToIndex(trackTileCol, trackTileRow);
+  let trackIndex: number = trackTileToIndex(trackTileCol, trackTileRow);
   return trackGrid[trackIndex] == 1;
 };
 
 const getTrackAtPixelCoord = (pixelX, pixelY) => {
-  var tileCol = pixelX / TRACK_W;
-  var tileRow = pixelY / TRACK_H;
+  let tileCol: number = pixelX / TRACK_W;
+  let tileRow: number = pixelY / TRACK_H;
 
   // we'll use Math.floor to round down to the nearest whole number
   tileCol = Math.floor(tileCol);
@@ -41,22 +41,22 @@ const getTrackAtPixelCoord = (pixelX, pixelY) => {
     return false;
     //  return TRACK_WALL; // avoid invalid array access, treat out of bounds as wall
   }
-  var trackIndex = trackTileToIndex(tileCol, tileRow);
+  let trackIndex: number = trackTileToIndex(tileCol, tileRow);
   return trackGrid[trackIndex];
 };
 
-var currentRGBvalue = "#23FF12";
-let activeColor = "blue";
+let currentRGBvalue: string = "#23FF12";
+let activeColor: string = "blue";
 
 const colorizeTracks = () => {
-  let blueCircleX = 9500;
-  let blueCircleY = 890;
+  let blueCircleX: number = 9500;
+  let blueCircleY: number = 890;
 
-  let greenCircleX = 9900;
-  let greenCircleY = 890;
+  let greenCircleX: number = 9900;
+  let greenCircleY: number = 890;
 
-  let redCircleX = 10300;
-  let redCircleY = 890;
+  let redCircleX: number = 10300;
+  let redCircleY: number = 890;
 
   if (
     p1.carX > blueCircleX &&
@@ -102,13 +102,13 @@ const colorizeTracks = () => {
 };
 
 const drawTracks = () => {
-  for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
+  for (let eachCol: number = 0; eachCol < TRACK_COLS; eachCol++) {
     // in each column...
-    for (var eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
+    for (let eachRow: number = 0; eachRow < TRACK_ROWS; eachRow++) {
       // in each row within that col
       if (isTrackAtTileCoord(eachCol, eachRow)) {
-        var trackLeftEdgeX = eachCol * TRACK_W;
-        var trackTopEdgeY = eachRow * TRACK_H;
+        let trackLeftEdgeX: number = eachCol * TRACK_W;
+        let trackTopEdgeY: number = eachRow * TRACK_H;
 
         colorRect(
           trackLeftEdgeX,

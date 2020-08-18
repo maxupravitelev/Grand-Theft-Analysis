@@ -1,5 +1,6 @@
 // save the canvas for dimensions, and its 2d context for drawing to it
-let canvas, canvasContext;
+let canvas;
+let canvasContext;
 let p1 = new carClass();
 window.onload = () => {
     canvas = document.getElementById("gameCanvas");

@@ -4,7 +4,7 @@ const TRACK_H = 600;
 const TRACK_GAP = 1;
 const TRACK_COLS = 20;
 const TRACK_ROWS = 15;
-var trackGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+const trackGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 const TRACK_ROAD = 0;
 const TRACK_WALL = 1;
 const TRACK_PLAYER = 2;
@@ -15,12 +15,12 @@ const trackTileToIndex = (tileCol, tileRow) => {
     return tileCol + TRACK_COLS * tileRow;
 };
 const isTrackAtTileCoord = (trackTileCol, trackTileRow) => {
-    var trackIndex = trackTileToIndex(trackTileCol, trackTileRow);
+    let trackIndex = trackTileToIndex(trackTileCol, trackTileRow);
     return trackGrid[trackIndex] == 1;
 };
 const getTrackAtPixelCoord = (pixelX, pixelY) => {
-    var tileCol = pixelX / TRACK_W;
-    var tileRow = pixelY / TRACK_H;
+    let tileCol = pixelX / TRACK_W;
+    let tileRow = pixelY / TRACK_H;
     // we'll use Math.floor to round down to the nearest whole number
     tileCol = Math.floor(tileCol);
     tileRow = Math.floor(tileRow);
@@ -32,10 +32,10 @@ const getTrackAtPixelCoord = (pixelX, pixelY) => {
         return false;
         //  return TRACK_WALL; // avoid invalid array access, treat out of bounds as wall
     }
-    var trackIndex = trackTileToIndex(tileCol, tileRow);
+    let trackIndex = trackTileToIndex(tileCol, tileRow);
     return trackGrid[trackIndex];
 };
-var currentRGBvalue = "#23FF12";
+let currentRGBvalue = "#23FF12";
 let activeColor = "blue";
 const colorizeTracks = () => {
     let blueCircleX = 9500;
@@ -76,13 +76,13 @@ const colorizeTracks = () => {
     colorCircle(redCircleX, redCircleY, radius_size, redValue);
 };
 const drawTracks = () => {
-    for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
+    for (let eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
         // in each column...
-        for (var eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
+        for (let eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
             // in each row within that col
             if (isTrackAtTileCoord(eachCol, eachRow)) {
-                var trackLeftEdgeX = eachCol * TRACK_W;
-                var trackTopEdgeY = eachRow * TRACK_H;
+                let trackLeftEdgeX = eachCol * TRACK_W;
+                let trackTopEdgeY = eachRow * TRACK_H;
                 colorRect(trackLeftEdgeX, trackTopEdgeY, TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
                 canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
             } // end of isTrackAtTileCoord()
