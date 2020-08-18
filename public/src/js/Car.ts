@@ -1,13 +1,13 @@
 // car tuning constants
-const GROUNDSPEED_DECAY_MULT = 0.98;
-const DRIVE_POWER = 0.19;
-const REVERSE_POWER = DRIVE_POWER / 3;
-const TURN_RATE = 0.013;
-const MIN_TURN_SPEED = 0.5;
-const MAX_SPEED = 20;
-const MAX_REVERSE_SPEED = -5;
+const GROUNDSPEED_DECAY_MULT: number = 0.98;
+const DRIVE_POWER: number = 0.19;
+const REVERSE_POWER: number = DRIVE_POWER / 3;
+const TURN_RATE: number = 0.013;
+const MIN_TURN_SPEED: number = 0.5;
+const MAX_SPEED: number = 20;
+const MAX_REVERSE_SPEED: number = -5;
 
-let reverse = false;
+let reverse: boolean = false;
 
 function carClass() {
   // variables to keep track of car position
@@ -90,8 +90,8 @@ function carClass() {
       this.carSpeed -= 0;
     }
 
-    var nextX = this.carX + Math.cos(this.carAng) * this.carSpeed;
-    var nextY = this.carY + Math.sin(this.carAng) * this.carSpeed;
+    var nextX: number = this.carX + Math.cos(this.carAng) * this.carSpeed;
+    var nextY: number = this.carY + Math.sin(this.carAng) * this.carSpeed;
 
     var drivingIntoTileType = getTrackAtPixelCoord(nextX, nextY);
 
