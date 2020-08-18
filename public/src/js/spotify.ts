@@ -43,8 +43,6 @@ let access_token: string = '';
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
 
-let token: string = "";
-// todo: check for redundancy in token vars
 
 
 fetch("http://localhost:8888/api/token")
@@ -52,7 +50,6 @@ fetch("http://localhost:8888/api/token")
   .then((data) => {
     access_token = data;
     console.log(access_token);
-    token = data;
     initSpotifyPlayer();
   });
 
@@ -63,7 +60,7 @@ const initSpotifyPlayer = () => {
     const player: any = new Spotify.Player({
       name: "Web Playback SDK Quick Start Player",
       getOAuthToken: (cb) => {
-        cb(token);
+        cb(access_token);
       },
     });
 
@@ -140,7 +137,7 @@ const startSpotifyPlayer = () => {
       body: JSON.stringify({ uris: [spotify_uri] }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${access_token}`,
       },
     }
   ).then(() => {

@@ -33,14 +33,11 @@ else {
 let access_token = '';
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
-let token = "";
-// todo: check for redundancy in token vars
 fetch("http://localhost:8888/api/token")
     .then((response) => response.json())
     .then((data) => {
     access_token = data;
     console.log(access_token);
-    token = data;
     initSpotifyPlayer();
 });
 // spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
@@ -49,7 +46,7 @@ const initSpotifyPlayer = () => {
         const player = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
             getOAuthToken: (cb) => {
-                cb(token);
+                cb(access_token);
             },
         });
         // Error handling
@@ -109,7 +106,7 @@ const startSpotifyPlayer = () => {
         body: JSON.stringify({ uris: [spotify_uri] }),
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${access_token}`,
         },
     }).then(() => {
         // start gameloop for first time
