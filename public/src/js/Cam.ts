@@ -4,8 +4,8 @@ const RUN_SPEED: number = 5.5;
 
 var camPanX: number = 0.0;
 var camPanY: number = 0.0;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = p1.carX;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = p1.carY;
+const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X: number = p1.carX;
+const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y: number = p1.carY;
 
 let sliderX: number = 0;
 let sliderY: number = 0;
