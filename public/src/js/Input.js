@@ -1,4 +1,3 @@
-// keyboard keycode constants, determined by printing out evt.keyCode from a key handler
 const KEY_LEFT_ARROW = 37;
 const KEY_UP_ARROW = 38;
 const KEY_RIGHT_ARROW = 39;
@@ -24,7 +23,7 @@ const setKeyHoldState = (thisKey, thisCar, setTo) => {
 };
 const keyPressed = (evt) => {
     setKeyHoldState(evt.keyCode, p1, true);
-    evt.preventDefault(); // without this, arrow keys scroll the browser!
+    evt.preventDefault();
 };
 const keyReleased = (evt) => {
     setKeyHoldState(evt.keyCode, p1, false);

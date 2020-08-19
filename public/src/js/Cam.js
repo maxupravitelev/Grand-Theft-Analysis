@@ -1,4 +1,3 @@
-// build upon "How To Program Games"-Course by Chris DeLeon: https://www.udemy.com/course/how-to-program-games/learn/lecture/3440374
 const RUN_SPEED = 5.5;
 var camPanX = 0.0;
 var camPanY = 0.0;
@@ -27,15 +26,12 @@ const sliderMove = () => {
     }
 };
 const sliderReset = () => {
-    // center slider on screen
     sliderX = canvas.width / 2;
     sliderY = canvas.height / 2;
 };
 const instantCamFollow = () => {
     camPanX = p1.carX - canvas.width / 2;
     camPanY = p1.carY - canvas.height / 2;
-    // camPanX = sliderX - canvas.width/2;
-    // camPanY = sliderY - canvas.height/2;
 };
 const cameraFollow = () => {
     let cameraFocusCenterX = camPanX + canvas.width / 2;
@@ -58,21 +54,4 @@ const cameraFollow = () => {
             camPanY -= RUN_SPEED;
         }
     }
-    //instantCamFollow();
-    // this next code blocks the game from showing out of bounds
-    // (this isn't required, if you don't mind seeing beyond edges)
-    // if(camPanX < 0) {
-    //   camPanX = 0;
-    // }
-    // if(camPanY < 0) {
-    //   camPanY = 0;
-    // }
-    // var maxPanRight = TRACK_COLS * TRACK_W - canvas.width;
-    // var maxPanTop = TRACK_ROWS * TRACK_H - canvas.height;
-    // if(camPanX > maxPanRight) {
-    //   camPanX = maxPanRight;
-    // }
-    // if(camPanY > maxPanTop) {
-    //   camPanY = maxPanTop;
-    // }
 };

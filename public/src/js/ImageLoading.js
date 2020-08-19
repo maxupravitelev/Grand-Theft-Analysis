@@ -7,8 +7,6 @@ let picsToLoad = 0;
 const countLoadedImageAndLaunchIfReady = () => {
     picsToLoad--;
     if (picsToLoad == 0) {
-        // last image loaded
-        // loadingDoneSoStartGame();
     }
 };
 const beginLoadingImage = (imgVar, fileName) => {
@@ -37,6 +35,6 @@ const loadImages = () => {
         }
         else {
             beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-        } // end of else
-    } // end of for imageList
-}; // end of function loadImages
+        }
+    }
+};

@@ -1,4 +1,3 @@
-// track constants and variables
 const TRACK_W = 600;
 const TRACK_H = 600;
 const TRACK_GAP = 1;
@@ -21,16 +20,13 @@ const isTrackAtTileCoord = (trackTileCol, trackTileRow) => {
 const getTrackAtPixelCoord = (pixelX, pixelY) => {
     let tileCol = pixelX / TRACK_W;
     let tileRow = pixelY / TRACK_H;
-    // we'll use Math.floor to round down to the nearest whole number
     tileCol = Math.floor(tileCol);
     tileRow = Math.floor(tileRow);
-    // first check whether the car is within any part of the track wall
     if (tileCol < 0 ||
         tileCol >= TRACK_COLS ||
         tileRow < 0 ||
         tileRow >= TRACK_ROWS) {
         return false;
-        //  return TRACK_WALL; // avoid invalid array access, treat out of bounds as wall
     }
     let trackIndex = trackTileToIndex(tileCol, tileRow);
     return trackGrid[trackIndex];
@@ -77,15 +73,13 @@ const colorizeTracks = () => {
 };
 const drawTracks = () => {
     for (let eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
-        // in each column...
         for (let eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
-            // in each row within that col
             if (isTrackAtTileCoord(eachCol, eachRow)) {
                 let trackLeftEdgeX = eachCol * TRACK_W;
                 let trackTopEdgeY = eachRow * TRACK_H;
                 colorRect(trackLeftEdgeX, trackTopEdgeY, TRACK_W - TRACK_GAP, TRACK_H - TRACK_GAP, currentRGBvalue);
                 canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
-            } // end of isTrackAtTileCoord()
-        } // end of for eachRow
-    } // end of for eachCol
-}; // end of drawTracks()
+            }
+        }
+    }
+};

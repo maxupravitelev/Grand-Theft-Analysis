@@ -1,9 +1,5 @@
-let greenValue = "#00AA00"; // initialize green value on start
+let greenValue = "#00AA00";
 const computeGreenValue = () => {
-    ///////////// compute RGB
-    // let R = Math.round(Math.random() * 255);
-    // let G = Math.round(Math.random() * 255);
-    // let B = Math.round(Math.random() * 255);
     let R = "00";
     let G = (current_segment_pitch_avg * 255).toString();
     let B = "00";
@@ -34,7 +30,6 @@ const computeRedValue = () => {
 };
 let current_segment_pitch_avg = 0;
 let segment_duration_index = 0;
-// Timer for RGB value
 let startTime = Date.now();
 let elapsedTime = 0.0;
 setInterval(function () {
@@ -48,11 +43,10 @@ const computeRGBvalueFromSpotifyAnalysis = () => {
         computeGreenValue();
         computeBlueValue();
         computeRedValue();
-        startTime = Date.now(); // set back timer to 0
+        startTime = Date.now();
         segment_duration_index++;
     }
 };
-// Timer for radius value
 let beat_startTime = Date.now();
 let beat_elapsedTime = 0.0;
 setInterval(() => {
@@ -68,12 +62,9 @@ const computeCircleRadius = () => {
             beat_startTime = Date.now();
         }
         else {
-            // (beat_duration_index % 2 == 0)
             radius_size = 40;
             beat_startTime = Date.now();
         }
         beat_duration_index++;
-        // const t1 = performance.now();
-        // console.log(`computeCircleRadius took ${t1-t0} ms`)
     }
 };
