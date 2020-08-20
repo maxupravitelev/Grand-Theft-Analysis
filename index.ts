@@ -60,6 +60,7 @@ app.get("/callback", (req, res) => {
   } else {
     res.clearCookie(stateKey);
 
+    
     let authOptions = {
       url: "https://accounts.spotify.com/api/token",
       form: {
@@ -70,6 +71,7 @@ app.get("/callback", (req, res) => {
       headers: {
         Authorization:
           "Basic " +
+          // @ts-ignore
           new Buffer.from(
             SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET
           ).toString("base64"),

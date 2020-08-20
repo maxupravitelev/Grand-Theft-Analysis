@@ -56,7 +56,9 @@ fetch("http://localhost:8888/api/token")
 // spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
 const initSpotifyPlayer = () => {
+    // @ts-ignore
   window.onSpotifyWebPlaybackSDKReady = () => {
+      // @ts-ignore
     const player: any = new Spotify.Player({
       name: "Web Playback SDK Quick Start Player",
       getOAuthToken: (cb) => {
