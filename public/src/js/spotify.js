@@ -1,4 +1,22 @@
+const queryString = window.location.search;
+let userLoggedIn = false;
+if (!queryString) {
+    userLoggedIn = false;
+}
+else {
+    userLoggedIn = true;
+}
+if (userLoggedIn == false) {
+    let button = document.createElement("button");
+    button.innerHTML = "Login in to spotify";
+    let header = document.getElementsByTagName("header")[0];
+    header.appendChild(button);
+    button.addEventListener("click", () => {
+        window.location.href = "/login";
+    });
+}
 let urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams);
 let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 let device_id_global = "";
@@ -11,18 +29,13 @@ else {
         .then((response) => response.json())
         .then((data) => {
         analysis = data;
+        let p = document.createElement("p");
+        document.body.appendChild(p);
         console.log(data);
         initAnalysis();
     });
 }
-let access_token = '';
-if (!access_token) {
-    document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>');
-}
-else {
-    let buttonObj = document.getElementById("loginButton");
-    buttonObj.remove();
-}
+let access_token = "";
 fetch("http://localhost:8888/api/token")
     .then((response) => response.json())
     .then((data) => {

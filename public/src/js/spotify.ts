@@ -1,4 +1,28 @@
+const queryString = window.location.search;
+
+let userLoggedIn = false;
+
+if (!queryString) {
+  userLoggedIn = false;
+} else {
+  userLoggedIn = true;
+}
+
+if (userLoggedIn == false) {
+  // Create the button for loggin in
+  let button = document.createElement("button");
+  button.innerHTML = "Login in to spotify";
+
+  let header = document.getElementsByTagName("header")[0];
+  header.appendChild(button);
+
+  button.addEventListener("click", () => {
+    window.location.href = "/login";
+  });
+}
+
 let urlParams: any = new URLSearchParams(window.location.search);
+console.log(urlParams);
 
 let spotifyID: any = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
@@ -17,27 +41,26 @@ if (spotifyID === null) {
     .then((response) => response.json())
     .then((data) => {
       analysis = data;
-
+      let p = document.createElement("p");
+      document.body.appendChild(p);
       console.log(data);
       initAnalysis();
     });
 }
 
-let access_token: string = '';
+let access_token: string = "";
 
 // show login button if user is not logged in // not functional yet
 
-if (!access_token) {
-  document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
-} else {
-  let buttonObj = document.getElementById("loginButton");
-  buttonObj.remove()
-}
+// if (!access_token) {
+//   document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
+// } else {
+//   let buttonObj = document.getElementById("loginButton");
+//   buttonObj.remove()
+// }
 
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);
-
-
 
 fetch("http://localhost:8888/api/token")
   .then((response) => response.json())
@@ -50,9 +73,9 @@ fetch("http://localhost:8888/api/token")
 // spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
 const initSpotifyPlayer = () => {
-    // @ts-ignore
+  // @ts-ignore
   window.onSpotifyWebPlaybackSDKReady = () => {
-      // @ts-ignore
+    // @ts-ignore
     const player: any = new Spotify.Player({
       name: "Web Playback SDK Quick Start Player",
       getOAuthToken: (cb) => {
@@ -105,7 +128,7 @@ let spotify_uri: string = "spotify:track:" + spotifyID;
 
 // track analysis via Spotify API
 let data_json: any = {
-    // segments: [],
+  // segments: [],
 };
 
 let segmentsDurationsArray: any[] = [];
@@ -113,10 +136,9 @@ let segmentsDurationsArray: any[] = [];
 let segmentsDurationPitchesArray: any[] = [];
 
 const initAnalysis = () => {
-  
-    data_json = analysis;
+  data_json = analysis;
 
-    for (let i = 0; i < data_json.segments.length; i++) {
+  for (let i = 0; i < data_json.segments.length; i++) {
     segmentsDurationsArray.push(data_json.segments[i].duration);
     segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
   }
@@ -124,7 +146,7 @@ const initAnalysis = () => {
 
 const startSpotifyPlayer = () => {
   // spotify_uri = uri_from_submit;
-//   console.log(spotify_uri)
+  //   console.log(spotify_uri)
 
   fetch(
     "https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global,
@@ -137,11 +159,10 @@ const startSpotifyPlayer = () => {
       },
     }
   ).then(() => {
-    
     // start gameloop for first time
     requestAnimationFrame(gameloop);
-    
-    computeRGBvalueFromSpotifyAnalysis(); 
+
+    computeRGBvalueFromSpotifyAnalysis();
 
     computeCircleRadius();
 
@@ -149,9 +170,8 @@ const startSpotifyPlayer = () => {
 
     p1.carInit(carPic, "Blue Car");
 
-    initInput();  
+    initInput();
+  });
 
-  })   
-
-//   spotifyPlayerStarted = true;
+  //   spotifyPlayerStarted = true;
 };
