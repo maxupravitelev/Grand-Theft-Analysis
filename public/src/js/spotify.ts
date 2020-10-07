@@ -1,19 +1,3 @@
-let userLoggedIn = false;
-
-if (userLoggedIn == false) {
-    document.write('<button onClick=handleLogin()><a href="/login">login</a></button>')
-    userLoggedIn = true;
-} else {
-    console.log("logged in")
-    document.write('<strong>user is logged id</strong>')
-}
-
-const handleLogin = () => {
-    console.log("logged in")
-    document.write('<strong>user is logged id</strong>')
-}
-
-
 let urlParams: any = new URLSearchParams(window.location.search);
 
 let spotifyID: any = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
@@ -28,17 +12,27 @@ if (spotifyID === null) {
   analysis = "No URI entered";
 } else {
   let url = "http://localhost:8888/api/" + spotifyID;
-  console.log(url);
+  // console.log(url);
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
       analysis = data;
+
       console.log(data);
       initAnalysis();
     });
 }
 
 let access_token: string = '';
+
+// show login button if user is not logged in // not functional yet
+
+if (!access_token) {
+  document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
+} else {
+  let buttonObj = document.getElementById("loginButton");
+  buttonObj.remove()
+}
 
 // let access_token = urlParams.get(spotifyID);
 // console.log(access_token);

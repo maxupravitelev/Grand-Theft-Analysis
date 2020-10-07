@@ -5,10 +5,15 @@ header {
 body {
     /* text-align: center; */
     color: white;
-    background-color: rgb(19, 89, 129);
+    background-color: rgb(34, 38, 41);
 }
 
 #tutorial {
-    background-color: rgb(28, 182, 136);
+    background-color:  rgb(19, 89, 129);
     width: 400px;
+}
+
+#loginButton {
+    background-color: white;
+    color: black;
 }
