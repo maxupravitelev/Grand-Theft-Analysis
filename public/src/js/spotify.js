@@ -20,63 +20,65 @@ console.log(urlParams);
 let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 let device_id_global = "";
-if (spotifyID === null) {
-    analysis = "No URI entered";
-}
-else {
-    let url = "http://localhost:8888/api/" + spotifyID;
-    fetch(url)
+let access_token = "";
+if (userLoggedIn == true) {
+    if (spotifyID === null) {
+        analysis = "No URI entered";
+    }
+    else {
+        let url = "http://localhost:8888/api/" + spotifyID;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+            analysis = data;
+            let p = document.createElement("p");
+            document.body.appendChild(p);
+            console.log(data);
+            initAnalysis();
+        });
+    }
+    fetch("http://localhost:8888/api/token")
         .then((response) => response.json())
         .then((data) => {
-        analysis = data;
-        let p = document.createElement("p");
-        document.body.appendChild(p);
-        console.log(data);
-        initAnalysis();
+        access_token = data;
+        console.log(access_token);
+        initSpotifyPlayer();
     });
-}
-let access_token = "";
-fetch("http://localhost:8888/api/token")
-    .then((response) => response.json())
-    .then((data) => {
-    access_token = data;
-    console.log(access_token);
-    initSpotifyPlayer();
-});
-const initSpotifyPlayer = () => {
-    window.onSpotifyWebPlaybackSDKReady = () => {
-        const player = new Spotify.Player({
-            name: "Web Playback SDK Quick Start Player",
-            getOAuthToken: (cb) => {
-                cb(access_token);
-            },
-        });
-        player.addListener("initialization_error", ({ message }) => {
-            console.error(message);
-        });
-        player.addListener("authentication_error", ({ message }) => {
-            console.error(message);
-        });
-        player.addListener("account_error", ({ message }) => {
-            console.error(message);
-        });
-        player.addListener("playback_error", ({ message }) => {
-            console.error(message);
-        });
-        player.addListener("player_state_changed", (state) => {
-            if (state.position >= 0) {
-            }
-        });
-        player.addListener("ready", ({ device_id }) => {
-            console.log("Ready with Device ID", device_id);
-            device_id_global = device_id;
-        });
-        player.addListener("not_ready", ({ device_id }) => {
-            console.log("Device ID has gone offline", device_id);
-        });
-        player.connect();
+    const initSpotifyPlayer = () => {
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const player = new Spotify.Player({
+                name: "Web Playback SDK Quick Start Player",
+                getOAuthToken: (cb) => {
+                    cb(access_token);
+                },
+            });
+            player.addListener("initialization_error", ({ message }) => {
+                console.error(message);
+            });
+            player.addListener("authentication_error", ({ message }) => {
+                console.error(message);
+            });
+            player.addListener("account_error", ({ message }) => {
+                console.error(message);
+            });
+            player.addListener("playback_error", ({ message }) => {
+                console.error(message);
+            });
+            player.addListener("player_state_changed", (state) => {
+                if (state.position >= 0) {
+                }
+            });
+            player.addListener("ready", ({ device_id }) => {
+                console.log("Ready with Device ID", device_id);
+                device_id_global = device_id;
+            });
+            player.addListener("not_ready", ({ device_id }) => {
+                console.log("Device ID has gone offline", device_id);
+            });
+            player.connect();
+        };
     };
-};
+}
 let spotify_uri = "spotify:track:" + spotifyID;
 let data_json = {};
 let segmentsDurationsArray = [];

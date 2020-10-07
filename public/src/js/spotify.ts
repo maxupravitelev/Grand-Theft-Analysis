@@ -32,93 +32,95 @@ let device_id_global: string = "";
 
 // console.log(spotifyID);
 
-if (spotifyID === null) {
-  analysis = "No URI entered";
-} else {
-  let url = "http://localhost:8888/api/" + spotifyID;
-  // console.log(url);
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      analysis = data;
-      let p = document.createElement("p");
-      document.body.appendChild(p);
-      console.log(data);
-      initAnalysis();
-    });
-}
-
 let access_token: string = "";
 
-// show login button if user is not logged in // not functional yet
+if (userLoggedIn == true) {
+  if (spotifyID === null) {
+    analysis = "No URI entered";
+  } else {
+    let url = "http://localhost:8888/api/" + spotifyID;
+    // console.log(url);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        analysis = data;
+        let p = document.createElement("p");
+        document.body.appendChild(p);
+        console.log(data);
+        initAnalysis();
+      });
+  }
 
-// if (!access_token) {
-//   document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
-// } else {
-//   let buttonObj = document.getElementById("loginButton");
-//   buttonObj.remove()
-// }
+  // show login button if user is not logged in // not functional yet
 
-// let access_token = urlParams.get(spotifyID);
-// console.log(access_token);
+  // if (!access_token) {
+  //   document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
+  // } else {
+  //   let buttonObj = document.getElementById("loginButton");
+  //   buttonObj.remove()
+  // }
 
-fetch("http://localhost:8888/api/token")
-  .then((response) => response.json())
-  .then((data) => {
-    access_token = data;
-    console.log(access_token);
-    initSpotifyPlayer();
-  });
+  // let access_token = urlParams.get(spotifyID);
+  // console.log(access_token);
 
-// spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
+  fetch("http://localhost:8888/api/token")
+    .then((response) => response.json())
+    .then((data) => {
+      access_token = data;
+      console.log(access_token);
+      initSpotifyPlayer();
+    });
 
-const initSpotifyPlayer = () => {
-  // @ts-ignore
-  window.onSpotifyWebPlaybackSDKReady = () => {
+  // spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
+
+  const initSpotifyPlayer = () => {
     // @ts-ignore
-    const player: any = new Spotify.Player({
-      name: "Web Playback SDK Quick Start Player",
-      getOAuthToken: (cb) => {
-        cb(access_token);
-      },
-    });
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      // @ts-ignore
+      const player: any = new Spotify.Player({
+        name: "Web Playback SDK Quick Start Player",
+        getOAuthToken: (cb) => {
+          cb(access_token);
+        },
+      });
 
-    // Error handling
-    player.addListener("initialization_error", ({ message }) => {
-      console.error(message);
-    });
-    player.addListener("authentication_error", ({ message }) => {
-      console.error(message);
-    });
-    player.addListener("account_error", ({ message }) => {
-      console.error(message);
-    });
-    player.addListener("playback_error", ({ message }) => {
-      console.error(message);
-    });
+      // Error handling
+      player.addListener("initialization_error", ({ message }) => {
+        console.error(message);
+      });
+      player.addListener("authentication_error", ({ message }) => {
+        console.error(message);
+      });
+      player.addListener("account_error", ({ message }) => {
+        console.error(message);
+      });
+      player.addListener("playback_error", ({ message }) => {
+        console.error(message);
+      });
 
-    // Playback status updates
-    player.addListener("player_state_changed", (state) => {
-      if (state.position >= 0) {
-        // spotifyPlayerCurrentPosition = 0;
-      }
-    });
+      // Playback status updates
+      player.addListener("player_state_changed", (state) => {
+        if (state.position >= 0) {
+          // spotifyPlayerCurrentPosition = 0;
+        }
+      });
 
-    // Ready
-    player.addListener("ready", ({ device_id }) => {
-      console.log("Ready with Device ID", device_id);
-      device_id_global = device_id;
-    });
+      // Ready
+      player.addListener("ready", ({ device_id }) => {
+        console.log("Ready with Device ID", device_id);
+        device_id_global = device_id;
+      });
 
-    // Not Ready
-    player.addListener("not_ready", ({ device_id }) => {
-      console.log("Device ID has gone offline", device_id);
-    });
+      // Not Ready
+      player.addListener("not_ready", ({ device_id }) => {
+        console.log("Device ID has gone offline", device_id);
+      });
 
-    // Connect to the player!
-    player.connect();
+      // Connect to the player!
+      player.connect();
+    };
   };
-};
+}
 
 // Spotify URI submitted @ submit.html
 // let uri_from_submit = "spotify:track:7HmyUTrYePMg7KlTt7W9RR";
