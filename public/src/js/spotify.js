@@ -1,3 +1,16 @@
+let userLoggedIn = false;
+if (userLoggedIn == false) {
+    document.write('<button onClick=handleLogin()><a href="/login">login</a></button>');
+    userLoggedIn = true;
+}
+else {
+    console.log("logged in");
+    document.write('<strong>user is logged id</strong>');
+}
+const handleLogin = () => {
+    console.log("logged in");
+    document.write('<strong>user is logged id</strong>');
+};
 let urlParams = new URLSearchParams(window.location.search);
 let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
