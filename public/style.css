@@ -5,5 +5,10 @@ header {
 body {
     /* text-align: center; */
     color: white;
-    background-color: black;
+    background-color: rgb(19, 89, 129);
+}
+
+#tutorial {
+    background-color: rgb(28, 182, 136);
+    width: 400px;
 }
