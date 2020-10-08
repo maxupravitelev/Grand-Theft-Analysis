@@ -10,9 +10,8 @@
 // const MAX_REVERSE_SPEED: number = -5;
 
 // @30 FPS
-
 const GROUNDSPEED_DECAY_MULT: number = 0.98;
-const DRIVE_POWER: number = 0.69;
+const DRIVE_POWER: number = 0.45;
 const REVERSE_POWER: number = DRIVE_POWER / 1;
 const TURN_RATE: number = 0.038;
 const MIN_TURN_SPEED: number = 2;

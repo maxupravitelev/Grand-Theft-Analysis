@@ -25,8 +25,25 @@ const gameloop = () => {
 };
 document.getElementById("startButton").addEventListener("click", () => {
     var elmnt = document.getElementById("gameCanvas");
-    console.log(elmnt);
     elmnt.scrollIntoView();
+    startSpotifyPlayer();
+});
+document.getElementById("startFullscreen").addEventListener("click", () => {
+    var elem = document.getElementById("gameCanvas");
+    elem.scrollIntoView();
+    var elem = document.getElementById("gameCanvas");
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    }
+    else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    }
+    else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    }
+    else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
     startSpotifyPlayer();
 });
 const moveEverything = () => {
