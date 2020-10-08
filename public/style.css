@@ -6,11 +6,26 @@ body {
     /* text-align: center; */
     color: white;
     background-color: rgb(34, 38, 41);
+    
 }
 
 #tutorial {
     background-color:  rgb(19, 89, 129);
     width: 400px;
+    border-radius: 40px;
+    padding: 2.3em;
+    max-width: 20em;
+    margin: auto;
+}
+
+#uriform {
+    background-color:  rgb(19, 89, 129);
+    width: 400px;
+    border-radius: 40px;
+    padding: 2.3em;
+    max-width: 20em;
+    margin: auto;
+    text-align: center;
 }
 
 #loginButton {
