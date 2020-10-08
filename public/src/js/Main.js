@@ -11,7 +11,7 @@ window.onload = () => {
 let currentTime = 0;
 let deltaTime = 0;
 let pastTime = new Date().getTime();
-let framesPerSecond = 1 / 60;
+let framesPerSecond = 1 / 30;
 const gameloop = () => {
     currentTime = new Date().getTime();
     deltaTime = deltaTime + Math.min(1, (currentTime - pastTime) / 1000);

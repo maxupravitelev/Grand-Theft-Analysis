@@ -1,11 +1,23 @@
 // car tuning constants
+
+// @60 FPS
+// const GROUNDSPEED_DECAY_MULT: number = 0.98;
+// const DRIVE_POWER: number = 0.19;
+// const REVERSE_POWER: number = DRIVE_POWER / 3;
+// const TURN_RATE: number = 0.013;
+// const MIN_TURN_SPEED: number = 0.5;
+// const MAX_SPEED: number = 20;
+// const MAX_REVERSE_SPEED: number = -5;
+
+// @30 FPS
+
 const GROUNDSPEED_DECAY_MULT: number = 0.98;
-const DRIVE_POWER: number = 0.19;
-const REVERSE_POWER: number = DRIVE_POWER / 3;
-const TURN_RATE: number = 0.013;
-const MIN_TURN_SPEED: number = 0.5;
-const MAX_SPEED: number = 20;
-const MAX_REVERSE_SPEED: number = -5;
+const DRIVE_POWER: number = 0.69;
+const REVERSE_POWER: number = DRIVE_POWER / 1;
+const TURN_RATE: number = 0.038;
+const MIN_TURN_SPEED: number = 2;
+const MAX_SPEED: number = 30;
+const MAX_REVERSE_SPEED: number = -10;
 
 let reverse: boolean = false;
 

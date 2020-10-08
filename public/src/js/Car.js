@@ -1,10 +1,10 @@
 const GROUNDSPEED_DECAY_MULT = 0.98;
-const DRIVE_POWER = 0.19;
-const REVERSE_POWER = DRIVE_POWER / 3;
-const TURN_RATE = 0.013;
-const MIN_TURN_SPEED = 0.5;
-const MAX_SPEED = 20;
-const MAX_REVERSE_SPEED = -5;
+const DRIVE_POWER = 0.69;
+const REVERSE_POWER = DRIVE_POWER / 1;
+const TURN_RATE = 0.038;
+const MIN_TURN_SPEED = 2;
+const MAX_SPEED = 30;
+const MAX_REVERSE_SPEED = -10;
 let reverse = false;
 class carClass {
     constructor() {

@@ -22,7 +22,7 @@ window.onload = () => {
 let currentTime: number = 0;
 let deltaTime: number = 0;
 let pastTime = new Date().getTime();
-let framesPerSecond: number = 1 / 60;
+let framesPerSecond: number = 1 / 30;
 
 const gameloop = () => {
   currentTime = new Date().getTime();
