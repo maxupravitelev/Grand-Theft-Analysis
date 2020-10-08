@@ -16,7 +16,6 @@ if (userLoggedIn == false) {
     });
 }
 let urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams);
 let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 let device_id_global = "";

@@ -22,7 +22,7 @@ if (userLoggedIn == false) {
 }
 
 let urlParams: any = new URLSearchParams(window.location.search);
-console.log(urlParams);
+// console.log(urlParams);
 
 let spotifyID: any = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";

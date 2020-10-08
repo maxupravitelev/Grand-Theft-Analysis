@@ -8,11 +8,11 @@ window.onload = () => {
   canvas = document.getElementById("gameCanvas");
   canvasContext = canvas.getContext("2d");
 
-  //   canvasContext.canvas.width  = window.innerWidth;
-  //   canvasContext.canvas.height = window.innerHeight;
+    canvasContext.canvas.width  = window.innerWidth;
+    canvasContext.canvas.height = window.innerHeight;
 
-  canvasContext.canvas.width = 1280;
-  canvasContext.canvas.height = 720;
+  // canvasContext.canvas.width = 1280;
+  // canvasContext.canvas.height = 720;
 
   loadImages();
 };
@@ -37,6 +37,9 @@ const gameloop = () => {
 };
 
 document.getElementById("startButton").addEventListener("click", () => {
+  var elmnt = document.getElementById("gameCanvas");
+  console.log(elmnt)
+  elmnt.scrollIntoView();
   startSpotifyPlayer();
 });
 

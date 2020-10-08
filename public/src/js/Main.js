@@ -4,8 +4,8 @@ let p1 = new carClass();
 window.onload = () => {
     canvas = document.getElementById("gameCanvas");
     canvasContext = canvas.getContext("2d");
-    canvasContext.canvas.width = 1280;
-    canvasContext.canvas.height = 720;
+    canvasContext.canvas.width = window.innerWidth;
+    canvasContext.canvas.height = window.innerHeight;
     loadImages();
 };
 let currentTime = 0;
@@ -24,6 +24,9 @@ const gameloop = () => {
     requestAnimationFrame(gameloop);
 };
 document.getElementById("startButton").addEventListener("click", () => {
+    var elmnt = document.getElementById("gameCanvas");
+    console.log(elmnt);
+    elmnt.scrollIntoView();
     startSpotifyPlayer();
 });
 const moveEverything = () => {
