@@ -20,6 +20,7 @@ let spotifyID = urlParams.get("query") || "7HmyUTrYePMg7KlTt7W9RR";
 let analysis = "";
 let device_id_global = "";
 let access_token = "";
+let playerStarted = false;
 if (userLoggedIn == true) {
     if (spotifyID === null) {
         analysis = "No URI entered";
@@ -63,7 +64,11 @@ if (userLoggedIn == true) {
             });
             player.addListener("player_state_changed", (state) => {
                 console.log(state);
-                if (state.position >= 0) {
+                if (playerStarted == false) {
+                    elapsedTime = 0.0;
+                    startTime = Date.now();
+                    console.log("yo");
+                    playerStarted = true;
                 }
             });
             player.addListener("ready", ({ device_id }) => {

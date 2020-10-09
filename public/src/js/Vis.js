@@ -32,7 +32,7 @@ let current_segment_pitch_avg = 0;
 let segment_duration_index = 0;
 let startTime = Date.now();
 let elapsedTime = 0.0;
-setInterval(function () {
+setInterval(() => {
     elapsedTime = (Date.now() - startTime) / 1000;
 }, 1);
 let durationCheck = 0;
@@ -49,8 +49,6 @@ const computeRGBvalueFromSpotifyAnalysis = () => {
 };
 let beat_startTime = Date.now();
 let beat_elapsedTime = 0.0;
-setInterval(() => {
-}, 1);
 let radius_size = 200;
 let beat_duration_index = 0;
 let beatDutationTotal = 0;

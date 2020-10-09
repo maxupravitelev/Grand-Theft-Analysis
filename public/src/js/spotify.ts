@@ -34,6 +34,9 @@ let device_id_global: string = "";
 
 let access_token: string = "";
 
+let playerStarted: Boolean = false;
+
+
 if (userLoggedIn == true) {
   if (spotifyID === null) {
     analysis = "No URI entered";
@@ -73,6 +76,8 @@ if (userLoggedIn == true) {
 
   // spotify init // based on: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/
 
+
+
   const initSpotifyPlayer = () => {
     // @ts-ignore
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -101,8 +106,11 @@ if (userLoggedIn == true) {
       // Playback status updates
       player.addListener("player_state_changed", (state) => {
         console.log(state)
-        if (state.position >= 0) {
-          // spotifyPlayerCurrentPosition = 0;
+        if (playerStarted == false) {
+          elapsedTime = 0.0
+          startTime = Date.now();
+          console.log("yo")
+          playerStarted = true;
         }
       });
 
@@ -151,7 +159,6 @@ const initAnalysis = () => {
   console.log(duration)
 
 
-  // current_segment_pitch_avg = segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0 ) / segmentsDurationPitchesArray[segment_duration_index].length;
 
 
 };
@@ -177,6 +184,8 @@ const startSpotifyPlayer = () => {
     computeRGBvalueFromSpotifyAnalysis();
 
     computeCircleRadius();
+
+    
 
     sliderReset();
 

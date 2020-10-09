@@ -53,7 +53,7 @@ let segment_duration_index: number = 0;
 let startTime = Date.now();
 let elapsedTime: number = 0.0;
 
-setInterval(function () {
+setInterval(() => {
   elapsedTime = (Date.now() - startTime) / 1000;
 }, 1);
 
@@ -79,9 +79,9 @@ const computeRGBvalueFromSpotifyAnalysis = () => {
 let beat_startTime = Date.now();
 let beat_elapsedTime: number = 0.0;
 
-setInterval(() => {
+// setInterval(() => {
   // beat_elapsedTime = (Date.now() - beat_startTime) / 1000;
-}, 1);
+// }, 1);
 
 let radius_size: number = 200;
 
