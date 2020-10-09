@@ -55,4 +55,15 @@ let radius_size = 200;
 let beat_duration_index = 0;
 let beatDutationTotal = 0;
 const computeCircleRadius = () => {
+    if (elapsedTime > data_json.beats[beat_duration_index].start &&
+        beat_duration_index < data_json.beats.length - 1) {
+        if (beat_duration_index % 2 == 1) {
+            radius_size += 10;
+        }
+        else {
+            radius_size = 40;
+            beatDutationTotal += beat_elapsedTime;
+        }
+        beat_duration_index++;
+    }
 };
