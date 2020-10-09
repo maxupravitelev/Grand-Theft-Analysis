@@ -149,7 +149,9 @@ let segmentsDurationPitchesArray: any[] = [];
 let duration: number = 0;
 
 
-let timePositionPitchArray = []
+let timePositionPitchArray = [];
+
+let pitchAverageInSectionArray = [];
 
 const initAnalysis = () => {
   data_json = analysis;
@@ -162,18 +164,27 @@ const initAnalysis = () => {
   console.log(duration)
 
 
+  //   current_segment_pitch_avg = segmentsDurationPitchesArray[counter].reduce((a:number, b:number) => a + b, 0 ) / 12; // segmentsDurationPitchesArray[counter].length;
+
+
   let currentTimePosition = 0.0000;
 
   for (let i = 0; i < data_json.segments.length; i++) {
-    // testArray.push([data_json.segments[i]])
-  
-    for (let j = 0; j < data_json.segments[i].pitches.length; j++) {
-      currentTimePosition += data_json.segments[i].duration / data_json.segments[i].pitches.length;
-      timePositionPitchArray.push([currentTimePosition, data_json.segments[i].pitches[j]])
-  }
+      currentTimePosition += data_json.segments[i].duration;
+      let currentAverage = data_json.segments[i].pitches.reduce((a:number, b:number) => a + b, 0 ) / 12;
+      pitchAverageInSectionArray.push([currentTimePosition, currentAverage])
   }
 
-  console.log(timePositionPitchArray)
+  console.log(pitchAverageInSectionArray)
+
+  // for (let i = 0; i < data_json.segments.length; i++) {
+  
+  //   for (let j = 0; j < data_json.segments[i].pitches.length; j++) {
+  //     currentTimePosition += data_json.segments[i].duration / data_json.segments[i].pitches.length;
+  //     timePositionPitchArray.push([currentTimePosition, data_json.segments[i].pitches[j]])
+  // }
+  // }
+
 
 };
 
