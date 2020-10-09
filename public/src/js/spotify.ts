@@ -44,8 +44,8 @@ if (userLoggedIn == true) {
       .then((response) => response.json())
       .then((data) => {
         analysis = data;
-        let p = document.createElement("p");
-        document.body.appendChild(p);
+        // let p = document.createElement("p");
+        // document.body.appendChild(p);
         console.log(data);
         initAnalysis();
       });
@@ -100,6 +100,7 @@ if (userLoggedIn == true) {
 
       // Playback status updates
       player.addListener("player_state_changed", (state) => {
+        console.log(state)
         if (state.position >= 0) {
           // spotifyPlayerCurrentPosition = 0;
         }
@@ -137,13 +138,22 @@ let segmentsDurationsArray: any[] = [];
 
 let segmentsDurationPitchesArray: any[] = [];
 
+let duration: number = 0;
+
 const initAnalysis = () => {
   data_json = analysis;
 
   for (let i = 0; i < data_json.segments.length; i++) {
     segmentsDurationsArray.push(data_json.segments[i].duration);
+    duration += data_json.segments[i].duration;
     segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
   }
+  console.log(duration)
+
+
+  // current_segment_pitch_avg = segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0 ) / segmentsDurationPitchesArray[segment_duration_index].length;
+
+
 };
 
 const startSpotifyPlayer = () => {

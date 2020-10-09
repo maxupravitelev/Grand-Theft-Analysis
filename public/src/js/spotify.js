@@ -30,8 +30,6 @@ if (userLoggedIn == true) {
             .then((response) => response.json())
             .then((data) => {
             analysis = data;
-            let p = document.createElement("p");
-            document.body.appendChild(p);
             console.log(data);
             initAnalysis();
         });
@@ -64,6 +62,7 @@ if (userLoggedIn == true) {
                 console.error(message);
             });
             player.addListener("player_state_changed", (state) => {
+                console.log(state);
                 if (state.position >= 0) {
                 }
             });
@@ -82,12 +81,15 @@ let spotify_uri = "spotify:track:" + spotifyID;
 let data_json = {};
 let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
+let duration = 0;
 const initAnalysis = () => {
     data_json = analysis;
     for (let i = 0; i < data_json.segments.length; i++) {
         segmentsDurationsArray.push(data_json.segments[i].duration);
+        duration += data_json.segments[i].duration;
         segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
     }
+    console.log(duration);
 };
 const startSpotifyPlayer = () => {
     fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global, {

@@ -57,51 +57,82 @@ setInterval(function () {
   elapsedTime = (Date.now() - startTime) / 1000;
 }, 1);
 
+let durationCheck = 0
+
+let counter = 0
+
 const computeRGBvalueFromSpotifyAnalysis = () => {
-  if (
-    elapsedTime > segmentsDurationsArray[segment_duration_index] &&
-    segment_duration_index < segmentsDurationsArray.length - 1
-  ) {
-    current_segment_pitch_avg =
-      segmentsDurationPitchesArray[segment_duration_index].reduce(
-        (a, b) => a + b,
-        0
-      ) / segmentsDurationPitchesArray[segment_duration_index].length;
+  
+
+  if ((elapsedTime > data_json.segments[counter].start) && (counter < data_json.segments.length - 1)) {
+    console.log(data_json.segments[counter].start)
+    current_segment_pitch_avg = segmentsDurationPitchesArray[counter].reduce((a, b) => a + b, 0 ) / segmentsDurationPitchesArray[counter].length;
     computeGreenValue();
     computeBlueValue();
     computeRedValue();
-    startTime = Date.now(); // set back timer to 0
-    segment_duration_index++;
+    counter++;
   }
+
+  
+  // if (
+  //   elapsedTime >= segmentsDurationsArray[segment_duration_index] && segment_duration_index < segmentsDurationsArray.length - 1
+  // ) {
+  //   console.log(segmentsDurationsArray[segment_duration_index]);
+  //   // current_segment_pitch_avg = segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0 ) / segmentsDurationPitchesArray[segment_duration_index].length;
+  //   // computeGreenValue();
+  //   // computeBlueValue();
+  //   // computeRedValue();
+  //   durationCheck += elapsedTime
+  //   startTime = Date.now(); // set back timer to 0
+  //   segment_duration_index++;
+  // }
 };
+
+// const computeRGBvalueFromSpotifyAnalysis = () => {
+//   if (
+//     elapsedTime >= segmentsDurationsArray[segment_duration_index] && segment_duration_index < segmentsDurationsArray.length - 1
+//   ) {
+//     console.log(segmentsDurationsArray[segment_duration_index]);
+//     // current_segment_pitch_avg = segmentsDurationPitchesArray[segment_duration_index].reduce((a, b) => a + b, 0 ) / segmentsDurationPitchesArray[segment_duration_index].length;
+//     // computeGreenValue();
+//     // computeBlueValue();
+//     // computeRedValue();
+//     durationCheck += elapsedTime
+//     startTime = Date.now(); // set back timer to 0
+//     segment_duration_index++;
+//   }
+// };
 
 // Timer for radius value
 let beat_startTime = Date.now();
 let beat_elapsedTime: number = 0.0;
 
 setInterval(() => {
-  beat_elapsedTime = (Date.now() - beat_startTime) / 1000;
+  // beat_elapsedTime = (Date.now() - beat_startTime) / 1000;
 }, 1);
 
 let radius_size: number = 200;
 
 let beat_duration_index: number = 0;
 
+let beatDutationTotal = 0
+
 const computeCircleRadius = () => {
-  if (
-    beat_elapsedTime > data_json.beats[beat_duration_index].duration &&
-    beat_duration_index < data_json.beats.length - 1
-  ) {
-    if (beat_duration_index % 2 == 1) {
-      radius_size += 10;
-      beat_startTime = Date.now();
-    } else {
-      // (beat_duration_index % 2 == 0)
-      radius_size = 40;
-      beat_startTime = Date.now();
-    }
-    beat_duration_index++;
-    // const t1 = performance.now();
-    // console.log(`computeCircleRadius took ${t1-t0} ms`)
-  }
+  // if (
+  //   beat_elapsedTime > data_json.beats[beat_duration_index].duration &&
+  //   beat_duration_index < data_json.beats.length - 1
+  // ) {
+  //   if (beat_duration_index % 2 == 1) {
+  //     radius_size += 10;
+  //     beat_startTime = Date.now();
+  //   } else {
+  //     // (beat_duration_index % 2 == 0)
+  //     radius_size = 40;
+  //     beatDutationTotal += beat_elapsedTime
+  //     beat_startTime = Date.now();
+  //   }
+  //   beat_duration_index++;
+  //   // const t1 = performance.now();
+  //   // console.log(`computeCircleRadius took ${t1-t0} ms`)
+  // }
 };
