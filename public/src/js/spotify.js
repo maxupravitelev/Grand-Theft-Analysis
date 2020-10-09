@@ -87,6 +87,7 @@ let data_json = {};
 let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
 let duration = 0;
+let timePositionPitchArray = [];
 const initAnalysis = () => {
     data_json = analysis;
     for (let i = 0; i < data_json.segments.length; i++) {
@@ -95,6 +96,14 @@ const initAnalysis = () => {
         segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
     }
     console.log(duration);
+    let currentTimePosition = 0.0000;
+    for (let i = 0; i < data_json.segments.length; i++) {
+        for (let j = 0; j < data_json.segments[i].pitches.length; j++) {
+            currentTimePosition += data_json.segments[i].duration / data_json.segments[i].pitches.length;
+            timePositionPitchArray.push([currentTimePosition, data_json.segments[i].pitches[j]]);
+        }
+    }
+    console.log(timePositionPitchArray);
 };
 const startSpotifyPlayer = () => {
     fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global, {

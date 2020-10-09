@@ -148,6 +148,9 @@ let segmentsDurationPitchesArray: any[] = [];
 
 let duration: number = 0;
 
+
+let timePositionPitchArray = []
+
 const initAnalysis = () => {
   data_json = analysis;
 
@@ -159,7 +162,18 @@ const initAnalysis = () => {
   console.log(duration)
 
 
+  let currentTimePosition = 0.0000;
 
+  for (let i = 0; i < data_json.segments.length; i++) {
+    // testArray.push([data_json.segments[i]])
+  
+    for (let j = 0; j < data_json.segments[i].pitches.length; j++) {
+      currentTimePosition += data_json.segments[i].duration / data_json.segments[i].pitches.length;
+      timePositionPitchArray.push([currentTimePosition, data_json.segments[i].pitches[j]])
+  }
+  }
+
+  console.log(timePositionPitchArray)
 
 };
 

@@ -34,13 +34,13 @@ let startTime = Date.now();
 let elapsedTime = 0.0;
 setInterval(() => {
     elapsedTime = (Date.now() - startTime) / 1000;
+    computeRGBvalueFromSpotifyAnalysis();
 }, 1);
 let durationCheck = 0;
 let counter = 0;
 const computeRGBvalueFromSpotifyAnalysis = () => {
-    if ((elapsedTime > data_json.segments[counter].start) && (counter < data_json.segments.length - 1)) {
-        console.log(data_json.segments[counter].start);
-        current_segment_pitch_avg = segmentsDurationPitchesArray[counter].reduce((a, b) => a + b, 0) / segmentsDurationPitchesArray[counter].length;
+    if ((elapsedTime > timePositionPitchArray[counter][0]) && (counter < timePositionPitchArray.length - 1)) {
+        current_segment_pitch_avg = timePositionPitchArray[counter][1];
         computeGreenValue();
         computeBlueValue();
         computeRedValue();

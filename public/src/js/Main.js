@@ -52,7 +52,6 @@ const moveEverything = () => {
     instantCamFollow();
 };
 const drawEverything = () => {
-    computeRGBvalueFromSpotifyAnalysis();
     computeCircleRadius();
     colorRect(0, 0, canvas.width, canvas.height, "black");
     canvasContext.save();
