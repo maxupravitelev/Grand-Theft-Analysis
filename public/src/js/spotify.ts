@@ -54,17 +54,6 @@ if (userLoggedIn == true) {
       });
   }
 
-  // show login button if user is not logged in // not functional yet
-
-  // if (!access_token) {
-  //   document.write('<button onClick=handleLogin() id="loginButton"><a href="/login">login</a></button>')
-  // } else {
-  //   let buttonObj = document.getElementById("loginButton");
-  //   buttonObj.remove()
-  // }
-
-  // let access_token = urlParams.get(spotifyID);
-  // console.log(access_token);
 
   fetch("http://localhost:8888/api/token")
     .then((response) => response.json())
@@ -149,9 +138,9 @@ let segmentsDurationPitchesArray: any[] = [];
 let duration: number = 0;
 
 
-let timePositionPitchArray = [];
+// let timePositionPitchArray: any[] = [];
 
-let pitchAverageInSectionArray = [];
+let pitchAverageInSectionArray: any[] = [];
 
 const initAnalysis = () => {
   data_json = analysis;
@@ -161,17 +150,13 @@ const initAnalysis = () => {
     duration += data_json.segments[i].duration;
     segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
   }
-  console.log(duration)
+  console.log("track duration: " + duration)
 
-
-  //   current_segment_pitch_avg = segmentsDurationPitchesArray[counter].reduce((a:number, b:number) => a + b, 0 ) / 12; // segmentsDurationPitchesArray[counter].length;
-
-
-  let currentTimePosition = 0.0000;
+  let currentTimePosition: number = 0.0000;
 
   for (let i = 0; i < data_json.segments.length; i++) {
       currentTimePosition += data_json.segments[i].duration;
-      let currentAverage = data_json.segments[i].pitches.reduce((a:number, b:number) => a + b, 0 ) / 12;
+      let currentAverage:number = data_json.segments[i].pitches.reduce((a:number, b:number) => a + b, 0 ) / 12;
       pitchAverageInSectionArray.push([currentTimePosition, currentAverage])
   }
 
@@ -189,8 +174,6 @@ const initAnalysis = () => {
 };
 
 const startSpotifyPlayer = () => {
-  // spotify_uri = uri_from_submit;
-  //   console.log(spotify_uri)
 
   fetch(
     "https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global,
@@ -210,8 +193,6 @@ const startSpotifyPlayer = () => {
 
     computeCircleRadius();
 
-    
-
     sliderReset();
 
     p1.carInit(carPic, "Blue Car");
@@ -219,5 +200,4 @@ const startSpotifyPlayer = () => {
     initInput();
   });
 
-  //   spotifyPlayerStarted = true;
 };

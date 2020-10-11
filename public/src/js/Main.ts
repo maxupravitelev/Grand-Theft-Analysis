@@ -91,7 +91,6 @@ const drawEverything = () => {
   drawTracks();
   colorizeTracks();
 
-  //   colorCircle(75, 75, radius_size, 'blue')
   p1.carDraw();
 
   canvasContext.restore();

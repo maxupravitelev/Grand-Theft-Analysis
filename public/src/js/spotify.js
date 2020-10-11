@@ -87,7 +87,6 @@ let data_json = {};
 let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
 let duration = 0;
-let timePositionPitchArray = [];
 let pitchAverageInSectionArray = [];
 const initAnalysis = () => {
     data_json = analysis;
@@ -96,7 +95,7 @@ const initAnalysis = () => {
         duration += data_json.segments[i].duration;
         segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
     }
-    console.log(duration);
+    console.log("track duration: " + duration);
     let currentTimePosition = 0.0000;
     for (let i = 0; i < data_json.segments.length; i++) {
         currentTimePosition += data_json.segments[i].duration;
