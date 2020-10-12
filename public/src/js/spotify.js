@@ -21,12 +21,13 @@ let analysis = "";
 let device_id_global = "";
 let access_token = "";
 let playerStarted = false;
+let baseUrl = "https://grandtheftanalysis.herokuapp.com/";
 if (userLoggedIn == true) {
     if (spotifyID === null) {
         analysis = "No URI entered";
     }
     else {
-        let url = "http://localhost:8888/api/" + spotifyID;
+        let url = baseUrl + "api/" + spotifyID;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -35,7 +36,7 @@ if (userLoggedIn == true) {
             initAnalysis();
         });
     }
-    fetch("http://localhost:8888/api/token")
+    fetch(baseUrl + "api/token")
         .then((response) => response.json())
         .then((data) => {
         access_token = data;
