@@ -28,15 +28,20 @@ app.get("/login", (req, res) => {
 
   let scope: string = "streaming user-read-email user-read-private";
 
+  let authSpecs = {
+    response_type: "code",
+    client_id: SPOTIFY_CLIENT_ID,
+    scope: scope,
+    redirect_uri: SPOTIFY_REDIRECT_URI + "callback",
+    state: state,
+  }
+
+  console.log(authSpecs)
+
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
-      qs.stringify({
-        response_type: "code",
-        client_id: SPOTIFY_CLIENT_ID,
-        scope: scope,
-        redirect_uri: "http://localhost:8888/callback",
-        state: state,
-      })
+      qs.stringify(authSpecs)
+
   );
 });
 
@@ -48,7 +53,7 @@ app.get("/callback", (req, res) => {
   let state = req.query.state || null;
   let storedState = req.cookies ? req.cookies[stateKey] : null;
 
-  console.log(code);
+  console.log("code: " + code);
 
   if (state === null || state !== storedState) {
     res.redirect(
@@ -65,7 +70,7 @@ app.get("/callback", (req, res) => {
       url: "https://accounts.spotify.com/api/token",
       form: {
         code: code,
-        redirect_uri: "http://localhost:8888/callback",
+        redirect_uri: SPOTIFY_REDIRECT_URI + "callback",
         grant_type: "authorization_code",
       },
       headers: {
@@ -78,6 +83,8 @@ app.get("/callback", (req, res) => {
       },
       json: true,
     };
+    console.log("authOptions")
+    console.log(authOptions)
 
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
@@ -119,7 +126,7 @@ app.get("/callback", (req, res) => {
 });
 
 app.get("/api/token", (req, res) => {
-  console.log(token);
+  console.log("token: " + token);
   res.json(token);
 });
 
