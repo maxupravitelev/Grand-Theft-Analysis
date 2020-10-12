@@ -56,7 +56,7 @@ const computeCircleRadius = () => {
     if (elapsedTime > data_json.beats[beat_duration_index].start &&
         beat_duration_index < data_json.beats.length - 1) {
         if (beat_duration_index % 2 == 1) {
-            radius_size += 10;
+            radius_size = 60;
         }
         else {
             radius_size = 40;

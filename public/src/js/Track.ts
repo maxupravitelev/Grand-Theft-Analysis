@@ -1,6 +1,6 @@
 // track constants and variables
-const TRACK_W: number = 600;
-const TRACK_H: number = 600;
+let TRACK_W: number = 600;
+let TRACK_H: number = 600;
 const TRACK_GAP: number = 1;
 const TRACK_COLS: number = 20;
 const TRACK_ROWS: number = 15;

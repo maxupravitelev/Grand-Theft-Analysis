@@ -106,10 +106,16 @@ const computeCircleRadius = () => {
     beat_duration_index < data_json.beats.length - 1
   ) {
     if (beat_duration_index % 2 == 1) {
-      radius_size += 10;
+      // radius_size += 10;
+      radius_size = 60;
+      // TRACK_W = 610;
+      // TRACK_H = 610;
+
       // beat_startTime = Date.now();
     } else {
       // (beat_duration_index % 2 == 0)
+      // TRACK_W = 600;
+      // TRACK_H = 600;
       radius_size = 40;
       beatDutationTotal += beat_elapsedTime
       // beat_startTime = Date.now();

@@ -1,5 +1,5 @@
-const TRACK_W = 600;
-const TRACK_H = 600;
+let TRACK_W = 600;
+let TRACK_H = 600;
 const TRACK_GAP = 1;
 const TRACK_COLS = 20;
 const TRACK_ROWS = 15;
