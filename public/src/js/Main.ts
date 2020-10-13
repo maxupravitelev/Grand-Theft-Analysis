@@ -66,7 +66,26 @@ document.getElementById("startDev").addEventListener("click", () => {
   elmnt.scrollIntoView();
 
   initAnalysis(dummyData)
+
+  // setTimeout(startGame, 2000)
+  startGame();
+
 });
+
+
+const startGame = () => {
+  requestAnimationFrame(gameloop);
+
+  computeRGBvalueFromSpotifyAnalysis();
+  computeCircleRadius();
+
+  sliderReset();
+
+  p1.carInit(carPic, "Blue Car");
+
+  initInput();
+}
+
 
 // const loadingDoneSoStartGame = () => {
 //     requestAnimationFrame(gameloop);

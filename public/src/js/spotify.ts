@@ -190,16 +190,7 @@ const startSpotifyPlayer = () => {
     }
   ).then(() => {
     // start gameloop for first time
-    requestAnimationFrame(gameloop);
-
-    computeRGBvalueFromSpotifyAnalysis();
-    computeCircleRadius();
-
-    sliderReset();
-
-    p1.carInit(carPic, "Blue Car");
-
-    initInput();
+    startGame();
   });
 
 };

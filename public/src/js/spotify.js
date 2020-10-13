@@ -112,11 +112,6 @@ const startSpotifyPlayer = () => {
             Authorization: `Bearer ${access_token}`,
         },
     }).then(() => {
-        requestAnimationFrame(gameloop);
-        computeRGBvalueFromSpotifyAnalysis();
-        computeCircleRadius();
-        sliderReset();
-        p1.carInit(carPic, "Blue Car");
-        initInput();
+        startGame();
     });
 };

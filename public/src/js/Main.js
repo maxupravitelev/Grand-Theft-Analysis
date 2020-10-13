@@ -50,7 +50,16 @@ document.getElementById("startDev").addEventListener("click", () => {
     var elmnt = document.getElementById("gameCanvas");
     elmnt.scrollIntoView();
     initAnalysis(dummyData);
+    startGame();
 });
+const startGame = () => {
+    requestAnimationFrame(gameloop);
+    computeRGBvalueFromSpotifyAnalysis();
+    computeCircleRadius();
+    sliderReset();
+    p1.carInit(carPic, "Blue Car");
+    initInput();
+};
 const moveEverything = () => {
     p1.carMove();
     sliderMove();
