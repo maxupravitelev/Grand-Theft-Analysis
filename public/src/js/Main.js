@@ -46,6 +46,11 @@ document.getElementById("startFullscreen").addEventListener("click", () => {
     }
     startSpotifyPlayer();
 });
+document.getElementById("startDev").addEventListener("click", () => {
+    var elmnt = document.getElementById("gameCanvas");
+    elmnt.scrollIntoView();
+    initAnalysis(dummyData);
+});
 const moveEverything = () => {
     p1.carMove();
     sliderMove();

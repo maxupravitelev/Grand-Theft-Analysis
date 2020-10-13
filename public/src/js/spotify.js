@@ -31,9 +31,7 @@ if (userLoggedIn == true) {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-            analysis = data;
-            console.log(data);
-            initAnalysis();
+            initAnalysis(data);
         });
     }
     fetch(baseUrl + "api/token")
@@ -89,21 +87,21 @@ let segmentsDurationsArray = [];
 let segmentsDurationPitchesArray = [];
 let duration = 0;
 let pitchAverageInSectionArray = [];
-const initAnalysis = () => {
-    data_json = analysis;
-    for (let i = 0; i < data_json.segments.length; i++) {
-        segmentsDurationsArray.push(data_json.segments[i].duration);
-        duration += data_json.segments[i].duration;
-        segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
+const initAnalysis = (trackData) => {
+    data_json = trackData;
+    console.log(trackData);
+    for (let i = 0; i < trackData.segments.length; i++) {
+        segmentsDurationsArray.push(trackData.segments[i].duration);
+        duration += trackData.segments[i].duration;
+        segmentsDurationPitchesArray.push(trackData.segments[i].pitches);
     }
     console.log("track duration: " + duration);
     let currentTimePosition = 0.0000;
-    for (let i = 0; i < data_json.segments.length; i++) {
-        currentTimePosition += data_json.segments[i].duration;
-        let currentAverage = data_json.segments[i].pitches.reduce((a, b) => a + b, 0) / 12;
+    for (let i = 0; i < trackData.segments.length; i++) {
+        currentTimePosition += trackData.segments[i].duration;
+        let currentAverage = trackData.segments[i].pitches.reduce((a, b) => a + b, 0) / 12;
         pitchAverageInSectionArray.push([currentTimePosition, currentAverage]);
     }
-    console.log(pitchAverageInSectionArray);
 };
 const startSpotifyPlayer = () => {
     fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id_global, {

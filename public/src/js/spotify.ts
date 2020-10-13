@@ -48,11 +48,10 @@ if (userLoggedIn == true) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        analysis = data;
-        // let p = document.createElement("p");
-        // document.body.appendChild(p);
-        console.log(data);
-        initAnalysis();
+        // analysis = data;
+
+        // console.log(data);
+        initAnalysis(data);
       });
   }
 
@@ -144,31 +143,33 @@ let duration: number = 0;
 
 let pitchAverageInSectionArray: any[] = [];
 
-const initAnalysis = () => {
-  data_json = analysis;
+const initAnalysis = (trackData) => {
+  data_json = trackData;
 
-  for (let i = 0; i < data_json.segments.length; i++) {
-    segmentsDurationsArray.push(data_json.segments[i].duration);
-    duration += data_json.segments[i].duration;
-    segmentsDurationPitchesArray.push(data_json.segments[i].pitches);
+  console.log(trackData)
+
+  for (let i = 0; i < trackData.segments.length; i++) {
+    segmentsDurationsArray.push(trackData.segments[i].duration);
+    duration += trackData.segments[i].duration;
+    segmentsDurationPitchesArray.push(trackData.segments[i].pitches);
   }
   console.log("track duration: " + duration)
 
   let currentTimePosition: number = 0.0000;
 
-  for (let i = 0; i < data_json.segments.length; i++) {
-      currentTimePosition += data_json.segments[i].duration;
-      let currentAverage:number = data_json.segments[i].pitches.reduce((a:number, b:number) => a + b, 0 ) / 12;
+  for (let i = 0; i < trackData.segments.length; i++) {
+      currentTimePosition += trackData.segments[i].duration;
+      let currentAverage:number = trackData.segments[i].pitches.reduce((a:number, b:number) => a + b, 0 ) / 12;
       pitchAverageInSectionArray.push([currentTimePosition, currentAverage])
   }
 
-  console.log(pitchAverageInSectionArray)
+  // console.log(pitchAverageInSectionArray)
 
-  // for (let i = 0; i < data_json.segments.length; i++) {
+  // for (let i = 0; i < trackData.segments.length; i++) {
   
-  //   for (let j = 0; j < data_json.segments[i].pitches.length; j++) {
-  //     currentTimePosition += data_json.segments[i].duration / data_json.segments[i].pitches.length;
-  //     timePositionPitchArray.push([currentTimePosition, data_json.segments[i].pitches[j]])
+  //   for (let j = 0; j < trackData.segments[i].pitches.length; j++) {
+  //     currentTimePosition += trackData.segments[i].duration / trackData.segments[i].pitches.length;
+  //     timePositionPitchArray.push([currentTimePosition, trackData.segments[i].pitches[j]])
   // }
   // }
 
@@ -192,7 +193,6 @@ const startSpotifyPlayer = () => {
     requestAnimationFrame(gameloop);
 
     computeRGBvalueFromSpotifyAnalysis();
-
     computeCircleRadius();
 
     sliderReset();
