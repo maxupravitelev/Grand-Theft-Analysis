@@ -1,5 +1,5 @@
 {
-  "name": "shopping-assistent-server",
+  "name": "grand-theft-analysis",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxupravitelev/shopping-assistent-server.git"
+    "url": "git+https://github.com/maxupravitelev/Grand-Theft-Analysis.git"
   },
   "author": "Max Upravitelev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maxupravitelev/shopping-assistent-server/issues"
+    "url": "https://github.com/maxupravitelev/Grand-Theft-Analysis/issues"
   },
-  "homepage": "https://github.com/maxupravitelev/shopping-assistent-server#readme",
+  "homepage": "https://github.com/maxupravitelev/Grand-Theft-Analysis#readme",
   "devDependencies": {
     "@types/node": "^14.6.0",
     "nodemon": "^2.0.4",

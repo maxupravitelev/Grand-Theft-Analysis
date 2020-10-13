@@ -21,7 +21,7 @@ let analysis = "";
 let device_id_global = "";
 let access_token = "";
 let playerStarted = false;
-let baseUrl = "https://grandtheftanalysis.herokuapp.com/";
+let baseUrl = "http://localhost:8888/";
 if (userLoggedIn == true) {
     if (spotifyID === null) {
         analysis = "No URI entered";

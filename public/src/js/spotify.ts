@@ -36,8 +36,8 @@ let access_token: string = "";
 
 let playerStarted: Boolean = false;
 
-// let baseUrl = "http://localhost:8888/"
-let baseUrl = "https://grandtheftanalysis.herokuapp.com/"
+let baseUrl = "http://localhost:8888/"
+// let baseUrl = "https://grandtheftanalysis.herokuapp.com/"
 
 if (userLoggedIn == true) {
   if (spotifyID === null) {
