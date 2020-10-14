@@ -46,8 +46,8 @@ document.getElementById("startFullscreen").addEventListener("click", () => {
     startSpotifyPlayer();
 });
 document.getElementById("startDev").addEventListener("click", () => {
-    var elmnt = document.getElementById("gameCanvas");
-    elmnt.scrollIntoView();
+    var gameCanvas = document.getElementById("gameCanvas");
+    gameCanvas.scrollIntoView();
     initAnalysis(dummyData);
     startGame();
 });

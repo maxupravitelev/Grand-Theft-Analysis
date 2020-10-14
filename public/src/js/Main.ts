@@ -35,14 +35,14 @@ const gameloop = () => {
   requestAnimationFrame(gameloop);
 };
 
-document.getElementById("startButton").addEventListener("click", () => {
+document.getElementById("startButton")!.addEventListener("click", () => {
   let gameCanvas: any = document.getElementById("gameCanvas");
   gameCanvas.scrollIntoView();
 
   startSpotifyPlayer();
 });
 
-document.getElementById("startFullscreen").addEventListener("click", () => {
+document.getElementById("startFullscreen")!.addEventListener("click", () => {
 
   let gameCanvas: any = document.getElementById("gameCanvas");
 
@@ -59,9 +59,9 @@ document.getElementById("startFullscreen").addEventListener("click", () => {
   startSpotifyPlayer();
 });
 
-document.getElementById("startDev").addEventListener("click", () => {
-  var elmnt = document.getElementById("gameCanvas");
-  elmnt.scrollIntoView();
+document.getElementById("startDev")!.addEventListener("click", () => {
+  var gameCanvas: any = document.getElementById("gameCanvas");
+  gameCanvas.scrollIntoView();
 
   initAnalysis(dummyData)
 

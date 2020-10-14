@@ -80,37 +80,42 @@ if (userLoggedIn == true) {
       });
 
       // Error handling
+      // @ts-ignore 
       player.addListener("initialization_error", ({ message }) => {
         console.error(message);
       });
+      // @ts-ignore
       player.addListener("authentication_error", ({ message }) => {
         console.error(message);
       });
+      // @ts-ignore
       player.addListener("account_error", ({ message }) => {
         console.error(message);
       });
+      // @ts-ignore
       player.addListener("playback_error", ({ message }) => {
         console.error(message);
       });
 
       // Playback status updates
-      player.addListener("player_state_changed", (state) => {
+      player.addListener("player_state_changed", (state: object) => {
         console.log(state)
         if (playerStarted == false) {
           elapsedTime = 0.0
           startTime = Date.now();
-          console.log("yo")
           playerStarted = true;
         }
       });
 
       // Ready
+      // @ts-ignore
       player.addListener("ready", ({ device_id }) => {
         console.log("Ready with Device ID", device_id);
         device_id_global = device_id;
       });
 
       // Not Ready
+      // @ts-ignore
       player.addListener("not_ready", ({ device_id }) => {
         console.log("Device ID has gone offline", device_id);
       });

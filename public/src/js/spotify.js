@@ -67,7 +67,6 @@ if (userLoggedIn == true) {
                 if (playerStarted == false) {
                     elapsedTime = 0.0;
                     startTime = Date.now();
-                    console.log("yo");
                     playerStarted = true;
                 }
             });
