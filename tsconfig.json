@@ -8,7 +8,7 @@
         "resolveJsonModule": true,
         "lib": ["DOM", "ES2019"],
         "removeComments": true,
-        // "strict": true
+        "strict": true
         // "outDir": "js",
     },
     "include": ["public"],

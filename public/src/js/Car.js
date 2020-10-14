@@ -1,3 +1,4 @@
+"use strict";
 const GROUNDSPEED_DECAY_MULT = 0.98;
 const DRIVE_POWER = 0.45;
 const REVERSE_POWER = DRIVE_POWER / 1;

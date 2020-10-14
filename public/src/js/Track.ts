@@ -14,16 +14,16 @@ const TRACK_GOAL: number = 3;
 const TRACK_TREE: number = 4;
 const TRACK_FLAG: number = 5;
 
-const trackTileToIndex = (tileCol, tileRow) => {
+const trackTileToIndex = (tileCol: number, tileRow: number) => {
   return tileCol + TRACK_COLS * tileRow;
 };
 
-const isTrackAtTileCoord = (trackTileCol, trackTileRow) => {
+const isTrackAtTileCoord = (trackTileCol: number, trackTileRow: number) => {
   let trackIndex: number = trackTileToIndex(trackTileCol, trackTileRow);
   return trackGrid[trackIndex] == 1;
 };
 
-const getTrackAtPixelCoord = (pixelX, pixelY) => {
+const getTrackAtPixelCoord = (pixelX: number, pixelY: number) => {
   let tileCol: number = pixelX / TRACK_W;
   let tileRow: number = pixelY / TRACK_H;
 

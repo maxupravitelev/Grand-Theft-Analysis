@@ -1,3 +1,4 @@
+"use strict";
 let TRACK_W = 600;
 let TRACK_H = 600;
 const TRACK_GAP = 1;

@@ -1,3 +1,4 @@
+"use strict";
 let canvas;
 let canvasContext;
 let p1 = new carClass();
@@ -24,25 +25,23 @@ const gameloop = () => {
     requestAnimationFrame(gameloop);
 };
 document.getElementById("startButton").addEventListener("click", () => {
-    var elmnt = document.getElementById("gameCanvas");
-    elmnt.scrollIntoView();
+    let gameCanvas = document.getElementById("gameCanvas");
+    gameCanvas.scrollIntoView();
     startSpotifyPlayer();
 });
 document.getElementById("startFullscreen").addEventListener("click", () => {
-    var elem = document.getElementById("gameCanvas");
-    elem.scrollIntoView();
-    var elem = document.getElementById("gameCanvas");
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
+    let gameCanvas = document.getElementById("gameCanvas");
+    if (gameCanvas.requestFullscreen) {
+        gameCanvas.requestFullscreen();
     }
-    else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
+    else if (gameCanvas.mozRequestFullScreen) {
+        gameCanvas.mozRequestFullScreen();
     }
-    else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
+    else if (gameCanvas.webkitRequestFullscreen) {
+        gameCanvas.webkitRequestFullscreen();
     }
-    else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
+    else if (gameCanvas.msRequestFullscreen) {
+        gameCanvas.msRequestFullscreen();
     }
     startSpotifyPlayer();
 });

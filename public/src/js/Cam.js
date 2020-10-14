@@ -1,3 +1,4 @@
+"use strict";
 const RUN_SPEED = 5.5;
 var camPanX = 0.0;
 var camPanY = 0.0;

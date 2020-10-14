@@ -1,3 +1,4 @@
+"use strict";
 const queryString = window.location.search;
 let userLoggedIn = false;
 if (!queryString) {

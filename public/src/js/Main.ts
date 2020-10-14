@@ -36,26 +36,24 @@ const gameloop = () => {
 };
 
 document.getElementById("startButton").addEventListener("click", () => {
-  var elmnt = document.getElementById("gameCanvas");
-  elmnt.scrollIntoView();
+  let gameCanvas: any = document.getElementById("gameCanvas");
+  gameCanvas.scrollIntoView();
 
   startSpotifyPlayer();
 });
 
 document.getElementById("startFullscreen").addEventListener("click", () => {
-  var elem = document.getElementById("gameCanvas");
-  elem.scrollIntoView();
 
-  var elem = document.getElementById("gameCanvas");
+  let gameCanvas: any = document.getElementById("gameCanvas");
 
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
+    if (gameCanvas.requestFullscreen) {
+      gameCanvas.requestFullscreen();
+    } else if (gameCanvas.mozRequestFullScreen) { /* Firefox */
+      gameCanvas.mozRequestFullScreen();
+    } else if (gameCanvas.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      gameCanvas.webkitRequestFullscreen();
+    } else if (gameCanvas.msRequestFullscreen) { /* IE/Edge */
+      gameCanvas.msRequestFullscreen();
     }
 
   startSpotifyPlayer();

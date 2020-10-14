@@ -1,3 +1,4 @@
+"use strict";
 let carPic = document.createElement("img");
 let car2Pic = document.createElement("img");
 let roof = document.createElement("img");

@@ -1,3 +1,4 @@
+"use strict";
 let greenValue = "#00AA00";
 const computeGreenValue = () => {
     let R = "00";

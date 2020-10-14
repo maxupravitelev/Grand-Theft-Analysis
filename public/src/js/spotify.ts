@@ -1,6 +1,6 @@
 const queryString = window.location.search;
 
-let userLoggedIn = false;
+let userLoggedIn: Boolean = false;
 
 if (!queryString) {
   userLoggedIn = false;
@@ -74,7 +74,7 @@ if (userLoggedIn == true) {
       // @ts-ignore
       const player: any = new Spotify.Player({
         name: "Web Playback SDK Quick Start Player",
-        getOAuthToken: (cb) => {
+        getOAuthToken: (cb: any) => {
           cb(access_token);
         },
       });
@@ -143,7 +143,7 @@ let duration: number = 0;
 
 let pitchAverageInSectionArray: any[] = [];
 
-const initAnalysis = (trackData) => {
+const initAnalysis = (trackData: any) => {
   data_json = trackData;
 
   console.log(trackData)
