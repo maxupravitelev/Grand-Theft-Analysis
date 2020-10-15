@@ -73,7 +73,7 @@ class carClass {
       this.controlKeyForTurnRight = rightKey;
     };
 
-    this.carInit = (whichGraphic, whichName) => {
+    this.carInit = (whichGraphic: object, whichName: string) => {
       this.myBitmap = whichGraphic;
       this.myName = whichName;
       this.carReset();
