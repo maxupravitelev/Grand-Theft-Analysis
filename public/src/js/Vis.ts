@@ -7,7 +7,7 @@ const computeGreenValue = () => {
   // let B = Math.round(Math.random() * 255);
 
   let R: string = "00";
-  let G: string = (current_segment_pitch_avg * 255).toString();
+  let G: string = (current_segment_pitch_avg * 255).toString(16);
   let B: string = "00";
 
   R = ("00" + R.toString()).slice(-2);
@@ -22,7 +22,7 @@ let blueValue: string = "#0000AA";
 const computeBlueValue = () => {
   let R: string = "00";
   let G: string = "00";
-  let B: string = (current_segment_pitch_avg * 255).toString();
+  let B: string = (current_segment_pitch_avg * 255).toString(16);
 
   R = ("00" + R.toString()).slice(-2);
   G = ("00" + G.toString()).slice(-2);
@@ -34,7 +34,7 @@ const computeBlueValue = () => {
 let redValue: string = "#AA0000";
 
 const computeRedValue = () => {
-  let R: string = (current_segment_pitch_avg * 255).toString();
+  let R: string = (current_segment_pitch_avg * 255).toString(16);
   let G: string = "00";
   let B: string = "00";
 
@@ -98,7 +98,7 @@ let radius_size: number = 200;
 
 let beat_duration_index: number = 0;
 
-let beatDutationTotal = 0
+let beatDurationTotal: number = 0
 
 const computeCircleRadius = () => {
   if (
@@ -117,7 +117,7 @@ const computeCircleRadius = () => {
       // TRACK_W = 600;
       // TRACK_H = 600;
       radius_size = 40;
-      beatDutationTotal += beat_elapsedTime
+      beatDurationTotal += beat_elapsedTime
       // beat_startTime = Date.now();
     }
     beat_duration_index++;

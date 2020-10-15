@@ -98,7 +98,7 @@ if (userLoggedIn == true) {
       });
 
       // Playback status updates
-      player.addListener("player_state_changed", (state: object) => {
+      player.addListener("player_state_changed", (state: any) => {
         console.log(state)
         if (playerStarted == false) {
           elapsedTime = 0.0

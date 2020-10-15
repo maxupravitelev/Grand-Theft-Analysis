@@ -2,7 +2,7 @@
 let greenValue = "#00AA00";
 const computeGreenValue = () => {
     let R = "00";
-    let G = (current_segment_pitch_avg * 255).toString();
+    let G = (current_segment_pitch_avg * 255).toString(16);
     let B = "00";
     R = ("00" + R.toString()).slice(-2);
     G = ("00" + G.toString()).slice(-2);
@@ -13,7 +13,7 @@ let blueValue = "#0000AA";
 const computeBlueValue = () => {
     let R = "00";
     let G = "00";
-    let B = (current_segment_pitch_avg * 255).toString();
+    let B = (current_segment_pitch_avg * 255).toString(16);
     R = ("00" + R.toString()).slice(-2);
     G = ("00" + G.toString()).slice(-2);
     B = ("00" + B.toString()).slice(-2);
@@ -21,7 +21,7 @@ const computeBlueValue = () => {
 };
 let redValue = "#AA0000";
 const computeRedValue = () => {
-    let R = (current_segment_pitch_avg * 255).toString();
+    let R = (current_segment_pitch_avg * 255).toString(16);
     let G = "00";
     let B = "00";
     R = ("00" + R.toString()).slice(-2);
@@ -52,7 +52,7 @@ let beat_startTime = Date.now();
 let beat_elapsedTime = 0.0;
 let radius_size = 200;
 let beat_duration_index = 0;
-let beatDutationTotal = 0;
+let beatDurationTotal = 0;
 const computeCircleRadius = () => {
     if (elapsedTime > data_json.beats[beat_duration_index].start &&
         beat_duration_index < data_json.beats.length - 1) {
@@ -61,7 +61,7 @@ const computeCircleRadius = () => {
         }
         else {
             radius_size = 40;
-            beatDutationTotal += beat_elapsedTime;
+            beatDurationTotal += beat_elapsedTime;
         }
         beat_duration_index++;
     }
