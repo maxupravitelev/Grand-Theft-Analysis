@@ -16,7 +16,7 @@ const initInput = () => {
   );
 };
 
-const setKeyHoldState = (thisKey, thisCar, setTo) => {
+const setKeyHoldState = (thisKey: number, thisCar: any, setTo: Boolean) => {
   if (thisKey == thisCar.controlKeyForTurnLeft) {
     thisCar.keyHeld_TurnLeft = setTo;
   }
@@ -31,11 +31,11 @@ const setKeyHoldState = (thisKey, thisCar, setTo) => {
   }
 };
 
-const keyPressed = (evt) => {
+const keyPressed = (evt: any) => {
   setKeyHoldState(evt.keyCode, p1, true);
   evt.preventDefault(); // without this, arrow keys scroll the browser!
 };
 
-const keyReleased = (evt) => {
+const keyReleased = (evt: any) => {
   setKeyHoldState(evt.keyCode, p1, false);
 };

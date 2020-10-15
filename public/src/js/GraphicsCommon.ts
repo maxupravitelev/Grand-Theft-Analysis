@@ -1,9 +1,9 @@
-const colorRect = (topLeftX, topLeftY, boxWidth, boxHeight, fillColor) => {
+const colorRect = (topLeftX: number, topLeftY: number, boxWidth: number, boxHeight: number, fillColor: string) => {
   canvasContext.fillStyle = fillColor;
   canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
 };
 
-const colorCircle = (centerX, centerY, radius, fillColor) => {
+const colorCircle = (centerX: number, centerY: number, radius: number, fillColor: string) => {
   canvasContext.fillStyle = fillColor;
   canvasContext.beginPath();
   canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
@@ -11,10 +11,10 @@ const colorCircle = (centerX, centerY, radius, fillColor) => {
 };
 
 const drawBitmapCenteredAtLocationWithRotation = (
-  graphic,
-  atX,
-  atY,
-  withAngle
+  graphic: any,
+  atX: number,
+  atY: number,
+  withAngle: number
 ) => {
   canvasContext.save(); // allows us to undo translate movement and rotate spin
   canvasContext.translate(atX, atY); // sets the point where our graphic will go

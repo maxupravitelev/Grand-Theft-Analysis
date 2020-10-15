@@ -15,12 +15,12 @@ const countLoadedImageAndLaunchIfReady = () => {
   }
 };
 
-const beginLoadingImage = (imgVar, fileName) => {
+const beginLoadingImage = (imgVar: any, fileName: string) => {
   imgVar.onload = countLoadedImageAndLaunchIfReady;
   imgVar.src = fileName;
 };
 
-const loadImageForTrackCode = (trackCode, fileName) => {
+const loadImageForTrackCode = (trackCode: number, fileName: string) => {
   trackPics[trackCode] = document.createElement("img");
   beginLoadingImage(trackPics[trackCode], fileName);
 };
