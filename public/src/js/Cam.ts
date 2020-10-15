@@ -44,33 +44,36 @@ const instantCamFollow = () => {
   camPanY = p1.carY - canvas.height / 2;
   // camPanX = sliderX - canvas.width/2;
   // camPanY = sliderY - canvas.height/2;
+
+
 };
 
-const cameraFollow = () => {
-  let cameraFocusCenterX: number = camPanX + canvas.width / 2;
-  let cameraFocusCenterY: number = camPanY + canvas.height / 2;
+// const cameraFollow = () => {
+//   let cameraFocusCenterX: number = camPanX + canvas.width / 2;
+//   let cameraFocusCenterY: number = camPanY + canvas.height / 2;
 
-  let playerDistFromCameraFocusX: number = Math.abs(sliderX - cameraFocusCenterX);
-  let playerDistFromCameraFocusY: number = Math.abs(sliderY - cameraFocusCenterY);
 
-  if (
-    playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X
-  ) {
-    if (cameraFocusCenterX < sliderX) {
-      camPanX += RUN_SPEED;
-    } else {
-      camPanX -= RUN_SPEED;
-    }
-  }
-  if (
-    playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y
-  ) {
-    if (cameraFocusCenterY < sliderY) {
-      camPanY += RUN_SPEED;
-    } else {
-      camPanY -= RUN_SPEED;
-    }
-  }
+//   let playerDistFromCameraFocusX: number = Math.abs(sliderX - cameraFocusCenterX);
+//   let playerDistFromCameraFocusY: number = Math.abs(sliderY - cameraFocusCenterY);
+
+//   if (
+//     playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X
+//   ) {
+//     if (cameraFocusCenterX < sliderX) {
+//       camPanX += RUN_SPEED;
+//     } else {
+//       camPanX -= RUN_SPEED;
+//     }
+//   }
+//   if (
+//     playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y
+//   ) {
+//     if (cameraFocusCenterY < sliderY) {
+//       camPanY += RUN_SPEED;
+//     } else {
+//       camPanY -= RUN_SPEED;
+//     }
+//   }
 
 
 
@@ -92,4 +95,4 @@ const cameraFollow = () => {
   // if(camPanY > maxPanTop) {
   //   camPanY = maxPanTop;
   // }
-};
+// };

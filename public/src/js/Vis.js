@@ -40,7 +40,6 @@ let durationCheck = 0;
 let counter = 0;
 const computeRGBvalueFromSpotifyAnalysis = () => {
     if ((elapsedTime > pitchAverageInSectionArray[counter][0]) && (counter < pitchAverageInSectionArray.length - 1)) {
-        console.log(pitchAverageInSectionArray[counter][0]);
         current_segment_pitch_avg = pitchAverageInSectionArray[counter][1];
         computeGreenValue();
         computeBlueValue();

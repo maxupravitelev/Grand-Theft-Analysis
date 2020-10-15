@@ -103,6 +103,9 @@ class carClass {
     this.carMove = () => {
       // only allow the car to turn while it's rolling
 
+
+
+
       if (Math.abs(this.carSpeed) > MIN_TURN_SPEED) {
         if (this.keyHeld_TurnLeft && reverse == false) {
           this.carAng -= TURN_RATE * Math.PI;

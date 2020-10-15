@@ -110,14 +110,24 @@ const drawTracks = () => {
         let trackLeftEdgeX: number = eachCol * TRACK_W;
         let trackTopEdgeY: number = eachRow * TRACK_H;
 
-        colorRect(
-          trackLeftEdgeX,
-          trackTopEdgeY,
-          TRACK_W - TRACK_GAP,
-          TRACK_H - TRACK_GAP,
-          currentRGBvalue
-        );
-        canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
+        // console.log("camPanX:" + camPanX)
+
+        if ((trackLeftEdgeX >= camPanX - TRACK_W) && (trackLeftEdgeX <= camPanX + canvas.width + TRACK_W) ){
+          if (trackTopEdgeY >= camPanY - TRACK_W) {
+            if (trackTopEdgeY <= camPanY + canvas.height + TRACK_H) {
+
+              colorRect(
+                trackLeftEdgeX,
+                trackTopEdgeY,
+                TRACK_W - TRACK_GAP,
+                TRACK_H - TRACK_GAP,
+                currentRGBvalue
+              );
+              canvasContext.drawImage(roof, trackLeftEdgeX, trackTopEdgeY);
+            }
+          }
+        }
+
       } // end of isTrackAtTileCoord()
     } // end of for eachRow
   } // end of for eachCol
