@@ -14,6 +14,15 @@ const TRACK_GOAL: number = 3;
 const TRACK_TREE: number = 4;
 const TRACK_FLAG: number = 5;
 
+const getStreetNodes = async () => {
+  const response = await fetch('http://localhost:8888/api/maps/nodesinstreet')
+  
+  let streetNodes = await response.json();
+
+  console.log(streetNodes) 
+}
+getStreetNodes();
+
 const trackTileToIndex = (tileCol: number, tileRow: number) => {
   return tileCol + TRACK_COLS * tileRow;
 };
