@@ -13,7 +13,7 @@
         "moduleResolution": "node"
         // "outDir": "js",
     },
-    "include": ["public", "controllers"],
+    "include": ["public", "controllers", "utils"],
     "files": [
         "index.ts"
     ],
