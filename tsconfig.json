@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
+        "target": "ES2020",
         "watch": true,
         // "emitDecoratorMetadata": true,
         "module": "commonjs",
@@ -8,10 +8,12 @@
         "resolveJsonModule": true,
         "lib": ["DOM", "ES2019"],
         "removeComments": true,
-        "strict": true
+        "strict": true,
+        "types": ["node"],
+        "moduleResolution": "node"
         // "outDir": "js",
     },
-    "include": ["public"],
+    "include": ["public", "controllers"],
     "files": [
         "index.ts"
     ],

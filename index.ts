@@ -7,8 +7,14 @@ const cors = require("cors");
 const qs = require("querystring");
 const cookieParser = require("cookie-parser");
 
+const mapRouter = require('./controllers/maps')
+
+
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/maps', mapRouter)
+
 
 let stateKey: string = "spotify_auth_state";
 
@@ -156,7 +162,7 @@ app.listen(PORT, () => {
 
 // generating random state string @ app.get /login
 
-let generateRandomString = (length) => {
+let generateRandomString = (length: number) => {
   let text: string = "";
   let possible: string =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
