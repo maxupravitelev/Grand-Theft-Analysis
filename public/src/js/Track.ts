@@ -14,10 +14,12 @@ const TRACK_GOAL: number = 3;
 const TRACK_TREE: number = 4;
 const TRACK_FLAG: number = 5;
 
+let streetNodes = []
+
 const getStreetNodes = async () => {
   const response = await fetch('http://localhost:8888/api/maps/nodesinstreet')
   
-  let streetNodes = await response.json();
+  streetNodes = await response.json();
 
   console.log(streetNodes) 
 }
@@ -108,7 +110,24 @@ const colorizeTracks = () => {
   colorCircle(blueCircleX, blueCircleY, radius_size, blueValue);
   colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
   colorCircle(redCircleX, redCircleY, radius_size, redValue);
+
+  if (streetNodes) {
+    streetNodes.forEach(node => {
+
+      let zoomLevel = 7;
+
+      let nodeX:number = blueCircleX + ((parseFloat(node.lat) - 52.46) * zoomLevel * 10000);
+      let nodeY:number = blueCircleY + ((parseFloat(node.lon) - 13.3) * zoomLevel * 1000);
+      // console.log(p1.carX, nodeX)
+      // console.log(p1.carY, nodeY)
+      // console.log(nodeX, nodeY)
+      colorCircle(nodeX, nodeY, 10, "#FFFFFF")
+  })
+  }
+
 };
+
+
 
 const drawTracks = () => {
   for (let eachCol: number = 0; eachCol < TRACK_COLS; eachCol++) {
@@ -140,4 +159,7 @@ const drawTracks = () => {
       } // end of isTrackAtTileCoord()
     } // end of for eachRow
   } // end of for eachCol
+
+
+
 }; // end of drawTracks()
