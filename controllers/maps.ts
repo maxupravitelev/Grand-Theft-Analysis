@@ -23,16 +23,32 @@ mapRouter.get('/nodesinstreet', (request, response) => {
   
   let streetName = filterByValue(street.tag, "name")
 
+  let nextStretNameArray;
+
   let nodesInStreet: object[] = []
-  street.nd.forEach((node: object) => nodesInStreet.push(node))
+  street.nd.forEach((node: object) => {
+    nodesInStreet.push(node)
+    let currentNodeId = node._attributes.ref
+    let nodeInDB = filterByValue(jsonData.osm.way, currentNodeId)
+    if (nodeInDB.length > 1) {
+      nextStretNameArray = filterByValue(nodeInDB, "name")
+    }
+  })
 
   let nodeData: object[] = []
   nodesInStreet.forEach(node => nodeData.push(jsonData.osm.node.find(x => x._attributes.id === node._attributes.ref))) 
 
-  let nodesInStreetCoordinates: object[] = []
-  nodeData.forEach(data => nodesInStreetCoordinates.push({nodeId: data._attributes.id, streetName: streetName[0]._attributes.v, lat: data._attributes.lat, lon: data._attributes.lon}))
+  // forEach node: check if node has more than two entries in DB -> connection to other street.
 
-  response.json(nodesInStreetCoordinates)
+  let nodesInStreetCoordinates: object[] = []
+  nodeData.forEach(data => nodesInStreetCoordinates.push({
+    nodeId: data._attributes.id, 
+    streetName: streetName[0]._attributes.v,
+    nextStreet: '0'
+    lat: data._attributes.lat, 
+    lon: data._attributes.lon}))
+
+  response.json(nextStretNameArray)
 })
 
 mapRouter.get('/nextstreet', (request, response) => {
