@@ -33,12 +33,26 @@ mapRouter.get('/nodesinstreet', (request, response) => {
     
     let currentNodeId = node._attributes.ref
     let nodeInDB = filterByValue(jsonData.osm.way, currentNodeId)
+    
     if (nodeInDB.length > 1) {      
+      
       nextStreetNameArray = filterByValue(nodeInDB, "name")
+      
       for (let i = 0; i < nextStreetNameArray.length; i++) {
+        
         let nextStreetName = filterByValue(nextStreetNameArray[i].tag, "name")
-        if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v)
-        nodesInStreet.push({...node, nextStreet: {id: '', name: nextStreetName[0]._attributes.v}})
+        // let nextStreetId = filterByValue(nextStreetNameArray[i]._attributes, "id")
+        
+        if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v) {
+          nodesInStreet.push({
+            ...node, 
+            nextStreet: {
+              id: nextStreetNameArray[i]._attributes.id, 
+              name: nextStreetName[0]._attributes.v
+            }
+          })
+        }
+        
       }
 
     } else {
@@ -55,9 +69,11 @@ mapRouter.get('/nodesinstreet', (request, response) => {
   nodeData.forEach(data => nodesInStreetCoordinates.push({
     nodeId: data._attributes.id, 
     streetName: streetName[0]._attributes.v,
-    nextStreet: '0'
+    nextStreet: '0',
     lat: data._attributes.lat, 
-    lon: data._attributes.lon}))
+    lon: data._attributes.lon
+  })
+  )
 
   response.json(nodesInStreet)
 })

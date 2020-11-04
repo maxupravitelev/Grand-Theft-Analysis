@@ -20,8 +20,15 @@ mapRouter.get('/nodesinstreet', (request, response) => {
             nextStreetNameArray = filterByValue(nodeInDB, "name");
             for (let i = 0; i < nextStreetNameArray.length; i++) {
                 let nextStreetName = filterByValue(nextStreetNameArray[i].tag, "name");
-                if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v)
-                    nodesInStreet.push({ ...node, nextStreet: { id: '', name: nextStreetName[0]._attributes.v } });
+                if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v) {
+                    nodesInStreet.push({
+                        ...node,
+                        nextStreet: {
+                            id: nextStreetNameArray[i]._attributes.id,
+                            name: nextStreetName[0]._attributes.v
+                        }
+                    });
+                }
             }
         }
         else {
