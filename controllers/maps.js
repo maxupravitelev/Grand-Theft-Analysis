@@ -11,14 +11,21 @@ mapRouter.get('/', (request, response) => {
 mapRouter.get('/nodesinstreet', (request, response) => {
     let street = jsonData.osm.way.find(x => x._attributes.id === '151372374');
     let streetName = filterByValue(street.tag, "name");
-    let nextStretNameArray;
+    let nextStreetNameArray;
     let nodesInStreet = [];
     street.nd.forEach((node) => {
-        nodesInStreet.push(node);
         let currentNodeId = node._attributes.ref;
         let nodeInDB = filterByValue(jsonData.osm.way, currentNodeId);
         if (nodeInDB.length > 1) {
-            nextStretNameArray = filterByValue(nodeInDB, "name");
+            nextStreetNameArray = filterByValue(nodeInDB, "name");
+            for (let i = 0; i < nextStreetNameArray.length; i++) {
+                let nextStreetName = filterByValue(nextStreetNameArray[i].tag, "name");
+                if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v)
+                    nodesInStreet.push({ ...node, nextStreet: { id: '', name: nextStreetName[0]._attributes.v } });
+            }
+        }
+        else {
+            nodesInStreet.push(node);
         }
     });
     let nodeData = [];
@@ -31,7 +38,7 @@ mapRouter.get('/nodesinstreet', (request, response) => {
         lat: data._attributes.lat,
         lon: data._attributes.lon
     }));
-    response.json(nextStretNameArray);
+    response.json(nodesInStreet);
 });
 mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');

@@ -18,20 +18,31 @@ mapRouter.get('/', (request, response) => {
 mapRouter.get('/nodesinstreet', (request, response) => {
 
 // mapRouter.get('/:id', async (request, response) => {
-    
+  
+  // return object by street id
   let street = jsonData.osm.way.find(x => x._attributes.id === '151372374')
   
+  // find name attribute in street object
   let streetName = filterByValue(street.tag, "name")
 
-  let nextStretNameArray;
+
+  let nextStreetNameArray;
 
   let nodesInStreet: object[] = []
   street.nd.forEach((node: object) => {
-    nodesInStreet.push(node)
+    
     let currentNodeId = node._attributes.ref
     let nodeInDB = filterByValue(jsonData.osm.way, currentNodeId)
-    if (nodeInDB.length > 1) {
-      nextStretNameArray = filterByValue(nodeInDB, "name")
+    if (nodeInDB.length > 1) {      
+      nextStreetNameArray = filterByValue(nodeInDB, "name")
+      for (let i = 0; i < nextStreetNameArray.length; i++) {
+        let nextStreetName = filterByValue(nextStreetNameArray[i].tag, "name")
+        if (nextStreetName[0]._attributes.v != streetName[0]._attributes.v)
+        nodesInStreet.push({...node, nextStreet: {id: '', name: nextStreetName[0]._attributes.v}})
+      }
+
+    } else {
+      nodesInStreet.push(node)
     }
   })
 
@@ -48,7 +59,7 @@ mapRouter.get('/nodesinstreet', (request, response) => {
     lat: data._attributes.lat, 
     lon: data._attributes.lon}))
 
-  response.json(nextStretNameArray)
+  response.json(nodesInStreet)
 })
 
 mapRouter.get('/nextstreet', (request, response) => {
