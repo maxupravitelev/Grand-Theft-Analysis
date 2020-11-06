@@ -8,14 +8,22 @@ const xmlFile = fs.readFileSync('./maps/temp.xml', 'utf8');
     
 const jsonData = JSON.parse(convert.xml2json(xmlFile, {compact: true, spaces: 2}));
 
+const overpassFile = fs.readFileSync('./maps/NK_from_overpass.json', 'utf8');
+const jsonDataOverpassBbox = JSON.parse(overpassFile)
+
 /* .get street */
 mapRouter.get('/', (request, response) => {
-    
+  
+  // todo: get all street data from bounding box / file
+
   response.json(jsonData)
 })
 
 /* get nodes via street id */
 mapRouter.get('/nodesinstreet', (request, response) => {
+
+// todo: remove non-street elements (signs, stairs etc)
+
 
 // mapRouter.get('/:id', async (request, response) => {
   
@@ -77,6 +85,12 @@ mapRouter.get('/nodesinstreet', (request, response) => {
 
   response.json(nodesInStreet)
 })
+
+mapRouter.get('/overpass/nodesinstreet', (request, response) => {
+
+response.json(jsonDataOverpassBbox);
+
+}
 
 mapRouter.get('/nextstreet', (request, response) => {
       

@@ -5,6 +5,8 @@ const convert = require('xml-js');
 const fs = require('fs');
 const xmlFile = fs.readFileSync('./maps/temp.xml', 'utf8');
 const jsonData = JSON.parse(convert.xml2json(xmlFile, { compact: true, spaces: 2 }));
+const overpassFile = fs.readFileSync('./maps/NK_from_overpass.json', 'utf8');
+const jsonDataOverpassBbox = JSON.parse(overpassFile);
 mapRouter.get('/', (request, response) => {
     response.json(jsonData);
 });
@@ -47,9 +49,11 @@ mapRouter.get('/nodesinstreet', (request, response) => {
     }));
     response.json(nodesInStreet);
 });
-mapRouter.get('/nextstreet', (request, response) => {
+mapRouter.get('/overpass/nodesinstreet', (request, response) => {
+    response.json(jsonDataOverpassBbox);
+}, mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
-});
+}));
 const filterByValue = (array, value) => array.filter((data) => JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
 module.exports = mapRouter;
