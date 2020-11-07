@@ -50,7 +50,17 @@ mapRouter.get('/nodesinstreet', (request, response) => {
     response.json(nodesInStreet);
 });
 mapRouter.get('/overpass/nodesinstreet', (request, response) => {
-    response.json(jsonDataOverpassBbox);
+    let streetData = [];
+    let nodeData = [];
+    jsonDataOverpassBbox.elements.forEach(element => {
+        if (element.type == "way") {
+            streetData.push(element);
+        }
+        else if (element.type == "node") {
+            nodeData.push(element);
+        }
+    });
+    response.json(nodeData);
 }, mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);

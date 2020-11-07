@@ -86,9 +86,21 @@ mapRouter.get('/nodesinstreet', (request, response) => {
   response.json(nodesInStreet)
 })
 
+// http://localhost:8888/api/maps/overpass/nodesinstreet
 mapRouter.get('/overpass/nodesinstreet', (request, response) => {
 
-response.json(jsonDataOverpassBbox);
+  let streetData = [];
+  let nodeData = [];
+
+  jsonDataOverpassBbox.elements.forEach(element => {
+    if (element.type == "way") {
+      streetData.push(element);
+    } else if (element.type == "node") {
+      nodeData.push(element)
+    }
+  });
+
+  response.json(nodeData);
 
 }
 
