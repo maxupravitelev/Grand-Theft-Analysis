@@ -100,7 +100,17 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     }
   });
 
-  response.json(nodeData);
+  streetData.forEach((street) => {
+    let tempArr = [];
+    street.nodes.forEach((element) => {
+      let nodeCoordinates = filterByValue(nodeData, element.toString())
+      tempArr.push(nodeCoordinates);
+
+    });
+    street.nodes = tempArr;
+  })
+
+  response.json(streetData);
 
 }
 

@@ -60,7 +60,15 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
             nodeData.push(element);
         }
     });
-    response.json(nodeData);
+    streetData.forEach((street) => {
+        let tempArr = [];
+        street.nodes.forEach((element) => {
+            let nodeCoordinates = filterByValue(nodeData, element.toString());
+            tempArr.push(nodeCoordinates);
+        });
+        street.nodes = tempArr;
+    });
+    response.json(streetData);
 }, mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
