@@ -61,12 +61,10 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
         }
     });
     streetData.forEach((street) => {
-        let tempArr = [];
-        street.nodes.forEach((element) => {
+        street.nodes.forEach((element, index) => {
             let nodeCoordinates = filterByValue(nodeData, element.toString());
-            tempArr.push(nodeCoordinates);
+            street.nodes[index] = nodeCoordinates;
         });
-        street.nodes = tempArr;
     });
     response.json(streetData);
 }, mapRouter.get('/nextstreet', (request, response) => {
