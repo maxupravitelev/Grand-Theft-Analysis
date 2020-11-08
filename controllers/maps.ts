@@ -117,6 +117,11 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     });
   })
 
+  streetData.forEach((street) => {
+    let flattenedNodes = [].concat.apply([], street.nodes);
+    street.nodes = flattenedNodes;
+  })
+
   response.json(streetData);
 
 }
