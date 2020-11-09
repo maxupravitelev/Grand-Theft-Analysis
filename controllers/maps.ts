@@ -92,6 +92,7 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
   let streetData = [];
   let nodeData = [];
 
+
   jsonDataOverpassBbox.elements.forEach(element => {
     if (element.type == "way") {
       streetData.push(element);
@@ -99,6 +100,8 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
       nodeData.push(element)
     }
   });
+
+  if (!nodeData) { console.log("no nodeData") }
 
   // streetData.forEach((street) => {
   //   let tempArr = [];
@@ -124,7 +127,7 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
 
   response.json(streetData);
 
-}
+})
 
 mapRouter.get('/nextstreet', (request, response) => {
       

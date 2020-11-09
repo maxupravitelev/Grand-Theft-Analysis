@@ -60,6 +60,9 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
             nodeData.push(element);
         }
     });
+    if (!nodeData) {
+        console.log("no nodeData");
+    }
     streetData.forEach((street) => {
         street.nodes.forEach((element, index) => {
             let nodeCoordinates = filterByValue(nodeData, element.toString());
@@ -71,9 +74,10 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
         street.nodes = flattenedNodes;
     });
     response.json(streetData);
-}, mapRouter.get('/nextstreet', (request, response) => {
+});
+mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
-}));
+});
 const filterByValue = (array, value) => array.filter((data) => JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
 module.exports = mapRouter;
