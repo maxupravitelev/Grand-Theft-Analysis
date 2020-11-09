@@ -94,8 +94,8 @@ mapRouter.get('/nodesinstreet', (request, response) => {
 
 // handle data for next get call outside of function to prevent reading errors; reading data only once @server init
 
-  let streetData = [];
-  let nodeData = [];
+  let streetData: object[] = [];
+  let nodeData: object[] = [];
 
 
   jsonDataOverpassBbox.elements.forEach(element => {
@@ -107,7 +107,7 @@ mapRouter.get('/nodesinstreet', (request, response) => {
   });
 
   streetData.forEach((street) => {
-    street.nodes.forEach((element, index) => {
+    street.nodes.forEach((element: number, index: number) => {
       let nodeCoordinates = filterByValue(nodeData, element.toString())
       street.nodes[index] = nodeCoordinates;
     });

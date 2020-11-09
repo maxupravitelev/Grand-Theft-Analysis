@@ -9,6 +9,12 @@ const MAX_REVERSE_SPEED = -10;
 let reverse = false;
 class carClass {
     constructor() {
+        this.carAng = 0;
+        this.carSpeed = 0;
+        this.controlKeyForGas = 0;
+        this.controlKeyForReverse = 0;
+        this.controlKeyForTurnLeft = 0;
+        this.controlKeyForTurnRight = 0;
         this.carX = 75;
         this.carY = 75;
         this.keyHeld_Gas = false;

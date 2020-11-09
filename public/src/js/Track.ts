@@ -14,9 +14,9 @@ const TRACK_GOAL: number = 3;
 const TRACK_TREE: number = 4;
 const TRACK_FLAG: number = 5;
 
-let streetNodes = []
+let streetNodes: object[] = []
 
-let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
+let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
 // let streetNodeUrl = 'http://localhost:8888/api/maps/nodesinstreet'
 
 

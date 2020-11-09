@@ -31,20 +31,19 @@ class carClass {
   public keyHeld_TurnLeft: boolean;
   public keyHeld_TurnRight: boolean;
 
-  public carAng: number;
-  public carSpeed: number;
+  public carAng: number = 0;
+  public carSpeed: number = 0;
 
   public setupControls: any;
 
   // key controls used for this car
-  public controlKeyForGas: number;
-  public controlKeyForReverse: number;
-  public controlKeyForTurnLeft: number;
-  public controlKeyForTurnRight: number;
+  public controlKeyForGas: number = 0;
+  public controlKeyForReverse: number = 0;
+  public controlKeyForTurnLeft: number = 0;
+  public controlKeyForTurnRight: number = 0;
 
   public carInit: any;
 
-  // to do: specify types!
   public myBitmap: any; 
   public myName: any; 
   public carReset: any; 
@@ -66,7 +65,7 @@ class carClass {
     this.keyHeld_TurnRight = false;
 
     // key controls used for this car
-    this.setupControls = (forwardKey, backKey, leftKey, rightKey) => {
+    this.setupControls = (forwardKey: number, backKey: number, leftKey: number, rightKey: number) => {
       this.controlKeyForGas = forwardKey;
       this.controlKeyForReverse = backKey;
       this.controlKeyForTurnLeft = leftKey;
@@ -102,9 +101,6 @@ class carClass {
 
     this.carMove = () => {
       // only allow the car to turn while it's rolling
-
-
-
 
       if (Math.abs(this.carSpeed) > MIN_TURN_SPEED) {
         if (this.keyHeld_TurnLeft && reverse == false) {
