@@ -127,7 +127,7 @@ const drawEverything = () => {
 
   canvasContext.font = "15px Arial";
   canvasContext.fillText("carX: " + p1.carX, 10, 70);
-  canvasContext.fillText("carX: " + p1.carX, 10, 85);
+  canvasContext.fillText("carY: " + p1.carY, 10, 85);
 
 
 };
