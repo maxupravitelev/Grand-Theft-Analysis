@@ -119,7 +119,15 @@ const drawEverything = () => {
 
   canvasContext.restore();
 
+
+  // show specific values for debugging 
   canvasContext.fillStyle = "white";
   canvasContext.font = "20px Arial";
   canvasContext.fillText("Counter: " + elapsedTime, 10, 50);
+
+  canvasContext.font = "15px Arial";
+  canvasContext.fillText("carX: " + p1.carX, 10, 70);
+  canvasContext.fillText("carX: " + p1.carX, 10, 85);
+
+
 };

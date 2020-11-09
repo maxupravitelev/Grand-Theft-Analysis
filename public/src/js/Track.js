@@ -12,8 +12,9 @@ const TRACK_GOAL = 3;
 const TRACK_TREE = 4;
 const TRACK_FLAG = 5;
 let streetNodes = [];
+let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreet';
 const getStreetNodes = async () => {
-    const response = await fetch('http://localhost:8888/api/maps/nodesinstreet');
+    const response = await fetch(streetNodeUrl);
     streetNodes = await response.json();
     console.log(streetNodes);
 };
@@ -79,10 +80,13 @@ const colorizeTracks = () => {
     colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
     colorCircle(redCircleX, redCircleY, radius_size, redValue);
     if (streetNodes) {
-        streetNodes.forEach(node => {
-            let zoomLevel = 7;
-            let nodeX = blueCircleX + ((parseFloat(node.lat) - 52.46) * zoomLevel * 10000);
-            let nodeY = blueCircleY + ((parseFloat(node.lon) - 13.3) * zoomLevel * 1000);
+        streetNodes.forEach((street, index) => {
+            let firstNodeX = 9670;
+            let firstNodeY = -90;
+            let zoomLevel = 100000;
+            let nodeX = firstNodeX + ((parseFloat(street.nodes[0].lat) - 52.4) * zoomLevel);
+            let nodeY = firstNodeY - ((parseFloat(street.nodes[0].lon) - 13.3) * zoomLevel);
+            console.log(nodeX, nodeY);
             colorCircle(nodeX, nodeY, 10, "#FFFFFF");
         });
     }
