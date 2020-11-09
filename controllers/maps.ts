@@ -11,22 +11,25 @@ const jsonData = JSON.parse(convert.xml2json(xmlFile, {compact: true, spaces: 2}
 const overpassFile = fs.readFileSync('./maps/NK_from_overpass.json', 'utf8');
 const jsonDataOverpassBbox = JSON.parse(overpassFile)
 
+//////////////////////
+/* HELPER FUNCTIONS */
+
+// Source: https://stackoverflow.com/questions/44312924/filter-array-of-objects-whose-any-properties-contains-a-value
+const filterByValue = (array: object[], value: string) => array.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
+
+/////////////////
 /* .get street */
 mapRouter.get('/', (request, response) => {
   
-  // todo: get all street data from bounding box / file
 
   response.json(jsonData)
 })
 
+/////////////////////////////
 /* get nodes via street id */
+
 mapRouter.get('/nodesinstreet', (request, response) => {
 
-// todo: remove non-street elements (signs, stairs etc)
-
-
-// mapRouter.get('/:id', async (request, response) => {
-  
   // return object by street id
   let street = jsonData.osm.way.find(x => x._attributes.id === '151372374')
   
@@ -86,8 +89,10 @@ mapRouter.get('/nodesinstreet', (request, response) => {
   response.json(nodesInStreet)
 })
 
+///////////////////////
 // http://localhost:8888/api/maps/overpass/nodesinstreet
-mapRouter.get('/overpass/nodesinstreet', (request, response) => {
+
+// handle data for next get call outside of function to prevent reading errors
 
   let streetData = [];
   let nodeData = [];
@@ -101,18 +106,6 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     }
   });
 
-  if (!nodeData) { console.log("no nodeData") }
-
-  // streetData.forEach((street) => {
-  //   let tempArr = [];
-  //   street.nodes.forEach((element) => {
-  //     let nodeCoordinates = filterByValue(nodeData, element.toString())
-  //     tempArr.push(nodeCoordinates);
-
-  //   });
-  //   street.nodes = tempArr;
-  // })
-
   streetData.forEach((street) => {
     street.nodes.forEach((element, index) => {
       let nodeCoordinates = filterByValue(nodeData, element.toString())
@@ -125,9 +118,14 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     street.nodes = flattenedNodes;
   })
 
+mapRouter.get('/overpass/nodesinstreet', (request, response) => {
+
   response.json(streetData);
 
 })
+
+
+////////////////
 
 mapRouter.get('/nextstreet', (request, response) => {
       
@@ -137,10 +135,6 @@ mapRouter.get('/nextstreet', (request, response) => {
     response.json(nextStreet)
   })
 
-/* HELPER FUNCTIONS*/
-
-// Source: https://stackoverflow.com/questions/44312924/filter-array-of-objects-whose-any-properties-contains-a-value
-const filterByValue = (array: object[], value: string) => array.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
 
 
   

@@ -7,6 +7,7 @@ const xmlFile = fs.readFileSync('./maps/temp.xml', 'utf8');
 const jsonData = JSON.parse(convert.xml2json(xmlFile, { compact: true, spaces: 2 }));
 const overpassFile = fs.readFileSync('./maps/NK_from_overpass.json', 'utf8');
 const jsonDataOverpassBbox = JSON.parse(overpassFile);
+const filterByValue = (array, value) => array.filter((data) => JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
 mapRouter.get('/', (request, response) => {
     response.json(jsonData);
 });
@@ -49,35 +50,31 @@ mapRouter.get('/nodesinstreet', (request, response) => {
     }));
     response.json(nodesInStreet);
 });
-mapRouter.get('/overpass/nodesinstreet', (request, response) => {
-    let streetData = [];
-    let nodeData = [];
-    jsonDataOverpassBbox.elements.forEach(element => {
-        if (element.type == "way") {
-            streetData.push(element);
-        }
-        else if (element.type == "node") {
-            nodeData.push(element);
-        }
-    });
-    if (!nodeData) {
-        console.log("no nodeData");
+let streetData = [];
+let nodeData = [];
+jsonDataOverpassBbox.elements.forEach(element => {
+    if (element.type == "way") {
+        streetData.push(element);
     }
-    streetData.forEach((street) => {
-        street.nodes.forEach((element, index) => {
-            let nodeCoordinates = filterByValue(nodeData, element.toString());
-            street.nodes[index] = nodeCoordinates;
-        });
+    else if (element.type == "node") {
+        nodeData.push(element);
+    }
+});
+streetData.forEach((street) => {
+    street.nodes.forEach((element, index) => {
+        let nodeCoordinates = filterByValue(nodeData, element.toString());
+        street.nodes[index] = nodeCoordinates;
     });
-    streetData.forEach((street) => {
-        let flattenedNodes = [].concat.apply([], street.nodes);
-        street.nodes = flattenedNodes;
-    });
+});
+streetData.forEach((street) => {
+    let flattenedNodes = [].concat.apply([], street.nodes);
+    street.nodes = flattenedNodes;
+});
+mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     response.json(streetData);
 });
 mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
 });
-const filterByValue = (array, value) => array.filter((data) => JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
 module.exports = mapRouter;
