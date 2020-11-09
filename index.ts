@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
+require('express-async-errors')
+
 const app = express();
 const request = require("request"); // todo: update to https://github.com/mikeal/bent
 const cors = require("cors");

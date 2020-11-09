@@ -76,5 +76,11 @@ mapRouter.get('/overpass/nodesinstreet', (request, response) => {
 mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
+    if (nextStreet) {
+        response.json(nextStreet);
+    }
+    else {
+        response.status(404).end();
+    }
 });
 module.exports = mapRouter;

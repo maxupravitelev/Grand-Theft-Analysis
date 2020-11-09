@@ -115,9 +115,6 @@ const colorizeTracks = () => {
   colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
   colorCircle(redCircleX, redCircleY, radius_size, redValue);
 
-
-
-
   if (streetNodes) {
     streetNodes.forEach((street, index) => {
 

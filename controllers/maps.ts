@@ -92,7 +92,7 @@ mapRouter.get('/nodesinstreet', (request, response) => {
 ///////////////////////
 // http://localhost:8888/api/maps/overpass/nodesinstreet
 
-// handle data for next get call outside of function to prevent reading errors
+// handle data for next get call outside of function to prevent reading errors; reading data only once @server init
 
   let streetData = [];
   let nodeData = [];
@@ -133,9 +133,12 @@ mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446')
 
     response.json(nextStreet)
+
+    if (nextStreet) {
+      response.json(nextStreet)
+    } else {
+      response.status(404).end()
+    }
   })
 
-
-
-  
 module.exports = mapRouter
