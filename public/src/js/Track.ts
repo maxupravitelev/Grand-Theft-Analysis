@@ -184,31 +184,32 @@ const colorizeTracks = () => {
   colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
   colorCircle(redCircleX, redCircleY, radius_size, redValue);
 
-  if (slimStreetNodes) {
-    slimStreetNodes.forEach((street, index) => {
+  // if (slimStreetNodes) {
+  //   slimStreetNodes.forEach((street, index) => {
 
-      let firstNodeX: number = 9670;
-      let firstNodeY: number = -90;
+  //     let firstNodeX: number = 9670;
+  //     let firstNodeY: number = -90;
 
-      let nodeX:number = firstNodeX + street.nodes[0].lat;
-      let nodeY:number = firstNodeY - street.nodes[0].lon;
+  //     let nodeX:number = firstNodeX + street.nodes[0].lat;
+  //     let nodeY:number = firstNodeY - street.nodes[0].lon;
 
-      // console.log(nodeX, nodeY)
-      colorCircle(nodeX, nodeY, 10, "#FFFFFF")
-  })
-  }
+  //     // console.log(nodeX, nodeY)
+  //     colorCircle(nodeX, nodeY, 10, "#FFFFFF")
+  // })
+  // }
 
-  for (let i = 0; i < slimStreetNodes[1].nodes.length; i++) {
+// for (let j = 0; j < slimStreetNodes.length; j++) {
+  for (let i = 0, j = 1; i < slimStreetNodes[j].nodes.length; i++) {
     
-    let nodeLat = slimStreetNodes[1].nodes[i].lat;
-    let nodeLon = slimStreetNodes[1].nodes[i].lat;
+    let nodeLat = slimStreetNodes[j].nodes[i].lat;
+    let nodeLon = slimStreetNodes[j].nodes[i].lat;
 
     let nextNodeLat: number;
     let nextNodeLon: number;
 
-    if (i < slimStreetNodes[1].nodes.length - 1) {
-      nextNodeLat = slimStreetNodes[1].nodes[i + 1].lat;
-      nextNodeLon = slimStreetNodes[1].nodes[i + 1].lon;
+    if (i < slimStreetNodes[j].nodes.length - 1) {
+      nextNodeLat = slimStreetNodes[j].nodes[i + 1].lat;
+      nextNodeLon = slimStreetNodes[j].nodes[i + 1].lon;
     } else {
       nextNodeLat = nodeLat;
       nextNodeLon = nodeLon;
@@ -223,14 +224,14 @@ const colorizeTracks = () => {
     
     canvasContext.lineTo(nextNodeLat, nextNodeLon);
   
-    canvasContext.strokeStyle = '#808000';
+    canvasContext.strokeStyle = '#FFFFFF';
   
     canvasContext.lineWidth = 5;
     // Make the line visible
     canvasContext.stroke();
   }
 
-
+// }
 
 };
 

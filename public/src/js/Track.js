@@ -109,23 +109,14 @@ const colorizeTracks = () => {
     colorCircle(blueCircleX, blueCircleY, radius_size, blueValue);
     colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
     colorCircle(redCircleX, redCircleY, radius_size, redValue);
-    if (slimStreetNodes) {
-        slimStreetNodes.forEach((street, index) => {
-            let firstNodeX = 9670;
-            let firstNodeY = -90;
-            let nodeX = firstNodeX + street.nodes[0].lat;
-            let nodeY = firstNodeY - street.nodes[0].lon;
-            colorCircle(nodeX, nodeY, 10, "#FFFFFF");
-        });
-    }
-    for (let i = 0; i < slimStreetNodes[1].nodes.length; i++) {
-        let nodeLat = slimStreetNodes[1].nodes[i].lat;
-        let nodeLon = slimStreetNodes[1].nodes[i].lat;
+    for (let i = 0, j = 1; i < slimStreetNodes[j].nodes.length; i++) {
+        let nodeLat = slimStreetNodes[j].nodes[i].lat;
+        let nodeLon = slimStreetNodes[j].nodes[i].lat;
         let nextNodeLat;
         let nextNodeLon;
-        if (i < slimStreetNodes[1].nodes.length - 1) {
-            nextNodeLat = slimStreetNodes[1].nodes[i + 1].lat;
-            nextNodeLon = slimStreetNodes[1].nodes[i + 1].lon;
+        if (i < slimStreetNodes[j].nodes.length - 1) {
+            nextNodeLat = slimStreetNodes[j].nodes[i + 1].lat;
+            nextNodeLon = slimStreetNodes[j].nodes[i + 1].lon;
         }
         else {
             nextNodeLat = nodeLat;
@@ -136,7 +127,7 @@ const colorizeTracks = () => {
         canvasContext.beginPath();
         canvasContext.moveTo(nodeLat, nodeLon);
         canvasContext.lineTo(nextNodeLat, nextNodeLon);
-        canvasContext.strokeStyle = '#808000';
+        canvasContext.strokeStyle = '#FFFFFF';
         canvasContext.lineWidth = 5;
         canvasContext.stroke();
     }
