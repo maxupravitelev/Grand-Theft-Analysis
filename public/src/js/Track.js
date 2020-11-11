@@ -21,15 +21,25 @@ const getStreetNodes = async () => {
     streetNodes.forEach(street => {
         street.nodes.forEach(node => {
             let stringLat = node.lat.toString();
-            let firstDigits = [];
+            let stringLon = node.lon.toString();
+            let firstDigitsLat = [];
+            let firstDigitsLon = [];
             for (let i = 0; i < stringLat.length; i++) {
                 if (stringLat[i] === '.') {
                     break;
                 }
-                firstDigits.push(stringLat[i]);
+                firstDigitsLat.push(stringLat[i]);
             }
-            let firstDigitsOfLatitude = Number(firstDigits.join(''));
+            let firstDigitsOfLatitude = Number(firstDigitsLat.join(''));
+            for (let i = 0; i < stringLon.length; i++) {
+                if (stringLon[i] === '.') {
+                    break;
+                }
+                firstDigitsLon.push(stringLon[i]);
+            }
+            let firstDigitsOfLongitude = Number(firstDigitsLon.join(''));
             node.lat %= firstDigitsOfLatitude;
+            node.lon %= firstDigitsOfLongitude;
         });
     });
     console.log(slimStreetNodes);
