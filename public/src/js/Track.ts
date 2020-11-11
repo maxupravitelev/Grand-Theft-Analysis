@@ -20,6 +20,7 @@ let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstre
 // let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
 // let streetNodeUrl = 'http://localhost:8888/api/maps/nodesinstreet'
 
+let slimStreetNodes: object[] = []
 
 const getStreetNodes = async () => {
   const response = await fetch(streetNodeUrl)
@@ -27,7 +28,7 @@ const getStreetNodes = async () => {
   streetNodes = await response.json();
   console.log(streetNodes) 
 
-  let slimStreetNodes: object[] = streetNodes;
+  slimStreetNodes = streetNodes;
 
   // delete first digits before . in lat and lon
   streetNodes.forEach(street => {
@@ -38,7 +39,31 @@ const getStreetNodes = async () => {
       let firstDigitsLat = [];
       let firstDigitsLon = [];
 
-      // handle latitude data
+      // // handle latitude data
+      // for (let i = 0; i < stringLat.length; i++) {
+        
+      //   if (stringLat[i] === '.') {
+      //     break
+      //   }
+      //   firstDigitsLat.push(stringLat[i]);
+      // }
+      // let firstDigitsOfLatitude: number = Number(firstDigitsLat.join(''))
+      
+      // // handle longitude data
+      // for (let i = 0; i < stringLon.length; i++) {
+        
+      //   if (stringLon[i] === '.') {
+      //     break
+      //   }
+      //   firstDigitsLon.push(stringLon[i]);
+      // }
+      // let firstDigitsOfLongitude: number = Number(firstDigitsLon.join(''))
+
+      // // update new 0. lon and lat data
+      // node.lat %= firstDigitsOfLatitude;
+      // node.lon %= firstDigitsOfLongitude;
+
+       // handle latitude data
       for (let i = 0; i < stringLat.length; i++) {
         
         if (stringLat[i] === '.') {
@@ -61,6 +86,11 @@ const getStreetNodes = async () => {
       // update new 0. lon and lat data
       node.lat %= firstDigitsOfLatitude;
       node.lon %= firstDigitsOfLongitude;
+
+      let zoomLevel = 10000;
+
+      node.lat *= zoomLevel;
+      node.lon *= zoomLevel;
     })
     
   })
@@ -154,22 +184,21 @@ const colorizeTracks = () => {
   colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
   colorCircle(redCircleX, redCircleY, radius_size, redValue);
 
-  if (streetNodes) {
-    streetNodes.forEach((street, index) => {
+  if (slimStreetNodes) {
+    slimStreetNodes.forEach((street, index) => {
 
       let firstNodeX: number = 9670;
       let firstNodeY: number = -90;
 
-      let zoomLevel: number = 100000;
-      // console.log((parseFloat(street.nodes[0].lat))
-      let nodeX:number = firstNodeX + ((parseFloat(street.nodes[0].lat) - 52.4) * zoomLevel );
-      let nodeY:number = firstNodeY - ((parseFloat(street.nodes[0].lon) - 13.3) * zoomLevel );
-      // console.log(p1.carX)
-      // console.log(p1.carY)
+      let nodeX:number = firstNodeX + street.nodes[0].lat;
+      let nodeY:number = firstNodeY - street.nodes[0].lon;
+
       console.log(nodeX, nodeY)
       colorCircle(nodeX, nodeY, 10, "#FFFFFF")
   })
   }
+
+
 
 };
 

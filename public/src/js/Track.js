@@ -13,11 +13,12 @@ const TRACK_TREE = 4;
 const TRACK_FLAG = 5;
 let streetNodes = [];
 let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreetslim';
+let slimStreetNodes = [];
 const getStreetNodes = async () => {
     const response = await fetch(streetNodeUrl);
     streetNodes = await response.json();
     console.log(streetNodes);
-    let slimStreetNodes = streetNodes;
+    slimStreetNodes = streetNodes;
     streetNodes.forEach(street => {
         street.nodes.forEach(node => {
             let stringLat = node.lat.toString();
@@ -40,6 +41,9 @@ const getStreetNodes = async () => {
             let firstDigitsOfLongitude = Number(firstDigitsLon.join(''));
             node.lat %= firstDigitsOfLatitude;
             node.lon %= firstDigitsOfLongitude;
+            let zoomLevel = 10000;
+            node.lat *= zoomLevel;
+            node.lon *= zoomLevel;
         });
     });
     console.log(slimStreetNodes);
@@ -105,13 +109,12 @@ const colorizeTracks = () => {
     colorCircle(blueCircleX, blueCircleY, radius_size, blueValue);
     colorCircle(greenCircleX, greenCircleY, radius_size, greenValue);
     colorCircle(redCircleX, redCircleY, radius_size, redValue);
-    if (streetNodes) {
-        streetNodes.forEach((street, index) => {
+    if (slimStreetNodes) {
+        slimStreetNodes.forEach((street, index) => {
             let firstNodeX = 9670;
             let firstNodeY = -90;
-            let zoomLevel = 100000;
-            let nodeX = firstNodeX + ((parseFloat(street.nodes[0].lat) - 52.4) * zoomLevel);
-            let nodeY = firstNodeY - ((parseFloat(street.nodes[0].lon) - 13.3) * zoomLevel);
+            let nodeX = firstNodeX + street.nodes[0].lat;
+            let nodeY = firstNodeY - street.nodes[0].lon;
             console.log(nodeX, nodeY);
             colorCircle(nodeX, nodeY, 10, "#FFFFFF");
         });
