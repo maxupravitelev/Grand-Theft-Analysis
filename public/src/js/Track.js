@@ -12,11 +12,27 @@ const TRACK_GOAL = 3;
 const TRACK_TREE = 4;
 const TRACK_FLAG = 5;
 let streetNodes = [];
-let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreet';
+let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreetslim';
 const getStreetNodes = async () => {
     const response = await fetch(streetNodeUrl);
     streetNodes = await response.json();
     console.log(streetNodes);
+    let slimStreetNodes = streetNodes;
+    streetNodes.forEach(street => {
+        street.nodes.forEach(node => {
+            let stringLat = node.lat.toString();
+            let firstDigits = [];
+            for (let i = 0; i < stringLat.length; i++) {
+                if (stringLat[i] === '.') {
+                    break;
+                }
+                firstDigits.push(stringLat[i]);
+            }
+            let firstDigitsOfLatitude = Number(firstDigits.join(''));
+            node.lat %= firstDigitsOfLatitude;
+        });
+    });
+    console.log(slimStreetNodes);
 };
 getStreetNodes();
 const trackTileToIndex = (tileCol, tileRow) => {

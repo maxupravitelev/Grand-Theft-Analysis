@@ -16,7 +16,8 @@ const TRACK_FLAG: number = 5;
 
 let streetNodes: object[] = []
 
-let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
+let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreetslim'
+// let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
 // let streetNodeUrl = 'http://localhost:8888/api/maps/nodesinstreet'
 
 
@@ -24,8 +25,27 @@ const getStreetNodes = async () => {
   const response = await fetch(streetNodeUrl)
   
   streetNodes = await response.json();
-
   console.log(streetNodes) 
+
+  let slimStreetNodes: object[] = streetNodes;
+
+  streetNodes.forEach(street => {
+    street.nodes.forEach(node => {
+      let stringLat = node.lat.toString();
+      let firstDigits = [];
+      for (let i = 0; i < stringLat.length; i++) {
+        
+        if (stringLat[i] === '.') {
+          break
+        }
+        firstDigits.push(stringLat[i]);
+      }
+      let firstDigitsOfLatitude: number = Number(firstDigits.join(''))
+      node.lat %= firstDigitsOfLatitude;
+    })
+    
+  })
+  console.log(slimStreetNodes)
 }
 getStreetNodes();
 
