@@ -193,9 +193,41 @@ const colorizeTracks = () => {
       let nodeX:number = firstNodeX + street.nodes[0].lat;
       let nodeY:number = firstNodeY - street.nodes[0].lon;
 
-      console.log(nodeX, nodeY)
+      // console.log(nodeX, nodeY)
       colorCircle(nodeX, nodeY, 10, "#FFFFFF")
   })
+  }
+
+  for (let i = 0; i < slimStreetNodes[1].nodes.length; i++) {
+    
+    let nodeLat = slimStreetNodes[1].nodes[i].lat;
+    let nodeLon = slimStreetNodes[1].nodes[i].lat;
+
+    let nextNodeLat: number;
+    let nextNodeLon: number;
+
+    if (i < slimStreetNodes[1].nodes.length - 1) {
+      nextNodeLat = slimStreetNodes[1].nodes[i + 1].lat;
+      nextNodeLon = slimStreetNodes[1].nodes[i + 1].lon;
+    } else {
+      nextNodeLat = nodeLat;
+      nextNodeLon = nodeLon;
+    }
+
+    console.log(nodeLat, nodeLon)
+    console.log(nextNodeLat, nextNodeLon)
+
+    canvasContext.beginPath(); 
+  
+    canvasContext.moveTo(nodeLat, nodeLon);
+    
+    canvasContext.lineTo(nextNodeLat, nextNodeLon);
+  
+    canvasContext.strokeStyle = '#808000';
+  
+    canvasContext.lineWidth = 5;
+    // Make the line visible
+    canvasContext.stroke();
   }
 
 
