@@ -73,6 +73,25 @@ streetData.forEach((street) => {
 mapRouter.get('/overpass/nodesinstreet', (request, response) => {
     response.json(streetData);
 });
+let streetDataSlim = [];
+streetData.forEach(street => {
+    let nodesCoordinates = [];
+    street.nodes.forEach(node => {
+        nodesCoordinates.push({
+            nodeId: node.id,
+            lat: node.lat,
+            lon: node.lon
+        });
+    });
+    streetDataSlim.push({
+        streetId: street.id,
+        streetName: street.tags.name,
+        nodes: nodesCoordinates
+    });
+});
+mapRouter.get('/overpass/nodesinstreetslim', (request, response) => {
+    response.json(streetDataSlim);
+});
 mapRouter.get('/nextstreet', (request, response) => {
     let nextStreet = filterByValue(jsonData.osm.way, '26876446');
     response.json(nextStreet);
