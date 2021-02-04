@@ -121,13 +121,13 @@ const drawEverything = () => {
 
 
   // show specific values for debugging 
-  canvasContext.fillStyle = "white";
-  canvasContext.font = "20px Arial";
-  canvasContext.fillText("Counter: " + elapsedTime, 10, 50);
+  // canvasContext.fillStyle = "white";
+  // canvasContext.font = "20px Arial";
+  // canvasContext.fillText("Counter: " + elapsedTime, 10, 50);
 
-  canvasContext.font = "15px Arial";
-  canvasContext.fillText("carX: " + p1.carX, 10, 70);
-  canvasContext.fillText("carY: " + p1.carY, 10, 85);
+  // canvasContext.font = "15px Arial";
+  // canvasContext.fillText("carX: " + p1.carX, 10, 70);
+  // canvasContext.fillText("carY: " + p1.carY, 10, 85);
 
 
 };

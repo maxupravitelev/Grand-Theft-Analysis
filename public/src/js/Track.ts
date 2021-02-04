@@ -26,7 +26,7 @@ const getStreetNodes = async () => {
   const response = await fetch(streetNodeUrl)
   
   streetNodes = await response.json();
-  console.log(streetNodes) 
+  // console.log(streetNodes) 
 
   slimStreetNodes = streetNodes;
 
@@ -94,7 +94,7 @@ const getStreetNodes = async () => {
     })
     
   })
-  console.log(slimStreetNodes)
+  // console.log(slimStreetNodes)
 }
 getStreetNodes();
 
@@ -215,8 +215,8 @@ const colorizeTracks = () => {
       nextNodeLon = nodeLon;
     }
 
-    console.log(nodeLat, nodeLon)
-    console.log(nextNodeLat, nextNodeLon)
+    // console.log(nodeLat, nodeLon)
+    // console.log(nextNodeLat, nextNodeLon)
 
     canvasContext.beginPath(); 
   

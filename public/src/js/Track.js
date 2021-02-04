@@ -17,7 +17,6 @@ let slimStreetNodes = [];
 const getStreetNodes = async () => {
     const response = await fetch(streetNodeUrl);
     streetNodes = await response.json();
-    console.log(streetNodes);
     slimStreetNodes = streetNodes;
     streetNodes.forEach(street => {
         street.nodes.forEach(node => {
@@ -46,7 +45,6 @@ const getStreetNodes = async () => {
             node.lon *= zoomLevel;
         });
     });
-    console.log(slimStreetNodes);
 };
 getStreetNodes();
 const trackTileToIndex = (tileCol, tileRow) => {
@@ -122,8 +120,6 @@ const colorizeTracks = () => {
             nextNodeLat = nodeLat;
             nextNodeLon = nodeLon;
         }
-        console.log(nodeLat, nodeLon);
-        console.log(nextNodeLat, nextNodeLon);
         canvasContext.beginPath();
         canvasContext.moveTo(nodeLat, nodeLon);
         canvasContext.lineTo(nextNodeLat, nextNodeLon);
