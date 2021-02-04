@@ -16,9 +16,7 @@ const TRACK_FLAG: number = 5;
 
 let streetNodes: object[] = []
 
-let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreetslim'
-// let streetNodeUrl: string = 'http://localhost:8888/api/maps/overpass/nodesinstreet'
-// let streetNodeUrl = 'http://localhost:8888/api/maps/nodesinstreet'
+let streetNodeUrl: string = '/api/maps/overpass/nodesinstreetslim'
 
 let slimStreetNodes: object[] = []
 
