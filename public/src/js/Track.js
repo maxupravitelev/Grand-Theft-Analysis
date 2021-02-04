@@ -12,7 +12,7 @@ const TRACK_GOAL = 3;
 const TRACK_TREE = 4;
 const TRACK_FLAG = 5;
 let streetNodes = [];
-let streetNodeUrl = 'http://localhost:8888/api/maps/overpass/nodesinstreetslim';
+let streetNodeUrl = '/api/maps/overpass/nodesinstreetslim';
 let slimStreetNodes = [];
 const getStreetNodes = async () => {
     const response = await fetch(streetNodeUrl);
